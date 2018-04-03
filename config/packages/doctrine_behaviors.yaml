@@ -1,0 +1,2 @@
+knp_doctrine_behaviors:
+    timestampable: true
