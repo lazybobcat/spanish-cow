@@ -1,0 +1,6 @@
+api_platform:
+    title: 'Spanish Cow API'
+    description: 'Manage your translations using the API'
+    version: '0.1'
+    mapping:
+        paths: ['%kernel.project_dir%/src/Entity']
