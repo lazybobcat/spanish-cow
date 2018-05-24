@@ -2,6 +2,7 @@
 
 $finder = PhpCsFixer\Finder::create()
     ->exclude('var')
+    ->exclude('Migrations')
     ->in(__DIR__)
 ;
 

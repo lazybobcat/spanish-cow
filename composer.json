@@ -14,11 +14,13 @@
         "ext-iconv": "*",
         "api-platform/api-pack": "^1.1",
         "knplabs/doctrine-behaviors": "^1.5",
+        "lexik/jwt-authentication-bundle": "^2.4",
         "symfony/console": "^4.0",
         "symfony/flex": "^1.0",
         "symfony/framework-bundle": "^4.0",
         "symfony/lts": "^4@dev",
         "symfony/orm-pack": "^1.0",
+        "symfony/security-bundle": "^4.0",
         "symfony/yaml": "^4.0"
     },
     "require-dev": {
