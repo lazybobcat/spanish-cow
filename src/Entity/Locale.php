@@ -14,12 +14,14 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 
 /**
  * @ORM\Entity()
  * @ORM\Table(name="locale__locale")
+ * @ApiResource()
  */
 class Locale
 {
@@ -61,7 +63,7 @@ class Locale
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -69,7 +71,7 @@ class Locale
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -89,7 +91,7 @@ class Locale
     /**
      * @return string
      */
-    public function getCode(): string
+    public function getCode(): ?string
     {
         return $this->code;
     }
@@ -109,7 +111,7 @@ class Locale
     /**
      * @return Domain
      */
-    public function getDomain(): Domain
+    public function getDomain(): ?Domain
     {
         return $this->domain;
     }

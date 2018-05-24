@@ -89,7 +89,7 @@ class Asset
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -97,7 +97,7 @@ class Asset
     /**
      * @return string
      */
-    public function getResname(): string
+    public function getResname(): ?string
     {
         return $this->resname;
     }
@@ -121,7 +121,7 @@ class Asset
     /**
      * @return string
      */
-    public function getSource(): string
+    public function getSource(): ?string
     {
         return $this->source;
     }
@@ -141,7 +141,7 @@ class Asset
     /**
      * @return string
      */
-    public function getNotes(): string
+    public function getNotes(): ?string
     {
         return $this->notes;
     }
@@ -161,7 +161,7 @@ class Asset
     /**
      * @return Domain
      */
-    public function getDomain(): Domain
+    public function getDomain(): ?Domain
     {
         return $this->domain;
     }
@@ -181,7 +181,7 @@ class Asset
     /**
      * @return Translation[]
      */
-    public function getTranslations(): ArrayCollection
+    public function getTranslations(): \Traversable
     {
         return $this->translations;
     }

@@ -14,6 +14,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
@@ -21,6 +22,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 /**
  * @ORM\Entity()
  * @ORM\Table(name="project__domain")
+ * @ApiResource()
  */
 class Domain
 {
@@ -34,6 +36,14 @@ class Domain
      * @ORM\Column(type="integer", name="id", nullable=false)
      */
     protected $id;
+
+    /**
+     * @var Project
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="projects")
+     * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
+     */
+    protected $project;
 
     /**
      * @var string
@@ -65,7 +75,7 @@ class Domain
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -73,7 +83,7 @@ class Domain
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -93,7 +103,7 @@ class Domain
     /**
      * @return Locale[]
      */
-    public function getLocales(): ArrayCollection
+    public function getLocales(): \Traversable
     {
         return $this->locales;
     }
@@ -151,7 +161,7 @@ class Domain
     /**
      * @return Locale
      */
-    public function getDefaultLocale(): Locale
+    public function getDefaultLocale(): ?Locale
     {
         return $this->defaultLocale;
     }

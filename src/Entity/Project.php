@@ -14,12 +14,15 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 
 /**
  * @ORM\Entity()
  * @ORM\Table(name="project__project")
+ * @ApiResource()
  */
 class Project
 {
@@ -42,9 +45,21 @@ class Project
     protected $name;
 
     /**
-     * @return string
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Domain", mappedBy="project")
      */
-    public function getId(): int
+    protected $projects;
+
+    public function __construct()
+    {
+        $this->projects = new ArrayCollection();
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -52,7 +67,7 @@ class Project
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }

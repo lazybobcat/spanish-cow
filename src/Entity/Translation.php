@@ -14,12 +14,14 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 
 /**
  * @ORM\Entity()
  * @ORM\Table(name="asset__translation")
+ * @ApiResource()
  */
 class Translation
 {
@@ -60,7 +62,7 @@ class Translation
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -68,7 +70,7 @@ class Translation
     /**
      * @return Asset
      */
-    public function getAsset(): Asset
+    public function getAsset(): ?Asset
     {
         return $this->asset;
     }
@@ -88,7 +90,7 @@ class Translation
     /**
      * @return Locale
      */
-    public function getLocale(): Locale
+    public function getLocale(): ?Locale
     {
         return $this->locale;
     }
@@ -108,7 +110,7 @@ class Translation
     /**
      * @return string
      */
-    public function getTarget(): string
+    public function getTarget(): ?string
     {
         return $this->target;
     }
