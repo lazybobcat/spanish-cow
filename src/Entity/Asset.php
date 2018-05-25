@@ -14,7 +14,9 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
@@ -29,6 +31,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
  *         "delete"={"access_control"="object.isAssociatedToProject(user) and is_granted('ROLE_ADMIN')", "access_control_message"="Domain not found."}
  *     }
  * )
+ * @ApiFilter(SearchFilter::class, properties={"domain": "exact"})
  */
 class Asset
 {
@@ -75,7 +78,7 @@ class Asset
     /**
      * @var Translation[]
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Translation", mappedBy="asset")
+     * @ORM\OneToMany(targetEntity="App\Entity\Translation", mappedBy="asset", fetch="EAGER")
      */
     protected $translations;
 

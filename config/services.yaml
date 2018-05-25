@@ -30,22 +30,22 @@ services:
     App\DataProvider\ProjectCollectionProvider:
         tags: ['api_platform.collection_data_provider']
         arguments:
-            $itemExtensions: !tagged api_platform.doctrine.orm.query_extension.item
+            $extensions: !tagged api_platform.doctrine.orm.query_extension.collection
 
     App\DataProvider\DomainCollectionProvider:
         tags: ['api_platform.collection_data_provider']
         arguments:
-            $itemExtensions: !tagged api_platform.doctrine.orm.query_extension.item
+            $extensions: !tagged api_platform.doctrine.orm.query_extension.collection
 
     App\DataProvider\LocaleCollectionProvider:
         tags: ['api_platform.collection_data_provider']
         arguments:
-            $itemExtensions: !tagged api_platform.doctrine.orm.query_extension.item
+            $extensions: !tagged api_platform.doctrine.orm.query_extension.collection
 
     App\DataProvider\AssetCollectionProvider:
         tags: ['api_platform.collection_data_provider']
         arguments:
-            $itemExtensions: !tagged api_platform.doctrine.orm.query_extension.item
+            $extensions: !tagged api_platform.doctrine.orm.query_extension.collection
 
     ######################################################################
     ## DATA PERSISTER
@@ -75,6 +75,3 @@ services:
     App\Manager\AssetManager:
         arguments:
             $class: 'App\Entity\Asset'
-
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones

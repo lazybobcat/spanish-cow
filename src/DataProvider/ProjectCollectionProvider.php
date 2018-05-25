@@ -14,17 +14,14 @@
 
 namespace App\DataProvider;
 
-
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGenerator;
-use ApiPlatform\Core\DataProvider\CollectionDataProviderInterface;
+use ApiPlatform\Core\DataProvider\ContextAwareCollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use ApiPlatform\Core\Exception\ResourceClassNotSupportedException;
 use App\Entity\Project;
 use App\Manager\ProjectManager;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class ProjectCollectionProvider implements CollectionDataProviderInterface, RestrictedDataProviderInterface
+class ProjectCollectionProvider extends BaseCollectionProvider implements ContextAwareCollectionDataProviderInterface, RestrictedDataProviderInterface
 {
     /**
      * @var TokenStorageInterface
@@ -39,13 +36,13 @@ class ProjectCollectionProvider implements CollectionDataProviderInterface, Rest
     /**
      * @var iterable
      */
-    protected $itemExtensions;
+    protected $extensions;
 
-    public function __construct(TokenStorageInterface $tokenStorage, ProjectManager $projectManager, iterable $itemExtensions)
+    public function __construct(TokenStorageInterface $tokenStorage, ProjectManager $projectManager, iterable $extensions)
     {
         $this->tokenStorage = $tokenStorage;
         $this->projectManager = $projectManager;
-        $this->itemExtensions = $itemExtensions;
+        $this->extensions = $extensions;
     }
 
     /**
@@ -55,11 +52,10 @@ class ProjectCollectionProvider implements CollectionDataProviderInterface, Rest
      *
      * @return array|\Traversable
      */
-    public function getCollection(string $resourceClass, string $operationName = null)
+    public function getCollection(string $resourceClass, string $operationName = null, array $context = [])
     {
         $user = $this->tokenStorage->getToken()->getUser();
         $qb = $this->projectManager->getQueryBuilder();
-        $queryNameGenerator = new QueryNameGenerator();
 
         // Only fetch projects associated to the current user
         $qb
@@ -67,12 +63,7 @@ class ProjectCollectionProvider implements CollectionDataProviderInterface, Rest
             ->setParameter('user', $user)
         ;
 
-        /** @var QueryCollectionExtensionInterface $extension */
-        foreach ($this->itemExtensions as $extension) {
-            $extension->applyToCollection($qb, $queryNameGenerator, $resourceClass, $operationName);
-        }
-
-        return $qb->getQuery()->getResult();
+        return $this->handleExtensions($this->extensions, $qb, $resourceClass, $operationName, $context);
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool

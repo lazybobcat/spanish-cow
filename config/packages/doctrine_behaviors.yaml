@@ -1,2 +1,6 @@
 knp_doctrine_behaviors:
     timestampable: true
+
+parameters:
+    knp.doctrine_behaviors.translatable_subscriber.translatable_fetch_method: EAGER
+    knp.doctrine_behaviors.translatable_subscriber.translation_fetch_method: EAGER

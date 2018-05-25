@@ -14,16 +14,13 @@
 
 namespace App\DataProvider;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGenerator;
-use ApiPlatform\Core\DataProvider\CollectionDataProviderInterface;
+use ApiPlatform\Core\DataProvider\ContextAwareCollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
-use ApiPlatform\Core\Exception\ResourceClassNotSupportedException;
 use App\Entity\Asset;
 use App\Manager\AssetManager;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class AssetCollectionProvider implements CollectionDataProviderInterface, RestrictedDataProviderInterface
+class AssetCollectionProvider extends BaseCollectionProvider implements ContextAwareCollectionDataProviderInterface, RestrictedDataProviderInterface
 {
     /**
      * @var TokenStorageInterface
@@ -38,27 +35,24 @@ class AssetCollectionProvider implements CollectionDataProviderInterface, Restri
     /**
      * @var iterable
      */
-    protected $itemExtensions;
+    protected $extensions;
 
-    public function __construct(TokenStorageInterface $tokenStorage, AssetManager $assetManager, iterable $itemExtensions)
+    public function __construct(TokenStorageInterface $tokenStorage, AssetManager $assetManager, iterable $extensions)
     {
         $this->tokenStorage = $tokenStorage;
         $this->assetManager = $assetManager;
-        $this->itemExtensions = $itemExtensions;
+        $this->extensions = $extensions;
     }
 
     /**
      * Retrieves a collection.
      *
-     * @throws ResourceClassNotSupportedException
-     *
      * @return array|\Traversable
      */
-    public function getCollection(string $resourceClass, string $operationName = null)
+    public function getCollection(string $resourceClass, string $operationName = null, array $context = [])
     {
         $user = $this->tokenStorage->getToken()->getUser();
         $qb = $this->assetManager->getQueryBuilder();
-        $queryNameGenerator = new QueryNameGenerator();
 
         // Only fetch projects associated to the current user
         $qb
@@ -68,12 +62,7 @@ class AssetCollectionProvider implements CollectionDataProviderInterface, Restri
             ->setParameter('user', $user)
         ;
 
-        /** @var QueryCollectionExtensionInterface $extension */
-        foreach ($this->itemExtensions as $extension) {
-            $extension->applyToCollection($qb, $queryNameGenerator, $resourceClass, $operationName);
-        }
-
-        return $qb->getQuery()->getResult();
+        return $this->handleExtensions($this->extensions, $qb, $resourceClass, $operationName, $context);
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
