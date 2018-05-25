@@ -32,6 +32,10 @@ services:
         arguments:
             $itemExtensions: !tagged api_platform.doctrine.orm.query_extension.item
 
+    App\DataProvider\DomainCollectionProvider:
+        tags: ['api_platform.collection_data_provider']
+        arguments:
+            $itemExtensions: !tagged api_platform.doctrine.orm.query_extension.item
 
     ######################################################################
     ## DATA PERSISTER
@@ -49,6 +53,10 @@ services:
     App\Manager\ProjectManager:
         arguments:
             $class: 'App\Entity\Project'
+
+    App\Manager\DomainManager:
+        arguments:
+            $class: 'App\Entity\Domain'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

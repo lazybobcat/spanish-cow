@@ -20,9 +20,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\DomainRepository")
  * @ORM\Table(name="project__domain")
- * @ApiResource()
+ * @ApiResource(
+ *     itemOperations={
+ *         "get"={"access_control"="object.isAssociatedToProject(user)", "access_control_message"="Domain not found."},
+ *         "put"={"access_control"="object.isAssociatedToProject(user)", "access_control_message"="Domain not found."},
+ *         "delete"={"access_control"="object.isAssociatedToProject(user) and is_granted('ROLE_ADMIN')", "access_control_message"="Domain not found."}
+ *     }
+ * )
  */
 class Domain
 {
@@ -55,7 +61,7 @@ class Domain
     /**
      * @var Locale[]
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Locale", mappedBy="domain", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Locale", mappedBy="domain", cascade={"all"}, orphanRemoval=true)
      */
     protected $locales;
 
@@ -70,6 +76,15 @@ class Domain
     public function __construct()
     {
         $this->locales = new ArrayCollection();
+    }
+
+    public function isAssociatedToProject(User $user)
+    {
+        if (!$this->getProject()) {
+            return false;
+        }
+
+        return $this->getProject()->isAssociatedToProject($user);
     }
 
     /**
