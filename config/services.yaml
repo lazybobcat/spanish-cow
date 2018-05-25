@@ -37,6 +37,11 @@ services:
         arguments:
             $itemExtensions: !tagged api_platform.doctrine.orm.query_extension.item
 
+    App\DataProvider\LocaleCollectionProvider:
+            tags: ['api_platform.collection_data_provider']
+            arguments:
+                $itemExtensions: !tagged api_platform.doctrine.orm.query_extension.item
+
     ######################################################################
     ## DATA PERSISTER
     ######################################################################
@@ -57,6 +62,10 @@ services:
     App\Manager\DomainManager:
         arguments:
             $class: 'App\Entity\Domain'
+
+    App\Manager\LocaleManager:
+        arguments:
+            $class: 'App\Entity\Locale'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
