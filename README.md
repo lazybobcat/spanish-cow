@@ -16,3 +16,9 @@ $ openssl rsa -in var/jwt/private.pem -out var/jwt/private2.pem
 $ mv var/jwt/private.pem var/jwt/private.pem-back
 $ mv var/jwt/private2.pem var/jwt/private.pem
 ```
+
+## Get JWT token
+
+```
+curl -X POST <base_url>/api/login_check -d _username=<email> -d _password=<password>
+```

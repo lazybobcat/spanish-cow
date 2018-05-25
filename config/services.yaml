@@ -24,10 +24,31 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    ######################################################################
+    ## DATA PROVIDERS
+    ######################################################################
+    App\DataProvider\ProjectCollectionProvider:
+        tags: ['api_platform.collection_data_provider']
+        arguments:
+            $itemExtensions: !tagged api_platform.doctrine.orm.query_extension.item
+
+
+    ######################################################################
+    ## DATA PERSISTER
+    ######################################################################
+    App\DataPersister\ProjectPersister:
+        tags: ['api_platform.data_persister']
+
+    ######################################################################
+    ## MANAGERS
+    ######################################################################
     App\Manager\UserManager:
         arguments:
             $class: 'App\Entity\User'
 
+    App\Manager\ProjectManager:
+        arguments:
+            $class: 'App\Entity\Project'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

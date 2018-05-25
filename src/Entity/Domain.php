@@ -40,7 +40,7 @@ class Domain
     /**
      * @var Project
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="projects")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="domains")
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
      */
     protected $project;
@@ -178,6 +178,25 @@ class Domain
         }
 
         $this->defaultLocale = $defaultLocale;
+
+        return $this;
+    }
+
+    /**
+     * @return Project
+     */
+    public function getProject(): Project
+    {
+        return $this->project;
+    }
+
+    /**
+     * @param Project $project
+     * @return Domain
+     */
+    public function setProject($project)
+    {
+        $this->project = $project;
 
         return $this;
     }
