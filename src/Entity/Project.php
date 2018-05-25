@@ -27,7 +27,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     itemOperations={
  *         "get"={"access_control"="object.isAssociatedToProject(user)", "access_control_message"="Project not found."},
  *         "put"={"access_control"="object.isAssociatedToProject(user)", "access_control_message"="Project not found."},
- *         "delete"={"access_control"="object.isAssociatedToProject(user)", "access_control_message"="Project not found."}
+ *         "delete"={"access_control"="object.isAssociatedToProject(user) and is_granted('ROLE_ADMIN')", "access_control_message"="Project not found."}
  *     },
  *     attributes={
  *         "normalization_context"={"groups"={"read"}},
