@@ -38,9 +38,14 @@ services:
             $itemExtensions: !tagged api_platform.doctrine.orm.query_extension.item
 
     App\DataProvider\LocaleCollectionProvider:
-            tags: ['api_platform.collection_data_provider']
-            arguments:
-                $itemExtensions: !tagged api_platform.doctrine.orm.query_extension.item
+        tags: ['api_platform.collection_data_provider']
+        arguments:
+            $itemExtensions: !tagged api_platform.doctrine.orm.query_extension.item
+
+    App\DataProvider\AssetCollectionProvider:
+        tags: ['api_platform.collection_data_provider']
+        arguments:
+            $itemExtensions: !tagged api_platform.doctrine.orm.query_extension.item
 
     ######################################################################
     ## DATA PERSISTER
@@ -66,6 +71,10 @@ services:
     App\Manager\LocaleManager:
         arguments:
             $class: 'App\Entity\Locale'
+
+    App\Manager\AssetManager:
+        arguments:
+            $class: 'App\Entity\Asset'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

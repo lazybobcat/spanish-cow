@@ -20,9 +20,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\AssetRepository")
  * @ORM\Table(name="asset__asset")
- * @ApiResource()
+ * @ApiResource(
+ *     itemOperations={
+ *         "get"={"access_control"="object.isAssociatedToProject(user)", "access_control_message"="Domain not found."},
+ *         "put"={"access_control"="object.isAssociatedToProject(user)", "access_control_message"="Domain not found."},
+ *         "delete"={"access_control"="object.isAssociatedToProject(user) and is_granted('ROLE_ADMIN')", "access_control_message"="Domain not found."}
+ *     }
+ * )
  */
 class Asset
 {
@@ -76,6 +82,15 @@ class Asset
     public function __construct()
     {
         $this->translations = new ArrayCollection();
+    }
+
+    public function isAssociatedToProject(User $user)
+    {
+        if (!$this->getDomain()) {
+            return false;
+        }
+
+        return $this->getDomain()->isAssociatedToProject($user);
     }
 
     /**
