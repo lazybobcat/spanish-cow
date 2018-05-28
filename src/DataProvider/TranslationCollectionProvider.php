@@ -8,18 +8,17 @@
  * file that was distributed with this source code.
  * Created by PhpStorm.
  * User: loicb
- * Date: 25/05/18
- * Time: 12:05
+ * Date: 28/05/18
+ * Time: 15:31
  */
 
 namespace App\DataProvider;
 
-use ApiPlatform\Core\Exception\ResourceClassNotSupportedException;
-use App\Entity\Project;
-use App\Manager\ProjectManager;
+use App\Entity\Translation;
+use App\Manager\TranslationManager;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class ProjectCollectionProvider extends BaseCollectionProvider
+class TranslationCollectionProvider extends BaseCollectionProvider
 {
     /**
      * @var TokenStorageInterface
@@ -27,36 +26,37 @@ class ProjectCollectionProvider extends BaseCollectionProvider
     protected $tokenStorage;
 
     /**
-     * @var ProjectManager
+     * @var TranslationManager
      */
-    protected $projectManager;
+    protected $translationManager;
 
     /**
      * @var iterable
      */
     protected $extensions;
 
-    public function __construct(TokenStorageInterface $tokenStorage, ProjectManager $projectManager, iterable $extensions)
+    public function __construct(TokenStorageInterface $tokenStorage, TranslationManager $translationManager, iterable $extensions)
     {
         $this->tokenStorage = $tokenStorage;
-        $this->projectManager = $projectManager;
+        $this->translationManager = $translationManager;
         $this->extensions = $extensions;
     }
 
     /**
      * Retrieves a collection.
      *
-     * @throws ResourceClassNotSupportedException
-     *
      * @return array|\Traversable
      */
     public function getCollection(string $resourceClass, string $operationName = null, array $context = [])
     {
         $user = $this->tokenStorage->getToken()->getUser();
-        $qb = $this->projectManager->getQueryBuilder();
+        $qb = $this->translationManager->getQueryBuilder();
 
         // Only fetch projects associated to the current user
         $qb
+            ->innerJoin('t.asset', 'a')
+            ->innerJoin('a.domain', 'd')
+            ->innerJoin('d.project', 'p')
             ->andWhere(':user MEMBER OF p.users')
             ->setParameter('user', $user)
         ;
@@ -66,6 +66,6 @@ class ProjectCollectionProvider extends BaseCollectionProvider
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
     {
-        return Project::class === $resourceClass;
+        return Translation::class === $resourceClass;
     }
 }

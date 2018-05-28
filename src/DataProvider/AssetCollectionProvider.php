@@ -14,13 +14,11 @@
 
 namespace App\DataProvider;
 
-use ApiPlatform\Core\DataProvider\ContextAwareCollectionDataProviderInterface;
-use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use App\Entity\Asset;
 use App\Manager\AssetManager;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class AssetCollectionProvider extends BaseCollectionProvider implements ContextAwareCollectionDataProviderInterface, RestrictedDataProviderInterface
+class AssetCollectionProvider extends BaseCollectionProvider
 {
     /**
      * @var TokenStorageInterface

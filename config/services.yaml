@@ -47,6 +47,11 @@ services:
         arguments:
             $extensions: !tagged api_platform.doctrine.orm.query_extension.collection
 
+    App\DataProvider\TranslationCollectionProvider:
+        tags: ['api_platform.collection_data_provider']
+        arguments:
+            $extensions: !tagged api_platform.doctrine.orm.query_extension.collection
+
     ######################################################################
     ## DATA PERSISTER
     ######################################################################
@@ -75,3 +80,7 @@ services:
     App\Manager\AssetManager:
         arguments:
             $class: 'App\Entity\Asset'
+
+    App\Manager\TranslationManager:
+        arguments:
+            $class: 'App\Entity\Translation'

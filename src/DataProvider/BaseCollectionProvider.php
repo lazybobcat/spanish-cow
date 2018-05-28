@@ -18,11 +18,13 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\ContextAwareQueryCollectionEx
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryResultCollectionExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGenerator;
+use ApiPlatform\Core\DataProvider\ContextAwareCollectionDataProviderInterface;
+use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use Doctrine\ORM\QueryBuilder;
 
-abstract class BaseCollectionProvider
+abstract class BaseCollectionProvider implements ContextAwareCollectionDataProviderInterface, RestrictedDataProviderInterface
 {
-    protected function handleExtensions(array $extensions, QueryBuilder $qb, $resourceClass, $operationName, array $context = [])
+    protected function handleExtensions(\Traversable $extensions, QueryBuilder $qb, $resourceClass, $operationName, array $context = [])
     {
         $queryNameGenerator = new QueryNameGenerator();
 

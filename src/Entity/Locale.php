@@ -25,7 +25,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
  *     itemOperations={
  *         "get"={"access_control"="object.isAssociatedToProject(user)", "access_control_message"="Domain not found."},
  *         "put"={"access_control"="object.isAssociatedToProject(user)", "access_control_message"="Domain not found."},
- *         "delete"={"access_control"="object.isAssociatedToProject(user) and is_granted('ROLE_ADMIN')", "access_control_message"="Domain not found."}
+ *         "delete"={"access_control"="object.isAssociatedToProject(user) and is_granted('ROLE_ADMIN')", "access_control_message"="Locale not found."}
  *     }
  * )
  */
