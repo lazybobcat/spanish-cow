@@ -78,7 +78,7 @@ class Asset
     /**
      * @var Translation[]
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Translation", mappedBy="asset", fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="App\Entity\Translation", mappedBy="asset", fetch="EAGER", cascade={"all"}, orphanRemoval=true)
      */
     protected $translations;
 
