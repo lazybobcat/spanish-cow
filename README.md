@@ -1,5 +1,27 @@
 # Spanish Cow
 
+## Installation
+
+Install composer vendor:
+
+```
+$ php composer install
+```
+
+If you want a super-admin user, use:
+
+```
+$ php bin/console app:user:create --super-admin
+```
+
+Initialize database with fixtures:
+
+```
+# If the database is not created yet:
+$ php bin/console doctrine:database:create
+$ php bin/console doctrine:migrations:migrate --no-interaction
+$ php bin/console doctrine:fixtures:load
+```
 
 ## Generate the SSH keys :
 

@@ -27,6 +27,8 @@
         "symfony/yaml": "^4.0"
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.0",
+        "fzaninotto/faker": "^1.7",
         "symfony/debug-pack": "^1.0",
         "symfony/dotenv": "^4.0",
         "symfony/test-pack": "^1.0"
