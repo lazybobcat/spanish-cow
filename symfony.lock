@@ -80,6 +80,9 @@
             "ref": "70062abc2cd58794d2a90274502f81b55cd9951b"
         }
     },
+    "incenteev/composer-parameter-handler": {
+        "version": "v2.1.3"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },

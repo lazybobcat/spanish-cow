@@ -4,6 +4,7 @@
 /public/bundles/
 /var/
 /vendor/
+/config/parameters.yaml
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
