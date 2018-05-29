@@ -14,10 +14,28 @@
 
 namespace App\Repository;
 
+use App\Entity\Project;
 use Doctrine\ORM\EntityRepository;
 
 class DomainRepository extends EntityRepository
 {
+    /**
+     * @param Project $project
+     *
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function findForProjectQueryBuilder(Project $project)
+    {
+        $qb = $this->getQueryBuilder();
+
+        $qb
+            ->andWhere('d.project = :project')
+            ->setParameter('project', $project)
+        ;
+
+        return $qb;
+    }
+
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */

@@ -25,8 +25,10 @@ class DefaultController extends Controller
      */
     public function index(Request $request)
     {
-        return $this->redirectToRoute('login');
+        if (null === $this->getUser()) {
+            return $this->redirectToRoute('login');
+        }
 
-        return $this->render('default/homepage.html.twig', []);
+        return $this->redirectToRoute('project_list');
     }
 }

@@ -2,9 +2,20 @@
 
 {% block body %}
     <h2>{{ 'label.projects_listing_title' | trans | desc("Mes projets") }}</h2>
+
+    {% if projects.count %}
     <ul>
         {% for project in projects %}
-            <li>{{ project }}</li>
+            <li><a href="{{ path('domain_list', {'project': project.id}) }}">{{ project }}</a></li>
         {% endfor %}
     </ul>
+    {% else %}
+    <p>{{ 'label.no_projects' | trans | desc("Vous n'êtes associé à aucun projet.") }}</p>
+    {% endif %}
+
+    {% if projects.haveToPaginate %}
+    <div class="pagerfanta">
+        {{ pagerfanta(projects) }}
+    </div>
+    {% endif %}
 {% endblock %}

@@ -79,6 +79,7 @@ class Asset
      * @var Translation[]
      *
      * @ORM\OneToMany(targetEntity="App\Entity\Translation", mappedBy="asset", fetch="EAGER", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OrderBy({"locale": "ASC"})
      */
     protected $translations;
 

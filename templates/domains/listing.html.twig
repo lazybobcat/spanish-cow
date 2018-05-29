@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>{{ 'label.domains_listing_title' | trans({'%projet%': project}) | desc("Domaines de '%projet%'") }}</h2>
+
+    {% if domains.count %}
+        <ul>
+            {% for domain in domains %}
+                <li><a href="{{ path('translate', {'domain': domain.id, 'project': domain.project.id}) }}">{{ domain }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>{{ 'label.no_domains' | trans | desc("Ce projet ne contient aucun domaine.") }}</p>
+    {% endif %}
+
+    {% if domains.haveToPaginate %}
+        <div class="pagerfanta">
+            {{ pagerfanta(domains) }}
+        </div>
+    {% endif %}
+{% endblock %}

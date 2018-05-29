@@ -14,13 +14,36 @@
 
 namespace App\Manager;
 
+use App\Entity\User;
 use App\Repository\ProjectRepository;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 
 /**
  * @method ProjectRepository getRepository()
  */
 class ProjectManager extends BaseManager
 {
+    /**
+     * @param User $user
+     * @param int $page
+     * @param int $maxPerPage
+     *
+     * @return Pagerfanta
+     */
+    public function findForUser(User $user, $page = 1, $maxPerPage = 25)
+    {
+        $qb = $this->getRepository()->findForUserQueryBuilder($user);
+        $adapter = new DoctrineORMAdapter($qb);
+        $pager = new Pagerfanta($adapter);
+        $pager
+            ->setMaxPerPage($maxPerPage)
+            ->setCurrentPage($page)
+        ;
+
+        return $pager;
+    }
+
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */

@@ -6,6 +6,9 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+        {% block breadcrumb %}
+            {{ wo_render_breadcrumbs() }}
+        {% endblock breadcrumb %}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

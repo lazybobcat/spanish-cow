@@ -14,10 +14,30 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
 class ProjectRepository extends EntityRepository
 {
+    /**
+     * @param User $user
+     * @param int $start
+     * @param int $limit
+     *
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function findForUserQueryBuilder(User $user)
+    {
+        $qb = $this->getQueryBuilder();
+
+        $qb
+            ->andWhere(':user MEMBER OF p.users')
+            ->setParameter('user', $user)
+        ;
+
+        return $qb;
+    }
+
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */
