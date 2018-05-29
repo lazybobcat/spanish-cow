@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>{{ 'label.projects_listing_title' | trans | desc("Mes projets") }}</h2>
+    <ul>
+        {% for project in projects %}
+            <li>{{ project }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

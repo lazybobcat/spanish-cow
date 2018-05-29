@@ -79,6 +79,15 @@ class Project
         $this->users = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        if (null === $this->name) {
+            return "n/a";
+        }
+
+        return $this->getName();
+    }
+
     public function isAssociatedToProject(User $user)
     {
         foreach ($this->users as $u) {
