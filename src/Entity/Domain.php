@@ -18,6 +18,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DomainRepository")
@@ -55,6 +56,7 @@ class Domain
      * @var string
      *
      * @ORM\Column(type="string", name="name", nullable=false)
+     * @Assert\NotBlank()
      */
     protected $name;
 
@@ -68,17 +70,12 @@ class Domain
     /**
      * @var Locale[]
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Locale", mappedBy="domain", cascade={"all"}, orphanRemoval=true)
+     * @ORM\ManyToMany(targetEntity="App\Entity\Locale")
+     * @ORM\JoinTable(name="project__domain_locales",
+     *     joinColumns={@ORM\JoinColumn(name="domain_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="locale_id", referencedColumnName="id")})
      */
     protected $locales;
-
-    /**
-     * @var Locale
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Locale")
-     * @ORM\JoinColumn(name="default_locale_id", referencedColumnName="id")
-     */
-    protected $defaultLocale;
 
     public function __construct()
     {
@@ -225,7 +222,6 @@ class Domain
     public function addLocale(Locale $locale)
     {
         if (!$this->locales->contains($locale)) {
-            $locale->setDomain($this);
             $this->locales->add($locale);
         }
 
@@ -240,33 +236,8 @@ class Domain
     public function removeLocale(Locale $locale)
     {
         if ($this->locales->contains($locale)) {
-            $locale->setDomain(null);
             $this->locales->removeElement($locale);
         }
-
-        return $this;
-    }
-
-    /**
-     * @return Locale
-     */
-    public function getDefaultLocale(): ?Locale
-    {
-        return $this->defaultLocale;
-    }
-
-    /**
-     * @param Locale $defaultLocale
-     *
-     * @return Domain
-     */
-    public function setDefaultLocale(Locale $defaultLocale)
-    {
-        if (!$this->locales->contains($defaultLocale)) {
-            throw new \LogicException("The locale '{$defaultLocale->getCode()}' is not part of the domain locales, impossible to set it as defaut.");
-        }
-
-        $this->defaultLocale = $defaultLocale;
 
         return $this;
     }

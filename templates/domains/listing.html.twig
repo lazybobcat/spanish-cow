@@ -4,6 +4,12 @@
     <div class="container-fluid">
         <h2>{{ 'label.domains_listing_title' | trans({'%projet%': project}) | desc("Domaines de '%projet%'") }}</h2>
 
+        <div>
+            <a href="{{ path('domain_add', {'project': project.id}) }}" class="btn btn-primary">
+                {{ 'label.add_domain' | trans | desc("Ajouter un domaine") }}
+            </a>
+        </div>
+
         {% if domains.count %}
             <section class="domain-card-list">
                 {% for domain in domains %}
@@ -28,6 +34,9 @@
                             <span class="-progress" style="width: {{ (progress[domain.id] * 100) }}%"></span>
                         </div>
                         <div class="domain-card__actions">
+                            <a href="{{ path('domain_edit', {'domain': domain.id, 'project': project.id}) }}" class="btn">
+                                {{ 'label.edit_domain' | trans | desc("Modifier") }}
+                            </a>
                             <a href="#" class="btn">
                                 {{ 'label.add_asset' | trans | desc("Ajouter un asset") }}
                             </a>

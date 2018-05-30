@@ -22,11 +22,8 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
  * @ORM\Entity(repositoryClass="App\Repository\LocaleRepository")
  * @ORM\Table(name="locale__locale")
  * @ApiResource(
- *     itemOperations={
- *         "get"={"access_control"="object.isAssociatedToProject(user)", "access_control_message"="Domain not found."},
- *         "put"={"access_control"="object.isAssociatedToProject(user)", "access_control_message"="Domain not found."},
- *         "delete"={"access_control"="object.isAssociatedToProject(user) and is_granted('ROLE_ADMIN')", "access_control_message"="Locale not found."}
- *     }
+ *     itemOperations={"get"},
+ *     collectionOperations={"get"}
  * )
  */
 class Locale
@@ -58,26 +55,9 @@ class Locale
      */
     protected $code;
 
-    /**
-     * @var Domain
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Domain", inversedBy="locales")
-     * @ORM\JoinColumn(name="domain_id", referencedColumnName="id")
-     */
-    protected $domain;
-
     public function __toString()
     {
         return $this->getCode();
-    }
-
-    public function isAssociatedToProject(User $user)
-    {
-        if (!$this->getDomain()) {
-            return false;
-        }
-
-        return $this->getDomain()->isAssociatedToProject($user);
     }
 
     /**
@@ -124,26 +104,6 @@ class Locale
     public function setCode($code)
     {
         $this->code = $code;
-
-        return $this;
-    }
-
-    /**
-     * @return Domain
-     */
-    public function getDomain(): ?Domain
-    {
-        return $this->domain;
-    }
-
-    /**
-     * @param Domain $domain
-     *
-     * @return Locale
-     */
-    public function setDomain($domain)
-    {
-        $this->domain = $domain;
 
         return $this;
     }
