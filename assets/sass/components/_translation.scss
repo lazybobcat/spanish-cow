@@ -15,11 +15,37 @@
         width: 100%;
     }
 
-    .form-row {
+    .form-row, .form-item {
         margin-bottom: 1rem;
     }
 
     .form-actions {
         text-align: right;
+    }
+}
+
+.translate-form {
+
+    &__translation {
+        position: relative;
+    }
+
+    &__message {
+        display: none;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        padding: 0 1rem;
+
+        &.-success {
+            background: map-get(map-get($message-types, 'success'), 'color');
+            color: #fff;
+        }
+
+        &.-error {
+            background: map-get(map-get($message-types, 'error'), 'color');
+            color: #fff;
+        }
     }
 }

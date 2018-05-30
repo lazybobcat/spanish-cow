@@ -2,25 +2,25 @@
 .assets-table {
     width: 100%;
     border: 1px solid $c-gray-light;
-    border-collapse: collapse;
     margin-bottom: 2rem;
 
-    thead {
-        tr {
-            background: $c-gray-light;
-
-            th {
-                text-align: left;
-                font-weight: normal;
-                border: none;
-                padding: 0 1rem;
-            }
-        }
+    &__head {
+        background: $c-gray-light;
+        padding: 0 1rem;
     }
 
-    tbody {
-        tr {
+    &__body {
+        max-height: 185px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        padding: 0 1rem;
+
+        .translation-row {
             cursor: pointer;
+
+            &.-pending {
+                font-weight: bold;
+            }
 
             &:hover {
                 background: $c-gray-lighter;
@@ -31,10 +31,15 @@
                 color: #fff;
             }
 
-            td {
+            div {
                 font-size: 1.4rem;
-                padding: .1rem 1rem;
             }
         }
+    }
+
+    .-source, .-id {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }

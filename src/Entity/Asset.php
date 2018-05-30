@@ -98,6 +98,51 @@ class Asset
     }
 
     /**
+     * @param $locale
+     *
+     * @return null|string
+     */
+    public function translate($locale)
+    {
+        if (null !== ($translation = $this->getTranslationForCode($locale))) {
+            return $translation->getTarget();
+        }
+
+        return null;
+    }
+
+    /**
+     * @param $locale
+     *
+     * @return Translation|null
+     */
+    public function getTranslationForCode($locale)
+    {
+        foreach ($this->translations as $translation) {
+            if ($translation->getLocale()->getCode() === $locale) {
+                return $translation;
+            }
+        }
+
+        return null;
+    }
+
+    public function isFullyTranslated(\Countable $locales)
+    {
+        if (count($locales) !== $this->translations->count()) {
+            return false;
+        }
+
+        foreach ($this->translations as $translation) {
+            if (empty($translation->getTarget())) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * @return string
      */
     public function getHash()
@@ -111,6 +156,18 @@ class Asset
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return $this
+     */
+    public function setId(int $id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     /**

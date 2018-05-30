@@ -66,6 +66,11 @@ class Locale
      */
     protected $domain;
 
+    public function __toString()
+    {
+        return $this->getCode();
+    }
+
     public function isAssociatedToProject(User $user)
     {
         if (!$this->getDomain()) {

@@ -5,53 +5,68 @@
         <h2>{{ 'label.translate_title' | trans() | desc("Traduction") }}</h2>
 
         {% if assets|length %}
-            <table class="assets-table">
-                <thead>
-                <tr>
-                    <th>{{ 'label.resname' | trans | desc('Id') }}</th>
-                    <th>{{ 'label.source' | trans | desc('Source') }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for asset in assets %}
-                    <tr{% if loop.first %} class="-active"{% endif %}>
-                        <td>{{ asset.resname }}</td>
-                        <td>{{ asset.source }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+            <div class="assets-table-container">
+                <div class="assets-table">
+                    <div class="assets-table__head">
+                        <div class="row">
+                            <div class="col-sm-5 -id">{{ 'label.resname' | trans | desc('Id') }}</div>
+                            <div class="col-sm-7 -source">{{ 'label.source' | trans | desc('Source') }}</div>
+                        </div>
+                    </div>
+                    <div class="assets-table__body" data-locales="{{ domain.locales|join(',') }}">
+                    {% for asset in assets %}
+                        <div class="row translation-row js-translation-row{% if not asset.isFullyTranslated(domain.locales) %} -pending{% endif %}{% if asset.id == select %} -active{% endif %}"
+                            {% for locale in domain.locales %}data-{{ locale.code }}="{{ asset.translate(locale.code) }}" {% endfor %}
+                            data-notes="{{ asset.notes }}"
+                            data-id="{{ asset.id }}"
+                        >
+                            <div class="col-sm-5 -id">{{ asset.resname }}</div>
+                            <div class="col-sm-7 -source">{{ asset.source }}</div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
 
-            <section class="row">
+            <section class="row translation js-translation-section">
                 <div class="col-md-9 col-sm-12">
-                    <form class="translate-form">
+                    <form class="translate-form" action="{{ path('ajax_translate', {'domain': domain.id, 'project': project.id}) }}">
+                        <input type="hidden" name="id" class="js-asset-id"/>
                         {% for locale in domain.locales %}
-                            <div class="form-row">
+                            <div class="form-row translate-form__translation">
                                 <label for="{{ locale.code }}">
                                     <img src="{{ asset('/img/flags/' ~ locale.code ~ '.png') }}" alt=""/>
                                     {{ locale.name }} ({{ locale.code }})
                                 </label>
-                                <textarea name="{{ locale.code }}" id="{{ locale.code }}" rows="10"></textarea>
+                                <textarea name="translation[{{ locale.code }}]" id="{{ locale.code }}" rows="10" class="js-translate-field"></textarea>
+                                <div class="translate-form__message -success js-translation-success">
+                                    {{ 'flash.translation_success' | trans | desc("La traduction a été sauvegardée avec succès !") }}
+                                </div>
+                                <div class="translate-form__message -error js-translation-error">
+                                    {{ 'flash.translation_error' | trans | desc("Une erreur est survenue lors de la sauvegarde de la traduction.") }}
+                                </div>
                             </div>
                         {% endfor %}
                     </form>
                 </div>
                 <div class="col-md-3 col-sm-12">
-                    <form class="asset-form">
-                        <div class="form-row">
-                            <label for="comment">{{ 'label.comment' | trans | desc("Commentaire") }}</label>
-                            <textarea name="comment" id="comment" rows="10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis, doloremque enim excepturi harum libero minima nihil omnis quis quisquam recusandae reiciendis repudiandae tenetur vero! Ad eligendi quam repudiandae rerum ullam!</textarea>
-                        </div>
-                        <div class="form-actions">
-                            <button type="submit" class="btn btn-primary">
-                                {{ 'label.comment_action' | trans | desc("Commenter") }}
-                            </button>
-                        </div>
-                    </form>
+                    <div class="asset-form">
+                        {{ form_start(form) }}
+                            {{ form_row(form.notes) }}
+                            {{ form_row(form.id) }}
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ 'label.comment_action' | trans | desc("Commenter") }}
+                                </button>
+                            </div>
+                        {{ form_end(form) }}
+                    </div>
                 </div>
             </section>
         {% else %}
-            <p>{{ 'label.no_assets' | trans | desc("Aucun asset n'a encore été ajouté à ce domaine.") }}</p>
+            <div class="container-fluid">
+                <p>{{ 'label.no_assets' | trans | desc("Aucun asset n'a encore été ajouté à ce domaine.") }}</p>
+            </div>
         {% endif %}
     </div>
 {% endblock %}

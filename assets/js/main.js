@@ -68,10 +68,63 @@
         });
     };
 
+    var translateTable = function() {
+        var $locales = $('[data-locales]'),
+            $rows = $('.js-translation-row');
+
+        if (!$locales.length || !$rows.length) {
+            return;
+        }
+
+        $rows.on('click', function() {
+            var $this = $(this),
+                locales = $locales.data('locales').split(',');
+
+            $('.js-translation-section').show();
+            $('.js-translation-row.-active').removeClass('-active');
+            $this.addClass('-active');
+
+            locales.forEach(function(locale) {
+                $('textarea#' + locale).val($this.data(locale));
+            });
+
+            $('.js-asset-notes').val($this.data('notes'));
+            $('.js-asset-id').val($this.data('id'));
+        });
+
+        var $activeRow = $('.js-translation-row.-active');
+        if ($activeRow.length) {
+            $activeRow.click();
+        } else {
+            $('.js-translation-section').hide();
+        }
+    };
+
+    var translateField = function() {
+        var $fields = $('textarea.js-translate-field');
+
+        if (!$fields.length) {
+            return;
+        }
+
+        $fields.on('focusout', function() {
+            console.log('focusout');
+            var $this = $(this),
+                $form = $this.parents('form');
+            $.post($form.attr('action'), $form.serialize()).done(function() {
+                $this.siblings('.js-translation-success').show().fadeOut(3000);
+            }).fail(function() {
+                $this.siblings('.js-translation-error').show().fadeOut(3000);
+            });
+        });
+    };
+
     $(document).ready(function () {
         ariaControls();
         checkVisibility('main-nav', mqBreakpoints.desktop);
         watchVisibility();
+        translateTable();
+        translateField();
     });
 })
 (jQuery);

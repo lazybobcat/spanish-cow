@@ -42,7 +42,7 @@ class DomainRepository extends EntityRepository
         $qb = $this->getQueryBuilder();
 
         $qb
-            ->select("COUNT(DISTINCT(t.id)) / (COUNT(DISTINCT(a.id)) * COUNT(DISTINCT(l.id))) AS prct")
+            ->select('COUNT(DISTINCT(t.id)) / (COUNT(DISTINCT(a.id)) * COUNT(DISTINCT(l.id))) AS prct')
             ->innerJoin('d.assets', 'a')
             ->innerJoin('a.translations', 't')
             ->innerJoin('d.locales', 'l')

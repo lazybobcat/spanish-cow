@@ -21,8 +21,8 @@ class ProjectRepository extends EntityRepository
 {
     /**
      * @param User $user
-     * @param int $start
-     * @param int $limit
+     * @param int  $start
+     * @param int  $limit
      *
      * @return \Doctrine\ORM\QueryBuilder
      */

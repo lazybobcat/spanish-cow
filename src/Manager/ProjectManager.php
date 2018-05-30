@@ -26,8 +26,8 @@ class ProjectManager extends BaseManager
 {
     /**
      * @param User $user
-     * @param int $page
-     * @param int $maxPerPage
+     * @param int  $page
+     * @param int  $maxPerPage
      *
      * @return Pagerfanta
      */

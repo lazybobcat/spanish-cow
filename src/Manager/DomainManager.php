@@ -27,8 +27,8 @@ class DomainManager extends BaseManager
 {
     /**
      * @param Project $project
-     * @param int $page
-     * @param int $maxPerPage
+     * @param int     $page
+     * @param int     $maxPerPage
      *
      * @return Pagerfanta
      */
