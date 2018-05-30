@@ -1,0 +1,72 @@
+// Add margin and padding with classes
+// mt1 = margin-top: 1rem;
+// pl4 = padding-left: 4rem;
+// mxauto = margin-left: auto; margin-right: auto;
+
+// TODO : Change breakpoints name in $mq-breakpoints
+// TODO : Add - around names in classes name (if this is not the 0 width breakpoint)
+// TODO : Test if we are on margin case and not load padding auto
+// So we can use classes like .mt-xs-4 rather than .mtdesktop4
+
+// for each breakpoint
+@each $bp in map-keys($mq-breakpoints) {
+
+    // Include from current breakpoints
+    @include mq($from: $bp) {
+
+        // For both margins and paddings
+        @each $prop, $abbrev in (margin: m, padding: p) {
+
+            // For predefined numbers (so we don't create 1534 classes, just the ones we need)
+            // Add a value here if you want to create a new size
+            @each $size in (1, 2, 3, 4, 5) {
+                .#{$abbrev}#{$bp}#{$size} {
+                    #{$prop}: #{$size}rem !important;
+                }
+
+                .#{$abbrev}#{$bp}t#{$size} {
+                    #{$prop}-top: #{$size}rem !important;
+                }
+
+                .#{$abbrev}#{$bp}r#{$size} {
+                    #{$prop}-right: #{$size}rem !important;
+                }
+
+                .#{$abbrev}#{$bp}b#{$size} {
+                    #{$prop}-bottom: #{$size}rem !important;
+                }
+
+                .#{$abbrev}#{$bp}l#{$size} {
+                    #{$prop}-left: #{$size}rem !important;
+                }
+
+                .#{$abbrev}#{$bp}x#{$size} {
+                    #{$prop}-left: #{$size}rem !important;
+                    #{$prop}-right: #{$size}rem !important;
+                }
+
+                .#{$abbrev}#{$bp}y#{$size} {
+                    #{$prop}-top: #{$size}rem !important;
+                    #{$prop}-bottom: #{$size}rem !important;
+                }
+
+
+                //@if $prop = 'margin'
+                // margin only
+                .m#{$bp}auto {
+                    margin: auto
+                }
+
+                .m#{$bp}xauto {
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+
+                .m#{$bp}yauto {
+                    margin-top: auto;
+                    margin-bottom: auto;
+                }
+            }
+        }
+    }
+}

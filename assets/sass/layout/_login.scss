@@ -1,0 +1,23 @@
+
+.login-form {
+    background-color: #91CDD5;
+    background-image: url('../img/bg-login.png');
+    background-repeat: no-repeat;
+    width: 800px;
+    height: 475px;
+
+    form {
+        display: block;
+        margin-left: 370px;
+        margin-right: 20px;
+        padding-top: 130px;
+
+        .form-row {
+            margin-bottom: 20px;
+        }
+
+        input, button {
+            width: 100%;
+        }
+    }
+}

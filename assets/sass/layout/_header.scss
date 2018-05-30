@@ -1,0 +1,45 @@
+/*------------------------------------*\
+    #HEADER
+\*------------------------------------*/
+
+.header {
+    height: 7rem;
+    background: linear-gradient(to bottom, #D2D2D2 0, darken(#D2D2D2, 10%) 100%);
+    border-bottom: 1px solid #fff;
+
+    .container-fluid {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    h1 {
+        display: inline-block;
+        padding: .5rem;
+        margin-bottom: 0;
+
+        img {
+            width: 6rem;
+        }
+    }
+
+    .main-nav {
+        align-self: center;
+
+        a {
+            color: #fff;
+        }
+
+        ul {
+            @extend %unstyled-list;
+
+            li {
+                display: inline-block;
+                padding: 0 .5rem;
+
+                &:last-child {
+                    padding-right: 0;
+                }
+            }
+        }
+    }
+}

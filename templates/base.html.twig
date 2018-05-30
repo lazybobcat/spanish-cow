@@ -1,15 +1,163 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block breadcrumb %}
-            {{ wo_render_breadcrumbs() }}
-        {% endblock breadcrumb %}
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<!doctype html>
+<html class="no-js" lang="{{ app.request.locale }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}Spanish Cow | Outils de traduction{% endblock %}</title>
+    <meta name="description" content="{% block description %}Spanish Cow | Outils de traduction{% endblock description %}" />
+
+    {#{% block twitter_card %}#}
+        {#<!-- Twitter Card data -->#}
+        {#<meta name="twitter:card" content="summary">#}
+        {#<meta name="twitter:site" content="@publisher_handle">#}
+        {#<meta name="twitter:title" content="Page Title">#}
+        {#<meta name="twitter:description" content="Page description less than 200 characters">#}
+        {#<meta name="twitter:creator" content="@author_handle">#}
+        {#<meta name="twitter:image" content="http://www.example.com/image/jpg">#}
+    {#{% endblock twitter_card %}#}
+
+    {#{% block open_graph %}#}
+        {#<!-- Open Graph data -->#}
+        {#<meta property="og:title" content="Title Here" />#}
+        {#<meta property="og:type" content="article" />#}
+        {#<meta property="og:url" content="http://www.example.com/" />#}
+        {#<meta property="og:image" content="http://example.com/image.jpg" />#}
+        {#<meta property="og:description" content="Description Here" />#}
+        {#<meta property="og:site_name" content="Site Name, i.e. Moz" />#}
+    {#{% endblock open_graph %}#}
+
+    {#{% block favicon %}#}
+        {#<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon/apple-touch-icon.png') }}">#}
+        {#<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon/favicon-32x32.png') }}">#}
+        {#<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon/favicon-16x16.png') }}">#}
+        {#<link rel="manifest" href="{{ asset('favicon/site.webmanifest') }}">#}
+        {#<link rel="mask-icon" href="{{ asset('favicon/safari-pinned-tab.svg') }}" color="#5bbad5">#}
+        {#<link rel="shortcut icon" href="{{ asset('favicon/favicon.ico') }}">#}
+        {#<meta name="msapplication-TileColor" content="#00aba9">#}
+        {#<meta name="msapplication-config" content="{{ asset('favicon/browserconfig.xml') }}">#}
+        {#<meta name="theme-color" content="#ffffff">#}
+    {#{% endblock favicon %}#}
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+    {% endblock %}
+
+    {% block head_scripts %}
+        <link rel="stylesheet" href="{{ asset('build/js/modernizr.js') }}">
+        <!-- Respond.js IE8 support of media queries -->
+        <!--[if lt IE 9]>
+        <link rel="stylesheet" href="{{ asset('build/js/respond.js') }}">
+        <![endif]-->
+    {% endblock head_scripts %}
+</head>
+
+
+<body {% block body_attributes %}{% endblock %}>
+{% block skip_links %}
+    <a href="#content" class="skip-link">{{ "skip_link.to_content" | trans | desc("Skip to content") }}</a>
+    <a href="#main-nav" class="skip-link">{{ "skip_link.to_nav" | trans | desc("Skip to navigation") }}</a>
+{% endblock skip_links %}
+
+{#{% include '_components/svg-sprite.svg.twig' %}#}
+
+
+{% block browsehappy %}
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        <p>You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/"><strong>upgrade your browser</strong></a> to improve your experience.</p>
+    </div>
+    <![endif]-->
+{% endblock browsehappy %}
+
+<div>
+    {% block header %}
+        <header class="header" role="banner">
+            {% block header_content %}
+            <div class="container-fluid">
+                {% block logo %}
+                    <h1>
+                        <a href="{{ path('homepage') }}" class="logo">
+                            <img src="{{ asset('img/logo.svg') }}" alt="Spanish Cow" />
+                            <span class="sr-only">Spanish Cow</span>
+                        </a>
+                    </h1>
+                {% endblock %}
+
+                <!-- Header -->
+                {% block main_nav %}
+                    <nav class="main-nav" id="main-nav" role="navigation" tabindex="-1">
+                        <ul>
+                            <li>
+                                <a href="{{ path('logout') }}">
+                                    {{ 'label.logout' | trans | desc("Déconnection") }}
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                {% endblock main_nav %}
+            {% endblock header_content %}
+            </div>
+        </header>
+    {% endblock header %}
+
+
+    {% block main %}
+        <main role="main" class="main" id="content" tabindex="-1">
+            {% block breadcrumb %}
+                {{ wo_render_breadcrumbs() }}
+            {% endblock breadcrumb %}
+
+            {% include '_components/flashbag.html.twig' %}
+
+            <div class="main-content">
+                {% block main_content %}
+                    <!-- Content goes here -->
+                {% endblock main_content %}
+            </div>
+        </main>
+    {% endblock main %}
+</div>
+
+{% block footer %}
+    {#<footer class="footer container-fluid" role="contentinfo">#}
+        {#{% block footer_content %}#}
+            {#<!-- Footer -->#}
+            {#<div class="row no-gutters justify-content-between">#}
+                {#<div class="col">#}
+                    {#{% block footer_nav %}#}
+                        {#<nav class="footer-nav">#}
+                            {#<ul>#}
+                                {#<li>#}
+                                    {#© {{ 'now'|date('Y') }} Spanish Cow#}
+                                {#</li>#}
+                            {#</ul>#}
+                        {#</nav>#}
+                    {#{% endblock %}#}
+                {#</div>#}
+            {#</div>#}
+        {#{% endblock footer_content %}#}
+    {#</footer>#}
+{% endblock footer %}
+
+
+{% block inline_scripts %}
+    <script type="application/javascript" src="{{ asset('build/js/main.js') }}"></script>
+{% endblock %}
+
+
+{% block google_analytics %}
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', '{{ ga_tracking }}', 'auto');
+        ga('require', 'linkid', 'linkid.js');
+        ga('send', 'pageview');
+    </script>
+{% endblock google_analytics %}
+</body>
 </html>

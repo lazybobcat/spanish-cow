@@ -1,0 +1,25 @@
+
+.translate-form, .asset-form {
+    label {
+        display: block;
+        background: $c-gray-light;
+        font-weight: bold;
+        padding: 0 1rem;
+
+        img {
+            width: 1.8rem;
+        }
+    }
+
+    textarea {
+        width: 100%;
+    }
+
+    .form-row {
+        margin-bottom: 1rem;
+    }
+
+    .form-actions {
+        text-align: right;
+    }
+}

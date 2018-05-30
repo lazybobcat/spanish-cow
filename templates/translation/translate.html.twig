@@ -1,38 +1,57 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h2>{{ 'label.translate_title' | trans() | desc("Traduction") }}</h2>
+{% block main_content %}
+    <div class="container-fluid">
+        <h2>{{ 'label.translate_title' | trans() | desc("Traduction") }}</h2>
 
-    {% if assets|length %}
-        <table>
-            <thead>
-            <tr>
-                <th>{{ 'label.resname' | trans | desc('Id') }}</th>
-                <th>{{ 'label.source' | trans | desc('Source') }}</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for asset in assets %}
+        {% if assets|length %}
+            <table class="assets-table">
+                <thead>
                 <tr>
-                    <td>{{ asset.resname }}</td>
-                    <td>{{ asset.source }}</td>
+                    <th>{{ 'label.resname' | trans | desc('Id') }}</th>
+                    <th>{{ 'label.source' | trans | desc('Source') }}</th>
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                {% for asset in assets %}
+                    <tr{% if loop.first %} class="-active"{% endif %}>
+                        <td>{{ asset.resname }}</td>
+                        <td>{{ asset.source }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
 
-        {% for locale in domain.locales %}
-            <div class="form-row">
-                <label for="fr">{{ locale.name }} ({{ locale.code }})</label>
-                <textarea name="fr" id="fr" rows="10"></textarea>
-            </div>
-        {% endfor %}
-
-        <div>
-            <label for="comment">{{ 'label.comment' | trans | desc("Commentaire") }}</label>
-            <textarea name="comment" id="comment" rows="10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis, doloremque enim excepturi harum libero minima nihil omnis quis quisquam recusandae reiciendis repudiandae tenetur vero! Ad eligendi quam repudiandae rerum ullam!</textarea>
-        </div>
-    {% else %}
-        <p>{{ 'label.no_assets' | trans | desc("Aucun asset n'a encore été ajouté à ce domaine.") }}</p>
-    {% endif %}
+            <section class="row">
+                <div class="col-md-9 col-sm-12">
+                    <form class="translate-form">
+                        {% for locale in domain.locales %}
+                            <div class="form-row">
+                                <label for="{{ locale.code }}">
+                                    <img src="{{ asset('/img/flags/' ~ locale.code ~ '.png') }}" alt=""/>
+                                    {{ locale.name }} ({{ locale.code }})
+                                </label>
+                                <textarea name="{{ locale.code }}" id="{{ locale.code }}" rows="10"></textarea>
+                            </div>
+                        {% endfor %}
+                    </form>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                    <form class="asset-form">
+                        <div class="form-row">
+                            <label for="comment">{{ 'label.comment' | trans | desc("Commentaire") }}</label>
+                            <textarea name="comment" id="comment" rows="10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis, doloremque enim excepturi harum libero minima nihil omnis quis quisquam recusandae reiciendis repudiandae tenetur vero! Ad eligendi quam repudiandae rerum ullam!</textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                {{ 'label.comment_action' | trans | desc("Commenter") }}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        {% else %}
+            <p>{{ 'label.no_assets' | trans | desc("Aucun asset n'a encore été ajouté à ce domaine.") }}</p>
+        {% endif %}
+    </div>
 {% endblock %}

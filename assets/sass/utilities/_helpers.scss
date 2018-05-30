@@ -1,0 +1,232 @@
+/*------------------------------------*\
+    #HELPERS
+\*------------------------------------*/
+
+/**
+* Notifications message
+*/
+.message {
+    margin: 1em 0;
+    padding: 1em;
+}
+
+// For each type in $message-types map (defined in variables)
+@each $type in map-keys($message-types) {
+
+    $bg: map-get(map-get($message-types, $type), 'bg');
+    $color: map-get(map-get($message-types, $type), 'color');
+    $border: map-get(map-get($message-types, $type), 'border');
+
+    .message.-#{$type} {
+        background: $bg;
+        color: $color;
+        border: 1px solid $border;
+    }
+
+    .#{$type} {
+        color: $color;
+        font-weight: 600;
+    }
+}
+
+/**
+* Skip links
+*/
+.skip-link {
+    position: absolute;
+    left: -99999em;
+    overflow: hidden;
+
+    &:hover,
+    &:focus {
+        position: static;
+    }
+}
+
+/**
+* Align
+*/
+.txtleft {
+    text-align: left;
+}
+
+.txtright {
+    text-align: right;
+}
+
+.txtcenter {
+    text-align: center;
+}
+
+.left,
+.start {
+    float: left;
+}
+
+img.left,
+img.start {
+    margin-right: 1em;
+}
+
+.right,
+.end {
+    float: right;
+}
+
+img.right,
+img.end {
+    margin-left: 1em;
+}
+
+img.left,
+img.right,
+img.start,
+img.end {
+    margin-bottom: 0.5em;
+}
+
+/*
+ * Unstyled list - remove margin, padding and list type
+ */
+%unstyled-list,
+.unstyled-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+/*
+ * Unstyled button - remove background, border, padding
+ */
+%unstyled-button,
+.unstyled-button {
+    border: 0;
+    background: transparent;
+    padding: 0;
+}
+
+/*
+ * Clearfix: contain floats
+ */
+%clearfix,
+.clearfix {
+    &:after, &:before {
+        content: ' ';
+        display: table;
+    }
+
+    &:after {
+        clear: both;
+    }
+}
+
+/**
+* Hide text for bg img
+*/
+%hide-text {
+    overflow: hidden;
+    text-indent: 200%;
+    white-space: nowrap;
+}
+
+/* Make hidden text accessible by screen readers */
+%sr-only,
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+// Use in conjunction with .sr-only to only display content when it' s focused .% sr-only-focusable,
+.sr-only-focusable {
+    &:active,
+    &:focus {
+        position: static;
+        width: auto;
+        height: auto;
+        margin: 0;
+        overflow: visible;
+        clip: auto;
+    }
+}
+
+/* Hidden */
+.hidden {
+    display: none !important;
+}
+
+/**
+* Embeds responsive
+*/
+// Credit: Nicolas Gallagher and SUIT CSS.
+.embed-responsive {
+    position: relative;
+    display: block;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+
+    .embed-responsive__item,
+    iframe,
+    embed,
+    object,
+    video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+        border: 0;
+    }
+
+    // Modifier class for 16:9 aspect ratio
+    &.-ratio16by9 {
+        padding-bottom: 56.25%;
+    }
+
+    // Modifier class for 4:3 aspect ratio
+    &.-ratio4by3 {
+        padding-bottom: 75%;
+    }
+}
+
+/*
+** Class for things to be done
+*/
+.to-do {
+    position: relative;
+    padding: 1rem;
+
+    &:before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba($c-txt, .3);
+    }
+
+    &:after {
+        content: 'TO DO';
+        position: absolute;
+        bottom: 0;
+        top: 50%;
+        left: 50%;
+        right: 0;
+        transform: translateX(-50%) translateY(-50%);
+        color: $c-primary;
+        font-weight: 700;
+        font-size: 4rem;
+        text-shadow: .2rem .2rem 1rem $c-gray;
+        text-align: center;
+        height: 4rem;
+        line-height: 1;
+    }
+}

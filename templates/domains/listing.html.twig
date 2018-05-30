@@ -1,21 +1,51 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h2>{{ 'label.domains_listing_title' | trans({'%projet%': project}) | desc("Domaines de '%projet%'") }}</h2>
+{% block main_content %}
+    <div class="container-fluid">
+        <h2>{{ 'label.domains_listing_title' | trans({'%projet%': project}) | desc("Domaines de '%projet%'") }}</h2>
 
-    {% if domains.count %}
-        <ul>
-            {% for domain in domains %}
-                <li><a href="{{ path('translate', {'domain': domain.id, 'project': domain.project.id}) }}">{{ domain }}</a></li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>{{ 'label.no_domains' | trans | desc("Ce projet ne contient aucun domaine.") }}</p>
-    {% endif %}
+        {% if domains.count %}
+            <section class="domain-card-list">
+                {% for domain in domains %}
+                    <div class="domain-card">
+                        <h3 class="domain-card__title">{{ domain }}</h3>
+                        <div class="domain-card__meta">
+                            {% if domain.locales|length %}
+                            <ul class="domain-card__locales">
+                                {% for locale in domain.locales %}
+                                <li>
+                                    <img src="{{ asset('/img/flags/' ~ locale.code ~ '.png') }}" alt="{{ locale.code }}"/>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                            <span class="domain-card__assets">
+                                {% set count = (domain.assets|length) %}
+                                {{ 'label.nb_assets' | transchoice(count, {'%nb%': count}) | desc("{0} Aucun asset|{1} 1 asset|]1,Inf[ %nb% assets") }}
+                            </span>
+                        </div>
+                        <div class="domain-card__progressbar" title="{{ (progress[domain.id] * 100) }}%">
+                            <span class="-progress" style="width: {{ (progress[domain.id] * 100) }}%"></span>
+                        </div>
+                        <div class="domain-card__actions">
+                            <a href="#" class="btn">
+                                {{ 'label.add_asset' | trans | desc("Ajouter un asset") }}
+                            </a>
+                            <a href="{{ path('translate', {'domain': domain.id, 'project': domain.project.id}) }}" class="btn btn-primary">
+                                {{ 'label.translate' | trans | desc("Traduire") }}
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </section>
+        {% else %}
+            <p>{{ 'label.no_domains' | trans | desc("Ce projet ne contient aucun domaine.") }}</p>
+        {% endif %}
 
-    {% if domains.haveToPaginate %}
-        <div class="pagerfanta">
-            {{ pagerfanta(domains) }}
-        </div>
-    {% endif %}
+        {% if domains.haveToPaginate %}
+            <div class="pagerfanta">
+                {{ pagerfanta(domains) }}
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}

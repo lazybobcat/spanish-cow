@@ -14,6 +14,7 @@
 
 namespace App\Manager;
 
+use App\Entity\Domain;
 use App\Entity\Project;
 use App\Repository\DomainRepository;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
@@ -42,6 +43,17 @@ class DomainManager extends BaseManager
         ;
 
         return $pager;
+    }
+
+    public function findTranslationProgress(Domain $domain)
+    {
+        try {
+            $prct = $this->getRepository()->findTranslationProgressScalar($domain);
+        } catch (\Exception $e) {
+            return 0;
+        }
+
+        return $prct;
     }
 
     /**

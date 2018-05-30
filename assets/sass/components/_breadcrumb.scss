@@ -1,0 +1,23 @@
+
+.breadcrumb {
+    background: #D2D2D2;
+
+    ol {
+        @extend %unstyled-list;
+
+        li {
+            font-size: 1.8rem;
+            padding: .3rem;
+            display: inline-block;
+
+            &:after {
+                content: "/";
+                padding: 0 .5rem;
+            }
+
+            &:last-child:after {
+                content: "";
+            }
+        }
+    }
+}

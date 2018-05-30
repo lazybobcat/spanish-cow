@@ -44,3 +44,22 @@ $ mv var/jwt/private2.pem var/jwt/private.pem
 ```
 curl -X POST <base_url>/api/login_check -d _username=<email> -d _password=<password>
 ```
+
+## Build assets (css/js)
+
+Symfony recommends to use Webpack Encore, which bridges Symfony apps with modern JavaScript-based tools to manage web assets. Since Webpack relies on NodeJS and npm, we use a Docker container to build assets.
+To launch the container use the following command:
+
+```
+docker-compose build --force-rm --no-cache
+```
+
+Once the container is up and running, launch:
+
+```
+docker-compose run -u `id -u` app yarn run watch
+```
+
+And then you can start editing you JS/CSS and assets will be generated
+
+Check package.json for other available commands.

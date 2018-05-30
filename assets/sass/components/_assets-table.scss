@@ -1,0 +1,40 @@
+
+.assets-table {
+    width: 100%;
+    border: 1px solid $c-gray-light;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+
+    thead {
+        tr {
+            background: $c-gray-light;
+
+            th {
+                text-align: left;
+                font-weight: normal;
+                border: none;
+                padding: 0 1rem;
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            cursor: pointer;
+
+            &:hover {
+                background: $c-gray-lighter;
+            }
+
+            &.-active {
+                background: $c-primary;
+                color: #fff;
+            }
+
+            td {
+                font-size: 1.4rem;
+                padding: .1rem 1rem;
+            }
+        }
+    }
+}

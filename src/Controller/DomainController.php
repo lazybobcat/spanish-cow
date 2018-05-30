@@ -38,14 +38,19 @@ class DomainController extends Controller
 
         $breadcrumbs->addItem('breadcrumbs.projects_listing', $router->generate('project_list'));
         $breadcrumbs->addItem($project->getName(), $router->generate('domain_list', ['project' => $project->getId()]));
-        $breadcrumbs->addItem('breadcrumbs.domains_listing', $router->generate('domain_list', ['project' => $project->getId()]));
 
         $page = $request->get('page', 1);
         $domains = $domainManager->findByProject($project, $page, self::MAX_PER_PAGE);
+        $progress = [];
+
+        foreach ($domains as $domain) {
+            $progress[$domain->getId()] = $domainManager->findTranslationProgress($domain);
+        }
 
         return $this->render('domains/listing.html.twig', [
             'project' => $project,
             'domains' => $domains,
+            'progress' => $progress,
         ]);
     }
 }

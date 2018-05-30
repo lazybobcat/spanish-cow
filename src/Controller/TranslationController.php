@@ -37,9 +37,7 @@ class TranslationController extends Controller
 
         $breadcrumbs->addItem('breadcrumbs.projects_listing', $router->generate('project_list'));
         $breadcrumbs->addItem($project->getName(), $router->generate('domain_list', ['project' => $project->getId()]));
-        $breadcrumbs->addItem('breadcrumbs.domains_listing', $router->generate('domain_list', ['project' => $project->getId()]));
         $breadcrumbs->addItem($domain->getName(), $router->generate('translate', ['project' => $project->getId(), 'domain' => $domain->getId()]));
-        $breadcrumbs->addItem('breadcrumbs.translate', $router->generate('translate', ['project' => $project->getId(), 'domain' => $domain->getId()]));
 
         $assets = $assetManager->findBy(['domain' => $domain], ['resname' => 'ASC']);
 

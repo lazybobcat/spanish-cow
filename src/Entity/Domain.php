@@ -59,6 +59,13 @@ class Domain
     protected $name;
 
     /**
+     * @var Asset[]
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Asset", mappedBy="domain", cascade={"all"}, orphanRemoval=true)
+     */
+    protected $assets;
+
+    /**
      * @var Locale[]
      *
      * @ORM\OneToMany(targetEntity="App\Entity\Locale", mappedBy="domain", cascade={"all"}, orphanRemoval=true)
@@ -75,6 +82,7 @@ class Domain
 
     public function __construct()
     {
+        $this->assets = new ArrayCollection();
         $this->locales = new ArrayCollection();
     }
 
@@ -120,6 +128,63 @@ class Domain
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Asset[]
+     */
+    public function getAssets(): \Traversable
+    {
+        return $this->assets;
+    }
+
+    /**
+     * @param Asset[] $assets
+     * @return Domain
+     */
+    public function setAssets($assets)
+    {
+        foreach ($this->assets as $asset) {
+            $this->removeAsset($asset);
+        }
+
+        $this->assets = new ArrayCollection();
+
+        foreach ($assets as $asset) {
+            $this->addAsset($asset);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Asset $asset
+     *
+     * @return Domain
+     */
+    public function addAsset(Asset $asset)
+    {
+        if (!$this->assets->contains($asset)) {
+            $asset->setDomain($this);
+            $this->assets->add($asset);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Asset $asset
+     *
+     * @return Domain
+     */
+    public function removeAsset(Asset $asset)
+    {
+        if ($this->assets->contains($asset)) {
+            $asset->setDomain(null);
+            $this->assets->removeElement($asset);
+        }
 
         return $this;
     }

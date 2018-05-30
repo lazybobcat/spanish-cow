@@ -14,6 +14,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Domain;
 use App\Entity\Project;
 use Doctrine\ORM\EntityRepository;
 
@@ -34,6 +35,22 @@ class DomainRepository extends EntityRepository
         ;
 
         return $qb;
+    }
+
+    public function findTranslationProgressScalar(Domain $domain)
+    {
+        $qb = $this->getQueryBuilder();
+
+        $qb
+            ->select("COUNT(DISTINCT(t.id)) / (COUNT(DISTINCT(a.id)) * COUNT(DISTINCT(l.id))) AS prct")
+            ->innerJoin('d.assets', 'a')
+            ->innerJoin('a.translations', 't')
+            ->innerJoin('d.locales', 'l')
+            ->andWhere('d = :domain')
+            ->setParameter('domain', $domain)
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     /**

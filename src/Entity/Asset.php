@@ -70,7 +70,7 @@ class Asset
     /**
      * @var Domain
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Domain", inversedBy="locales")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Domain", inversedBy="assets")
      * @ORM\JoinColumn(name="domain_id", referencedColumnName="id")
      */
     protected $domain;
