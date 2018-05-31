@@ -5,7 +5,7 @@
         <h2>{{ 'label.domains_listing_title' | trans({'%projet%': project}) | desc("Domaines de '%projet%'") }}</h2>
 
         <div class="top-page-actions">
-            <a href="{{ path('domain_add', {'project': project.id}) }}" title="{{ 'label.add_domain' | trans | desc("Ajouter un domaine") }}" class="btn btn-primary">
+            <a href="{{ path('domain_add', {'project': project.id}) }}" title="{{ 'label.add_domain' | trans | desc("Ajouter un domaine") }}" class="btn btn-primary btn-icon">
                 <svg class="icon-plus"><use xlink:href="#icon-plus"></use></svg>
             </a>
         </div>
@@ -34,16 +34,16 @@
                             <span class="-progress" style="width: {{ (progress[domain.id] * 100) }}%"></span>
                         </div>
                         <div class="domain-card__actions">
-                            <a href="{{ path('domain_edit', {'domain': domain.id, 'project': project.id}) }}" title="{{ 'label.edit_domain' | trans | desc("Modifier le domaine") }}" class="btn">
+                            <a href="{{ path('domain_edit', {'domain': domain.id, 'project': project.id}) }}" title="{{ 'label.edit_domain' | trans | desc("Modifier le domaine") }}" class="btn btn-icon">
                                 <svg class="icon-cog-gear"><use xlink:href="#icon-cog-gear"></use></svg>
                             </a>
-                            <a href="{{ path('asset_add', {'domain': domain.id, 'project': domain.project.id}) }}" title="{{ 'label.add_asset' | trans | desc("Ajouter un asset") }}" class="btn">
+                            <a href="{{ path('asset_add', {'domain': domain.id, 'project': domain.project.id}) }}" title="{{ 'label.add_asset' | trans | desc("Ajouter un asset") }}" class="btn btn-icon">
                                 <svg class="icon-tag-2"><use xlink:href="#icon-tag-2"></use></svg>
                             </a>
-                            <a href="{{ path('domain_delete', {'domain': domain.id, 'project': domain.project.id}) }}" title="{{ 'label.delete' | trans | desc("Supprimer") }}" class="btn btn-error">
+                            <a href="{{ path('domain_delete', {'domain': domain.id, 'project': domain.project.id}) }}" title="{{ 'label.delete' | trans | desc("Supprimer") }}" class="btn btn-icon btn-error">
                                 <svg class="icon-trash-bin"><use xlink:href="#icon-trash-bin"></use></svg>
                             </a>
-                            <a href="{{ path('translate', {'domain': domain.id, 'project': domain.project.id}) }}" title="{{ 'label.translate' | trans | desc("Traduire") }}" class="btn btn-primary">
+                            <a href="{{ path('translate', {'domain': domain.id, 'project': domain.project.id}) }}" title="{{ 'label.translate' | trans | desc("Traduire") }}" class="btn btn-icon btn-primary">
                                 <svg class="icon-chat-bubble-two"><use xlink:href="#icon-chat-bubble-two"></use></svg>
                             </a>
                         </div>

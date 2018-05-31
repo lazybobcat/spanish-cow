@@ -2,16 +2,16 @@
 
 {% block main_content %}
     <div class="container-fluid">
-        <h2>{{ 'label.delete_domain_title' | trans({'%domain%': domain}) | desc("Supprimer le domaine '%domain%'") }}</h2>
+        <h2>{{ 'label.delete_asset_title' | trans({'%asset%': asset.resname}) | desc("Supprimer l'asset '%asset%'") }}</h2>
 
         {{ form_start(form) }}
 
         <div>
-            <p>{{ 'label.delete_domain_confirmation' | trans({'%domain%': domain}) | desc("Êtes-vous sûr de vouloir supprimer le domaine '%domain%' ? Cette action est irréversible.") }}</p>
+            <p>{{ 'label.delete_asset_confirmation' | trans({'%asset%': asset.resname}) | desc("Êtes-vous sûr de vouloir supprimer l'asset '%asset%' ? Cette action est irréversible.") }}</p>
         </div>
 
         <div class="form-actions">
-            <a href="{{ path('domain_list', {'project': project.id}) }}" class="btn btn-primary">
+            <a href="{{ path('translate', {'project': project.id, 'domain': asset.domain.id, 'active': asset.id}) }}" class="btn btn-primary">
                 {{ 'label.back' | trans | desc("Retour") }}
             </a>
             <button type="submit" class="btn btn-error">

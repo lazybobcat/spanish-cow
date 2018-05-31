@@ -26,6 +26,7 @@ class DomainType extends AbstractType
         $builder
             ->add('name')
             ->add('locales', null, [
+                'required' => true,
                 'multiple' => true,
                 'choice_label' => function ($value, $key, $index) {
                     return $value->getName();

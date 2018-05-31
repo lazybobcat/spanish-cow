@@ -5,7 +5,7 @@
         <h2>{{ 'label.translate_title' | trans() | desc("Traduction") }}</h2>
 
         <div class="top-page-actions">
-            <a href="{{ path('asset_add', {'domain': domain.id, 'project': domain.project.id}) }}" title="{{ 'label.add_asset' | trans | desc("Ajouter un asset") }}" class="btn btn-primary">
+            <a href="{{ path('asset_add', {'domain': domain.id, 'project': domain.project.id}) }}" title="{{ 'label.add_asset' | trans | desc("Ajouter un asset") }}" class="btn btn-icon btn-primary">
                 <svg class="icon-plus"><use xlink:href="#icon-plus"></use></svg>
             </a>
         </div>
@@ -61,7 +61,10 @@
                             {{ form_row(form.notes) }}
                             {{ form_row(form.id) }}
                             <div class="form-actions">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" name="delete" value="delete" class="btn btn-error btn-icon" title="{{ 'label.delete' | trans | desc("Supprimer") }}">
+                                    <svg class="icon-trash-bin"><use xlink:href="#icon-trash-bin"></use></svg>
+                                </button>
+                                <button type="submit" name="comment" class="btn btn-primary">
                                     {{ 'label.comment_action' | trans | desc("Commenter") }}
                                 </button>
                             </div>

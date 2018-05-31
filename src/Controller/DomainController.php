@@ -18,6 +18,7 @@ use App\Entity\Domain;
 use App\Entity\Project;
 use App\Form\DomainType;
 use App\Manager\DomainManager;
+use App\Voter\DomainVoter;
 use App\Voter\ProjectVoter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -61,7 +62,11 @@ class DomainController extends Controller
      */
     public function add(Request $request, DomainManager $domainManager, Breadcrumbs $breadcrumbs, RouterInterface $router, Project $project)
     {
-        if (!$this->isGranted(ProjectVoter::UPDATE, $project)) {
+        /** @var Domain $domain */
+        $domain = $domainManager->create();
+        $domain->setProject($project);
+
+        if (!$this->isGranted(DomainVoter::CREATE, $domain)) {
             throw $this->createNotFoundException();
         }
 
@@ -69,9 +74,6 @@ class DomainController extends Controller
         $breadcrumbs->addItem($project->getName(), $router->generate('domain_list', ['project' => $project->getId()]));
         $breadcrumbs->addItem('breadcrumbs.domain_add', $router->generate('domain_add', ['project' => $project->getId()]));
 
-        /** @var Domain $domain */
-        $domain = $domainManager->create();
-        $domain->setProject($project);
         $form = $this->createForm(DomainType::class, $domain);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -92,7 +94,7 @@ class DomainController extends Controller
      */
     public function edit(Request $request, DomainManager $domainManager, Breadcrumbs $breadcrumbs, RouterInterface $router, Project $project, Domain $domain)
     {
-        if (!$this->isGranted(ProjectVoter::READ, $project) || $domain->getProject() !== $project) {
+        if (!$this->isGranted(DomainVoter::UPDATE, $domain)) {
             throw $this->createNotFoundException();
         }
 
@@ -120,13 +122,13 @@ class DomainController extends Controller
      */
     public function delete(Request $request, DomainManager $domainManager, Breadcrumbs $breadcrumbs, RouterInterface $router, Project $project, Domain $domain)
     {
-        if (!$this->isGranted(ProjectVoter::READ, $project) || $domain->getProject() !== $project) {
+        if (!$this->isGranted(DomainVoter::DELETE, $domain)) {
             throw $this->createNotFoundException();
         }
 
         $breadcrumbs->addItem('breadcrumbs.projects_listing', $router->generate('project_list'));
         $breadcrumbs->addItem($project->getName(), $router->generate('domain_list', ['project' => $project->getId()]));
-        $breadcrumbs->addItem($domain->getName(), $router->generate('domain_add', ['project' => $project->getId()]));
+        $breadcrumbs->addItem($domain->getName());
 
         $form = $this->createFormBuilder()->getForm();
         $form->handleRequest($request);

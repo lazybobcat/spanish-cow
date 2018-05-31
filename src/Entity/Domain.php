@@ -74,6 +74,7 @@ class Domain
      * @ORM\JoinTable(name="project__domain_locales",
      *     joinColumns={@ORM\JoinColumn(name="domain_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="locale_id", referencedColumnName="id")})
+     * @Assert\NotBlank()
      */
     protected $locales;
 

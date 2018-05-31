@@ -51,6 +51,11 @@ class TranslationController extends Controller
         $form = $this->createForm(AssetNotesType::class, new Asset(), ['csrf_protection' => false]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            // If delete button has been pressed
+            if ($request->request->get('delete')) {
+                return $this->redirectToRoute('asset_delete', ['project' => $project->getId(), 'asset' => $form->getData()->getId()]);
+            }
+
             /** @var Asset $asset */
             foreach ($assets as $asset) {
                 if ($asset->getId() == $form->getData()->getId()) {

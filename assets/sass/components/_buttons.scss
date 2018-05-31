@@ -4,12 +4,17 @@
 .btn {
     display: inline-block;
     text-align: center;
-    padding: 1.5rem 3rem;
+    padding: 1.45rem 3rem;
     border: none;
     text-decoration: none;
     user-select: none;
     vertical-align: middle;
     transition: background 250ms ease-in, color 250ms ease-in;
+    line-height: 1.15;
+
+    &.btn-icon {
+        padding: 1.1rem 1rem;
+    }
 }
 
 /*
