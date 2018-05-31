@@ -5,8 +5,8 @@
         <h2>{{ 'label.translate_title' | trans() | desc("Traduction") }}</h2>
 
         <div class="top-page-actions">
-            <a href="{{ path('asset_add', {'domain': domain.id, 'project': domain.project.id}) }}" class="btn btn-primary">
-                {{ 'label.add_asset' | trans | desc("Ajouter un asset") }}
+            <a href="{{ path('asset_add', {'domain': domain.id, 'project': domain.project.id}) }}" title="{{ 'label.add_asset' | trans | desc("Ajouter un asset") }}" class="btn btn-primary">
+                <svg class="icon-plus"><use xlink:href="#icon-plus"></use></svg>
             </a>
         </div>
 

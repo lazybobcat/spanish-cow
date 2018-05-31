@@ -27,6 +27,19 @@
     }
 }
 
+.btn-error {
+    border: 1px solid map-get(map-get($message-types, 'error'), 'color');
+    background: map-get(map-get($message-types, 'error'), 'color');
+
+    color: #fff;
+
+    &:hover,
+    &:focus {
+        background: #fff;
+        color: map-get(map-get($message-types, 'error'), 'color');
+    }
+}
+
 .btn-outline-primary {
     border: 1px solid $c-primary;
     background: transparent;

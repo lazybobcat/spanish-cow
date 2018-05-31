@@ -114,4 +114,32 @@ class DomainController extends Controller
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/project/{project}/domain/{domain}/delete", name="domain_delete")
+     */
+    public function delete(Request $request, DomainManager $domainManager, Breadcrumbs $breadcrumbs, RouterInterface $router, Project $project, Domain $domain)
+    {
+        if (!$this->isGranted(ProjectVoter::READ, $project) || $domain->getProject() !== $project) {
+            throw $this->createNotFoundException();
+        }
+
+        $breadcrumbs->addItem('breadcrumbs.projects_listing', $router->generate('project_list'));
+        $breadcrumbs->addItem($project->getName(), $router->generate('domain_list', ['project' => $project->getId()]));
+        $breadcrumbs->addItem($domain->getName(), $router->generate('domain_add', ['project' => $project->getId()]));
+
+        $form = $this->createFormBuilder()->getForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $domainManager->delete($domain);
+
+            return $this->redirectToRoute('domain_list', ['project' => $project->getId()]);
+        }
+
+        return $this->render('domains/delete.html.twig', [
+            'project' => $project,
+            'domain' => $domain,
+            'form' => $form->createView(),
+        ]);
+    }
 }

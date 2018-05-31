@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block main_content %}
+    <div class="container-fluid">
+        <h2>{{ 'label.delete_domain_title' | trans({'%domain%': domain}) | desc("Supprimer le domaine '%domain%'") }}</h2>
+
+        {{ form_start(form) }}
+
+        <div>
+            <p>{{ 'label.delete_domain_confirmation' | trans({'%domain%': domain}) | desc("Êtes-vous sûr de vouloir supprimer le domaine '%domain%' ? Cette action est irréversible.") }}</p>
+        </div>
+
+        <div class="form-actions">
+            <a href="{{ path('domain_list', {'project': project.id}) }}" class="btn">
+                {{ 'label.back' | trans | desc("Retour") }}
+            </a>
+            <button type="submit" class="btn btn-error">
+                {{ 'label.delete' | trans | desc("Valider") }}
+            </button>
+        </div>
+        {{ form_end(form) }}
+
+    </div>
+{% endblock %}
