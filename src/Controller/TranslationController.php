@@ -19,7 +19,7 @@ use App\Entity\Domain;
 use App\Entity\Locale;
 use App\Entity\Project;
 use App\Entity\Translation;
-use App\Form\AssetType;
+use App\Form\AssetNotesType;
 use App\Manager\AssetManager;
 use App\Manager\TranslationManager;
 use App\Voter\ProjectVoter;
@@ -48,7 +48,7 @@ class TranslationController extends Controller
         $assets = $assetManager->findBy(['domain' => $domain], ['resname' => 'ASC']);
         $select = $request->get('active', null);
 
-        $form = $this->createForm(AssetType::class, new Asset(), ['csrf_protection' => false]);
+        $form = $this->createForm(AssetNotesType::class, new Asset(), ['csrf_protection' => false]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Asset $asset */

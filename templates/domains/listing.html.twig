@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <h2>{{ 'label.domains_listing_title' | trans({'%projet%': project}) | desc("Domaines de '%projet%'") }}</h2>
 
-        <div>
+        <div class="top-page-actions">
             <a href="{{ path('domain_add', {'project': project.id}) }}" class="btn btn-primary">
                 {{ 'label.add_domain' | trans | desc("Ajouter un domaine") }}
             </a>
@@ -37,7 +37,7 @@
                             <a href="{{ path('domain_edit', {'domain': domain.id, 'project': project.id}) }}" class="btn">
                                 {{ 'label.edit_domain' | trans | desc("Modifier") }}
                             </a>
-                            <a href="#" class="btn">
+                            <a href="{{ path('asset_add', {'domain': domain.id, 'project': domain.project.id}) }}" class="btn">
                                 {{ 'label.add_asset' | trans | desc("Ajouter un asset") }}
                             </a>
                             <a href="{{ path('translate', {'domain': domain.id, 'project': domain.project.id}) }}" class="btn btn-primary">

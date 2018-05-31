@@ -23,7 +23,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AssetRepository")
- * @ORM\Table(name="asset__asset")
+ * @ORM\Table(name="asset__asset", indexes={@ORM\Index(name="resname_idx", columns={"resname"})})
  * @ApiResource(
  *     itemOperations={
  *         "get"={"access_control"="object.isAssociatedToProject(user)", "access_control_message"="Domain not found."},

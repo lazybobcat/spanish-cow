@@ -92,13 +92,13 @@ class DomainController extends Controller
      */
     public function edit(Request $request, DomainManager $domainManager, Breadcrumbs $breadcrumbs, RouterInterface $router, Project $project, Domain $domain)
     {
-        if (!$this->isGranted(ProjectVoter::READ, $project)) {
+        if (!$this->isGranted(ProjectVoter::READ, $project) || $domain->getProject() !== $project) {
             throw $this->createNotFoundException();
         }
 
         $breadcrumbs->addItem('breadcrumbs.projects_listing', $router->generate('project_list'));
         $breadcrumbs->addItem($project->getName(), $router->generate('domain_list', ['project' => $project->getId()]));
-        $breadcrumbs->addItem('breadcrumbs.domain_edit', $router->generate('domain_add', ['project' => $project->getId()]));
+        $breadcrumbs->addItem($domain->getName(), $router->generate('domain_add', ['project' => $project->getId()]));
 
         $form = $this->createForm(DomainType::class, $domain);
         $form->handleRequest($request);

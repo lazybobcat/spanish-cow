@@ -2,15 +2,12 @@
 
 {% block main_content %}
     <div class="container-fluid">
-        {% if domain %}
-            <h2>{{ 'label.edit_domain_title' | trans({'%domain%': domain}) | desc("Modifier le domaine '%domain%'") }}</h2>
-        {% else %}
-            <h2>{{ 'label.new_domain_title' | trans({'%project%': project}) | desc("Nouveau domaine pour '%project%'") }}</h2>
-        {% endif %}
+        <h2>{{ 'label.new_asset_title' | trans({'%domain%': domain}) | desc("Nouvel asset pour '%domain%'") }}</h2>
 
         {{ form_start(form) }}
-            {{ form_row(form.name) }}
-            {{ form_row(form.locales) }}
+            {{ form_row(form.resname) }}
+            {{ form_row(form.source) }}
+            {{ form_row(form.notes) }}
 
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary">
