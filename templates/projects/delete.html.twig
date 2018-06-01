@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block main_content %}
+    <div class="container-fluid">
+        <h2>{{ 'label.delete_project_title' | trans({'%project%': project}) | desc("Supprimer le projet '%project%'") }}</h2>
+
+        {{ form_start(form) }}
+
+        <div>
+            <p>{{ 'label.delete_project_confirmation' | trans({'%project%': project}) | desc("Êtes-vous sûr de vouloir supprimer le projet '%project%' ? Cette action est irréversible.") }}</p>
+        </div>
+
+        <div class="form-actions">
+            <a href="{{ path('project_list', {'project': project.id}) }}" class="btn btn-primary">
+                {{ 'label.back' | trans | desc("Retour") }}
+            </a>
+            <button type="submit" class="btn btn-error">
+                {{ 'label.delete' | trans | desc("Supprimer") }}
+            </button>
+        </div>
+        {{ form_end(form) }}
+
+    </div>
+{% endblock %}

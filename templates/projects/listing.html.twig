@@ -4,12 +4,41 @@
     <div class="container-fluid">
         <h2>{{ 'label.projects_listing_title' | trans | desc("Mes projets") }}</h2>
 
+        {% if is_granted('ROLE_ADMIN') %}
+        <div class="top-page-actions">
+            <a href="{{ path('project_add') }}" title="{{ 'label.add_project' | trans | desc("Créer un domaine") }}" class="btn btn-primary btn-icon">
+                <svg class="icon-plus"><use xlink:href="#icon-plus"></use></svg>
+            </a>
+        </div>
+        {% endif %}
+
         {% if projects.count %}
-            <ul>
+            <div class="domain-card-list">
                 {% for project in projects %}
-                    <li><a href="{{ path('domain_list', {'project': project.id}) }}">{{ project }}</a></li>
+                    <div class="domain-card">
+                        <h3 class="domain-card__title">{{ project }}</h3>
+                        <div class="domain-card__meta">
+                            <span class="domain-card__assets">
+                                {% set count = (project.domains|length) %}
+                                {{ 'label.nb_domains' | transchoice(count, {'%nb%': count}) | desc("{0} Aucun domaine|{1} 1 domaine|]1,Inf[ %nb% domaines") }}
+                                -
+                                {% set count = project.countAssets %}
+                                {{ 'label.nb_assets' | transchoice(count, {'%nb%': count}) | desc("{0} Aucun asset|{1} 1 asset|]1,Inf[ %nb% assets") }}
+                            </span>
+                        </div>
+                        <div class="domain-card__actions">
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('project_delete', {'project': project.id}) }}" title="{{ 'label.delete' | trans | desc("Supprimer") }}" class="btn btn-icon btn-error">
+                                <svg class="icon-trash-bin"><use xlink:href="#icon-trash-bin"></use></svg>
+                            </a>
+                            {% endif %}
+                            <a href="{{ path('domain_list', {'project': project.id}) }}" title="{{ 'label.domain_list' | trans | desc("Voir le projet") }}" class="btn btn-icon btn-primary">
+                                <svg class="icon-angle-right"><use xlink:href="#icon-angle-right"></use></svg>
+                            </a>
+                        </div>
+                    </div>
                 {% endfor %}
-            </ul>
+            </div>
         {% else %}
             <p>{{ 'label.no_projects' | trans | desc("Vous n'êtes associé à aucun projet.") }}</p>
         {% endif %}

@@ -102,6 +102,21 @@ class Project
     /**
      * @return int
      */
+    public function countAssets()
+    {
+        $count = 0;
+
+        /** @var Domain $domain */
+        foreach ($this->domains as $domain) {
+            $count += count($domain->getAssets());
+        }
+
+        return $count;
+    }
+
+    /**
+     * @return int
+     */
     public function getId(): ?int
     {
         return $this->id;

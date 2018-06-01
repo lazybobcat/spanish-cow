@@ -17,6 +17,7 @@ namespace App\Voter;
 use App\Entity\Project;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class ProjectVoter extends Voter
@@ -25,6 +26,16 @@ class ProjectVoter extends Voter
     const READ = 'read';
     const UPDATE = 'update';
     const DELETE = 'delete';
+
+    /**
+     * @var AccessDecisionManagerInterface
+     */
+    private $decisionManager;
+
+    public function __construct(AccessDecisionManagerInterface $decisionManager)
+    {
+        $this->decisionManager = $decisionManager;
+    }
 
     /**
      * Determines if the attribute and subject are supported by this voter.
@@ -68,12 +79,14 @@ class ProjectVoter extends Voter
         switch ($attribute) {
             case self::READ:
             case self::UPDATE:
-            case self::DELETE:
                 return $subject->isAssociatedToProject($user);
 
             case self::CREATE:
+            case self::DELETE:
+                return $this->decisionManager->decide($token, ['ROLE_ADMIN']);
+
             default:
-                return true;
+                return false;
         }
     }
 }
