@@ -175,11 +175,14 @@ class DomainController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $uploadedFile */
             $uploadedFile = $request->files->get('import_file')['file'];
-            $file = $uploadedFile->move($this->getParameter('import_translation_folder'), $uploadedFile->getClientOriginalName());
+            $destination = $this->getParameter('import_translation_folder').DIRECTORY_SEPARATOR.$domain->getId();
+            $file = $uploadedFile->move($destination, $uploadedFile->getClientOriginalName());
             $data->setFile($file);
             $producer->sendEvent(Topics::TOPIC_FILE_IMPORT, json_encode($data));
 
-//            return $this->redirectToRoute('domain_list', ['project' => $project->getId()]);
+            $this->addFlash('success', 'flash.import_success');
+
+            return $this->redirectToRoute('domain_list', ['project' => $project->getId()]);
         }
 
         return $this->render('domains/import.html.twig', [

@@ -21,6 +21,7 @@ use Interop\Queue\PsrContext;
 use Interop\Queue\PsrMessage;
 use Interop\Queue\PsrProcessor;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 class FileImportConsumer implements PsrProcessor, TopicSubscriberInterface
 {
@@ -55,9 +56,11 @@ class FileImportConsumer implements PsrProcessor, TopicSubscriberInterface
     {
         $data = json_decode($message->getBody(), true);
         $import = new Import($data);
+        $fs = new Filesystem();
 
         try {
             $this->fileImporter->import($import);
+            $fs->remove($import->getFilePath());
 
             return self::ACK;
         } catch (\Exception $e) {
