@@ -92,6 +92,39 @@
             "ref": "70062abc2cd58794d2a90274502f81b55cd9951b"
         }
     },
+    "enqueue/async-event-dispatcher": {
+        "version": "0.7",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.7",
+            "ref": "9e937ccb79e08b978f91fb816d4e6d645813113a"
+        }
+    },
+    "enqueue/enqueue": {
+        "version": "0.8.29"
+    },
+    "enqueue/enqueue-bundle": {
+        "version": "0.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.4",
+            "ref": "daaea0035c3abd612f71f0288d5c20197c3c34ad"
+        }
+    },
+    "enqueue/fs": {
+        "version": "0.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.4",
+            "ref": "330bbc75a5bb7d25359af339dadd2467774ce79d"
+        }
+    },
+    "enqueue/null": {
+        "version": "0.8.24"
+    },
     "fzaninotto/faker": {
         "version": "v1.7.1"
     },
@@ -112,6 +145,9 @@
             "version": "2.3",
             "ref": "a66e8a7b75a1825cf2414d5dd53c7ed38c8654d1"
         }
+    },
+    "makasim/temp-file": {
+        "version": "0.2.0"
     },
     "monolog/monolog": {
         "version": "1.23.0"
@@ -142,6 +178,9 @@
     },
     "pagerfanta/pagerfanta": {
         "version": "v2.0.1"
+    },
+    "paragonie/random_compat": {
+        "version": "v2.0.12"
     },
     "php-translation/common": {
         "version": "0.3.0"
@@ -181,6 +220,12 @@
     },
     "psr/simple-cache": {
         "version": "1.0.1"
+    },
+    "queue-interop/queue-interop": {
+        "version": "0.6.1"
+    },
+    "ramsey/uuid": {
+        "version": "3.7.3"
     },
     "sensio/framework-extra-bundle": {
         "version": "4.0",

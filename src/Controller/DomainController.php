@@ -14,13 +14,18 @@
 
 namespace App\Controller;
 
+use App\Consumer\Topics;
 use App\Entity\Domain;
 use App\Entity\Project;
 use App\Form\DomainType;
+use App\Form\ImportFileType;
 use App\Manager\DomainManager;
+use App\Model\Import;
 use App\Voter\DomainVoter;
 use App\Voter\ProjectVoter;
+use Enqueue\Client\ProducerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
@@ -40,7 +45,7 @@ class DomainController extends Controller
         }
 
         $breadcrumbs->addItem('breadcrumbs.projects_listing', $router->generate('project_list'));
-        $breadcrumbs->addItem($project->getName(), $router->generate('domain_list', ['project' => $project->getId()]));
+        $breadcrumbs->addItem($project->getName());
 
         $page = $request->get('page', 1);
         $domains = $domainManager->findByProject($project, $page, self::MAX_PER_PAGE);
@@ -72,7 +77,7 @@ class DomainController extends Controller
 
         $breadcrumbs->addItem('breadcrumbs.projects_listing', $router->generate('project_list'));
         $breadcrumbs->addItem($project->getName(), $router->generate('domain_list', ['project' => $project->getId()]));
-        $breadcrumbs->addItem('breadcrumbs.domain_add', $router->generate('domain_add', ['project' => $project->getId()]));
+        $breadcrumbs->addItem('breadcrumbs.domain_add');
 
         $form = $this->createForm(DomainType::class, $domain);
         $form->handleRequest($request);
@@ -100,7 +105,7 @@ class DomainController extends Controller
 
         $breadcrumbs->addItem('breadcrumbs.projects_listing', $router->generate('project_list'));
         $breadcrumbs->addItem($project->getName(), $router->generate('domain_list', ['project' => $project->getId()]));
-        $breadcrumbs->addItem($domain->getName(), $router->generate('domain_add', ['project' => $project->getId()]));
+        $breadcrumbs->addItem($domain->getName());
 
         $form = $this->createForm(DomainType::class, $domain);
         $form->handleRequest($request);
@@ -139,6 +144,45 @@ class DomainController extends Controller
         }
 
         return $this->render('domains/delete.html.twig', [
+            'project' => $project,
+            'domain' => $domain,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/project/{project}/domain/{domain}/import", name="domain_import")
+     */
+    public function import(Request $request, ProducerInterface $producer, Breadcrumbs $breadcrumbs, RouterInterface $router, Project $project, Domain $domain)
+    {
+        if (!$this->isGranted(DomainVoter::UPDATE, $domain)) {
+            throw $this->createNotFoundException();
+        }
+
+        $breadcrumbs->addItem('breadcrumbs.projects_listing', $router->generate('project_list'));
+        $breadcrumbs->addItem($project->getName(), $router->generate('domain_list', ['project' => $project->getId()]));
+        $breadcrumbs->addItem($domain->getName());
+
+        $data = new Import();
+        $data
+            ->setDomainId($domain->getId())
+            ->setDomainName($domain->getName())
+        ;
+        $form = $this->createForm(ImportFileType::class, $data, [
+            'domain' => $domain,
+        ]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $uploadedFile */
+            $uploadedFile = $request->files->get('import_file')['file'];
+            $file = $uploadedFile->move($this->getParameter('import_translation_folder'), $uploadedFile->getClientOriginalName());
+            $data->setFile($file);
+            $producer->sendEvent(Topics::TOPIC_FILE_IMPORT, json_encode($data));
+
+//            return $this->redirectToRoute('domain_list', ['project' => $project->getId()]);
+        }
+
+        return $this->render('domains/import.html.twig', [
             'project' => $project,
             'domain' => $domain,
             'form' => $form->createView(),

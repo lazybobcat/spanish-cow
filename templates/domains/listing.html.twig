@@ -40,7 +40,7 @@
                             <a href="{{ path('asset_add', {'domain': domain.id, 'project': domain.project.id}) }}" title="{{ 'label.add_asset' | trans | desc("Ajouter un asset") }}" class="btn btn-icon">
                                 <svg class="icon-tag-2"><use xlink:href="#icon-tag-2"></use></svg>
                             </a>
-                            <a href="#" title="{{ 'label.import' | trans | desc("Importer") }}" class="btn btn-icon">
+                            <a href="{{ path('domain_import', {'domain': domain.id, 'project': domain.project.id}) }}" title="{{ 'label.import' | trans | desc("Importer") }}" class="btn btn-icon">
                                 <svg class="icon-download"><use xlink:href="#icon-download"></use></svg>
                             </a>
                             <a href="#" title="{{ 'label.download' | trans | desc("Télécharger") }}" class="btn btn-icon">

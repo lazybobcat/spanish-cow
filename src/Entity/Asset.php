@@ -49,14 +49,14 @@ class Asset
     /**
      * @var string
      *
-     * @ORM\Column(type="string", name="resname", nullable=false)
+     * @ORM\Column(type="string", name="resname", nullable=false, length=190)
      */
     protected $resname;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", name="source", nullable=false)
+     * @ORM\Column(type="text", name="source", nullable=false)
      */
     protected $source;
 
@@ -98,7 +98,7 @@ class Asset
     }
 
     /**
-     * @param $locale
+     * @param string $locale The locale code
      *
      * @return null|string
      */
@@ -112,7 +112,7 @@ class Asset
     }
 
     /**
-     * @param $locale
+     * @param string $locale The locale code
      *
      * @return Translation|null
      */

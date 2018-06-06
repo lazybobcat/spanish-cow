@@ -14,6 +14,7 @@
 
 namespace App\Manager;
 
+use App\Entity\Domain;
 use App\Repository\AssetRepository;
 
 /**
@@ -21,6 +22,14 @@ use App\Repository\AssetRepository;
  */
 class AssetManager extends BaseManager
 {
+    public function deleteForDomain(Domain $domain)
+    {
+        $assets = $this->findBy(['domain' => $domain]);
+        foreach ($assets as $asset) {
+            $this->delete($asset);
+        }
+    }
+
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */

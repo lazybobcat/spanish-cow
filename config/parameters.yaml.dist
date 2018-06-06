@@ -12,5 +12,8 @@ parameters:
     jwt_public_key_path: var/jwt/public.pem
     jwt_passphrase: password
 
+    # Import / Export
+    import_translation_folder: '%kernel.project_dir%/var/translation_files'
+
     # Analytics
     ga_tracking: UA-XXXXX-XX

@@ -44,7 +44,7 @@ class DomainRepository extends EntityRepository
         $qb
             ->select('COUNT(DISTINCT(t.id)) / (COUNT(DISTINCT(a.id)) * COUNT(DISTINCT(l))) AS prct')
             ->innerJoin('d.assets', 'a')
-            ->innerJoin('a.translations', 't')
+            ->leftJoin('a.translations', 't')
             ->innerJoin('d.locales', 'l')
             ->andWhere('d = :domain')
             ->andWhere('t.target IS NOT NULL')

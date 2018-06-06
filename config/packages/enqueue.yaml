@@ -1,0 +1,4 @@
+enqueue:
+    transport:
+        default: 'file://%kernel.project_dir%/var/enqueue'
+    client: ~

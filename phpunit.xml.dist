@@ -33,6 +33,14 @@
         <env name="JWT_PUBLIC_KEY_PATH" value="config/jwt/public.pem"/>
         <env name="JWT_PASSPHRASE" value="b9c8f94f78565f189a50b889ddfd5c14"/>
         <!-- ###- lexik/jwt-authentication-bundle ### -->
+
+        <!-- ###+ enqueue/enqueue-bundle ### -->
+        <env name="ENQUEUE_DSN" value="null://"/>
+        <!-- ###- enqueue/enqueue-bundle ### -->
+
+        <!-- ###+ enqueue/fs ### -->
+        <env name="ENQUEUE_DSN" value="file://var/enqueue"/>
+        <!-- ###- enqueue/fs ### -->
     </php>
 
     <testsuites>

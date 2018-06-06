@@ -82,3 +82,15 @@ services:
     App\Manager\TranslationManager:
         arguments:
             $class: 'App\Entity\Translation'
+
+    ######################################################################
+    ## CONSUMERS
+    ######################################################################
+    App\Consumer\FileImportConsumer:
+        public: true
+        tags:
+            - { name: 'enqueue.client.processor' }
+
+    App\Importer\FileImporter:
+        arguments:
+            $translationWriter: '@translation.writer'

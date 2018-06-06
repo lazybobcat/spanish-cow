@@ -63,3 +63,9 @@ docker-compose run -u `id -u` app yarn run watch
 And then you can start editing you JS/CSS and assets will be generated
 
 Check package.json for other available commands.
+
+## Run the consumer (translation file importing, ...)
+
+```
+$ php bin/console enqueue:consume
+```

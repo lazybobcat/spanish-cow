@@ -30,16 +30,8 @@
 
 {% block checkbox_row %}
     <div {{ block('form_row_attributes') }}>
-        <label{% for attrname,attrvalue in attr %} {{attrname}}="{{attrvalue}}"{% endfor %}>
-        {{- form_widget(form) -}}
-        <span>
-                {% if not sonata_admin.admin %}
-                    {{- label|trans({}, translation_domain) -}}
-                {% else %}
-                    {{- label|trans({}, sonata_admin.field_description.translationDomain) -}}
-                {% endif%}
-            </span>
-        </label>
+        {{- form_widget(form) }}
+        {{ form_label(form) -}}
     </div>
     {{- form_errors(form) -}}
 {% endblock checkbox_row %}

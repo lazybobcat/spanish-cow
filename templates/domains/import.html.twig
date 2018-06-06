@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block main_content %}
+    <div class="container-fluid">
+        <h2>{{ 'label.import_title' | trans({'%domain%': domain}) | desc("Importer un fichier de traductions dans '%domain%'") }}</h2>
+
+        {{ form_start(form) }}
+            {{ form_row(form.file) }}
+            {{ form_row(form.fileType) }}
+            {{ form_row(form.localeCode) }}
+            {{ form_row(form.keep) }}
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    {{ 'label.create_action' | trans | desc("Valider") }}
+                </button>
+            </div>
+        {{ form_end(form) }}
+
+    </div>
+{% endblock %}
