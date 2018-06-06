@@ -60,7 +60,7 @@ class FileImportConsumer implements PsrProcessor, TopicSubscriberInterface
 
         try {
             $this->fileImporter->import($import);
-            $fs->remove($import->getFilePath());
+            $fs->remove($import->getSourceFilePath());
 
             return self::ACK;
         } catch (\Exception $e) {

@@ -15,9 +15,13 @@
 namespace App\Importer;
 
 use App\Importer\Dumper\DatabaseDumper;
+use App\Importer\Loader\DatabaseLoader;
+use App\Model\FileType;
 use App\Model\Import;
-use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Translation\Dumper\CsvFileDumper;
 use Symfony\Component\Translation\Dumper\DumperInterface;
+use Symfony\Component\Translation\Dumper\XliffFileDumper;
+use Symfony\Component\Translation\Dumper\YamlFileDumper;
 use Symfony\Component\Translation\Loader\CsvFileLoader;
 use Symfony\Component\Translation\Loader\XliffFileLoader;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
@@ -25,37 +29,70 @@ use Symfony\Component\Translation\Writer\TranslationWriter;
 
 class FileImporter
 {
-    const INPUT_TYPE_XLIFF = Import::FILE_TYPE_XLIFF;
-    const INPUT_TYPE_CSV = Import::FILE_TYPE_CSV;
-    const INPUT_TYPE_YAML = Import::FILE_TYPE_YAML;
-
-    const OUTPUT_TYPE_DATABASE = 'database';
-
     /**
      * @var TranslationWriter
      */
     private $translationWriter;
+
     /**
      * @var DatabaseDumper
      */
     private $databaseDumper;
 
-    public function __construct(TranslationWriter $translationWriter, DatabaseDumper $databaseDumper)
+    /**
+     * @var DatabaseLoader
+     */
+    private $databaseLoader;
+
+    public function __construct(TranslationWriter $translationWriter, DatabaseDumper $databaseDumper, DatabaseLoader $databaseLoader)
     {
         $this->translationWriter = $translationWriter;
         $this->databaseDumper = $databaseDumper;
+        $this->databaseLoader = $databaseLoader;
     }
 
     public function import(Import $importData)
     {
-        $file = new File($importData->getFilePath());
-        $this->translationWriter->addDumper(self::OUTPUT_TYPE_DATABASE, $this->getDumper(self::OUTPUT_TYPE_DATABASE));
-        $loader = $this->getLoader($importData->getFileType());
+        $this->translationWriter->addDumper($importData->getTargetType(), $this->getDumper($importData->getTargetType()));
+        $loader = $this->getLoader($importData->getSourceType());
 
-        $catalogue = $loader->load($file->getRealPath(), $importData->getLocaleCode(), $importData->getDomainName());
-        $this->translationWriter->write($catalogue, self::OUTPUT_TYPE_DATABASE, [
-            'import_data' => $importData,
-        ]);
+        $catalogue = $loader->load($this->getResource($importData, $importData->getSourceType()), $importData->getLocaleCode(), $importData->getDomainName());
+        $this->translationWriter->write($catalogue, $importData->getTargetType(), $this->getOptions($importData, $importData->getTargetType()));
+    }
+
+    private function getOptions(Import $data, $targetType)
+    {
+        $options = [
+            'import_data' => $data,
+        ];
+
+        switch ($targetType) {
+            case FileType::FILE_TYPE_DATABASE:
+                break;
+
+            case FileType::FILE_TYPE_XLIFF:
+            case FileType::FILE_TYPE_CSV:
+            case FileType::FILE_TYPE_YAML:
+            default:
+                $options['path'] = $data->getTargetFilePath();
+                break;
+        }
+
+        return $options;
+    }
+
+    private function getResource(Import $data, $type)
+    {
+        switch ($type) {
+            case FileType::FILE_TYPE_DATABASE:
+                return $data->getDomainId();
+
+            case FileType::FILE_TYPE_XLIFF:
+            case FileType::FILE_TYPE_CSV:
+            case FileType::FILE_TYPE_YAML:
+            default:
+                return $data->getSourceFilePath();
+        }
     }
 
     /**
@@ -66,8 +103,17 @@ class FileImporter
     private function getDumper($type)
     {
         switch ($type) {
-            case self::OUTPUT_TYPE_DATABASE:
+            case FileType::FILE_TYPE_DATABASE:
                 return $this->databaseDumper;
+
+            case FileType::FILE_TYPE_XLIFF:
+                return new XliffFileDumper();
+
+            case FileType::FILE_TYPE_CSV:
+                return new CsvFileDumper();
+
+            case FileType::FILE_TYPE_YAML:
+                return new YamlFileDumper();
 
             default:
                 throw new \LogicException("No dumper configured for type '{$type}'");
@@ -77,13 +123,16 @@ class FileImporter
     private function getLoader($type)
     {
         switch ($type) {
-            case self::INPUT_TYPE_XLIFF:
+            case FileType::FILE_TYPE_DATABASE:
+                return $this->databaseLoader;
+
+            case FileType::FILE_TYPE_XLIFF:
                 return new XliffFileLoader();
 
-            case self::INPUT_TYPE_CSV:
+            case FileType::FILE_TYPE_CSV:
                 return new CsvFileLoader();
 
-            case self::INPUT_TYPE_YAML:
+            case FileType::FILE_TYPE_YAML:
                 return new YamlFileLoader();
 
             default:

@@ -43,7 +43,7 @@
                             <a href="{{ path('domain_import', {'domain': domain.id, 'project': domain.project.id}) }}" title="{{ 'label.import' | trans | desc("Importer") }}" class="btn btn-icon">
                                 <svg class="icon-download"><use xlink:href="#icon-download"></use></svg>
                             </a>
-                            <a href="#" title="{{ 'label.download' | trans | desc("Télécharger") }}" class="btn btn-icon">
+                            <a href="{{ path('domain_export', {'domain': domain.id, 'project': domain.project.id}) }}" title="{{ 'label.download' | trans | desc("Télécharger") }}" class="btn btn-icon">
                                 <svg class="icon-file-text"><use xlink:href="#icon-file-text"></use></svg>
                             </a>
                             <a href="{{ path('domain_delete', {'domain': domain.id, 'project': domain.project.id}) }}" title="{{ 'label.delete' | trans | desc("Supprimer") }}" class="btn btn-icon btn-error">

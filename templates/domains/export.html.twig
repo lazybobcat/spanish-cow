@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block main_content %}
+    <div class="container-fluid">
+        <h2>{{ 'label.export_title' | trans({'%domain%': domain}) | desc("Exporter les traductions de '%domain%'") }}</h2>
+
+        <p>
+            <a href="{{ path('domain_export_download', {'locale': 'fr', 'format': 'xliff', 'domain': domain.id, 'project': project.id}) }}">
+                {{ 'label.export_translations' | trans({'%format%': 'xliff'}) | desc("Exporter au format %format%") }}
+            </a>
+        </p>
+        <p>
+            <a href="{{ path('domain_export_download', {'locale': 'fr', 'format': 'yaml', 'domain': domain.id, 'project': project.id}) }}">
+                {{ 'label.export_translations' | trans({'%format%': 'yaml'}) | desc("Exporter au format %format%") }}
+            </a>
+        </p>
+        <p>
+            <a href="{{ path('domain_export_download', {'locale': 'fr', 'format': 'csv', 'domain': domain.id, 'project': project.id}) }}">
+                {{ 'label.export_translations' | trans({'%format%': 'csv'}) | desc("Exporter au format %format%") }}
+            </a>
+        </p>
+    </div>
+{% endblock %}

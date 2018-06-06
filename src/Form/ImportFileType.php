@@ -60,7 +60,7 @@ class ImportFileType extends AbstractType
                 'required' => true,
                 'multiple' => false,
             ])
-            ->add('fileType', ChoiceType::class, [
+            ->add('sourceType', ChoiceType::class, [
                 'required' => true,
                 'choices' => Import::getFileTypes(),
                 'choice_translation_domain' => false,

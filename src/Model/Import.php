@@ -18,10 +18,6 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class Import implements \JsonSerializable
 {
-    const FILE_TYPE_XLIFF = 'xliff';
-    const FILE_TYPE_CSV = 'csv';
-    const FILE_TYPE_YAML = 'yaml';
-
     /**
      * @var int
      */
@@ -45,12 +41,22 @@ class Import implements \JsonSerializable
     /**
      * @var string
      */
-    protected $filePath;
+    protected $sourceFilePath;
 
     /**
      * @var string
      */
-    protected $fileType = self::FILE_TYPE_XLIFF;
+    protected $targetFilePath;
+
+    /**
+     * @var string
+     */
+    protected $sourceType = FileType::FILE_TYPE_XLIFF;
+
+    /**
+     * @var string
+     */
+    protected $targetType = FileType::FILE_TYPE_DATABASE;
 
     /**
      * Keep existing translations that are not in the newly imported file
@@ -62,9 +68,9 @@ class Import implements \JsonSerializable
     public static function getFileTypes()
     {
         return [
-            self::FILE_TYPE_XLIFF => self::FILE_TYPE_XLIFF,
-            self::FILE_TYPE_YAML => self::FILE_TYPE_YAML,
-            self::FILE_TYPE_CSV => self::FILE_TYPE_CSV,
+            FileType::FILE_TYPE_XLIFF => FileType::FILE_TYPE_XLIFF,
+            FileType::FILE_TYPE_YAML => FileType::FILE_TYPE_YAML,
+            FileType::FILE_TYPE_CSV => FileType::FILE_TYPE_CSV,
         ];
     }
 
@@ -74,8 +80,10 @@ class Import implements \JsonSerializable
             'domain_id' => $this->getDomainId(),
             'domain_name' => $this->getDomainName(),
             'locale_code' => $this->getLocaleCode(),
-            'file_path' => $this->getFilePath(),
-            'file_type' => $this->getFileType(),
+            'source_path' => $this->getSourceFilePath(),
+            'source_type' => $this->getSourceType(),
+            'target_path' => $this->getTargetFilePath(),
+            'target_type' => $this->getTargetType(),
             'keep' => $this->isKeep(),
         ];
     }
@@ -86,8 +94,10 @@ class Import implements \JsonSerializable
             $this->setDomainId($from['domain_id']);
             $this->setDomainName($from['domain_name']);
             $this->setLocaleCode($from['locale_code']);
-            $this->setFilePath($from['file_path']);
-            $this->setFileType($from['file_type']);
+            $this->setSourceFilePath($from['source_path']);
+            $this->setSourceType($from['source_type']);
+            $this->setTargetFilePath($from['target_path']);
+            $this->setTargetType($from['target_type']);
             $this->setKeep($from['keep']);
         }
     }
@@ -164,7 +174,7 @@ class Import implements \JsonSerializable
     public function setFile($file)
     {
         $this->file = $file;
-        $this->filePath = $file->getRealPath();
+        $this->sourceFilePath = $file->getRealPath();
 
         return $this;
     }
@@ -172,18 +182,18 @@ class Import implements \JsonSerializable
     /**
      * @return string
      */
-    public function getFilePath(): ?string
+    public function getSourceFilePath(): ?string
     {
-        return $this->filePath;
+        return $this->sourceFilePath;
     }
 
     /**
-     * @param string $filePath
+     * @param string $sourceFilePath
      * @return Import
      */
-    public function setFilePath($filePath)
+    public function setSourceFilePath($sourceFilePath)
     {
-        $this->filePath = $filePath;
+        $this->sourceFilePath = $sourceFilePath;
 
         return $this;
     }
@@ -191,18 +201,56 @@ class Import implements \JsonSerializable
     /**
      * @return string
      */
-    public function getFileType(): ?string
+    public function getTargetFilePath(): ?string
     {
-        return $this->fileType;
+        return $this->targetFilePath;
     }
 
     /**
-     * @param string $fileType
+     * @param string $targetFilePath
      * @return Import
      */
-    public function setFileType($fileType)
+    public function setTargetFilePath($targetFilePath)
     {
-        $this->fileType = $fileType;
+        $this->targetFilePath = $targetFilePath;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSourceType(): ?string
+    {
+        return $this->sourceType;
+    }
+
+    /**
+     * @param string $sourceType
+     * @return Import
+     */
+    public function setSourceType($sourceType)
+    {
+        $this->sourceType = $sourceType;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTargetType(): string
+    {
+        return $this->targetType;
+    }
+
+    /**
+     * @param string $targetType
+     * @return Import
+     */
+    public function setTargetType($targetType)
+    {
+        $this->targetType = $targetType;
 
         return $this;
     }

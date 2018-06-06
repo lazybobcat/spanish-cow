@@ -19,7 +19,9 @@ use App\Entity\Domain;
 use App\Entity\Project;
 use App\Form\DomainType;
 use App\Form\ImportFileType;
+use App\Importer\FileImporter;
 use App\Manager\DomainManager;
+use App\Model\FileType;
 use App\Model\Import;
 use App\Voter\DomainVoter;
 use App\Voter\ProjectVoter;
@@ -167,6 +169,7 @@ class DomainController extends Controller
         $data
             ->setDomainId($domain->getId())
             ->setDomainName($domain->getName())
+            ->setTargetType(FileType::FILE_TYPE_DATABASE)
         ;
         $form = $this->createForm(ImportFileType::class, $data, [
             'domain' => $domain,
@@ -190,5 +193,53 @@ class DomainController extends Controller
             'domain' => $domain,
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/project/{project}/domain/{domain}/export", name="domain_export")
+     */
+    public function export(Request $request, Breadcrumbs $breadcrumbs, RouterInterface $router, Project $project, Domain $domain)
+    {
+        if (!$this->isGranted(DomainVoter::READ, $domain)) {
+            throw $this->createNotFoundException();
+        }
+
+        $breadcrumbs->addItem('breadcrumbs.projects_listing', $router->generate('project_list'));
+        $breadcrumbs->addItem($project->getName(), $router->generate('domain_list', ['project' => $project->getId()]));
+        $breadcrumbs->addItem($domain->getName());
+
+        // @todo choix de la langue
+
+        return $this->render('domains/export.html.twig', [
+            'project' => $project,
+            'domain' => $domain,
+        ]);
+    }
+
+    /**
+     * @Route("/project/{project}/domain/{domain}/export/{locale}/{format}", name="domain_export_download")
+     */
+    public function exportDownload(Request $request, FileImporter $importer, Project $project, Domain $domain, $locale, $format)
+    {
+        if (!$this->isGranted(DomainVoter::READ, $domain)) {
+            throw $this->createNotFoundException();
+        }
+
+        $destination = $this->getParameter('import_translation_folder').DIRECTORY_SEPARATOR.$domain->getId().DIRECTORY_SEPARATOR.'exports';
+
+        $data = new Import();
+        $data
+            ->setSourceType(FileType::FILE_TYPE_DATABASE)
+            ->setLocaleCode($locale)
+            ->setDomainName($domain->getName())
+            ->setDomainId($domain->getId())
+            ->setTargetType($format)
+            ->setTargetFilePath($destination)
+        ;
+
+        $importer->import($data);
+
+        die();
+        // @todo file download
     }
 }
