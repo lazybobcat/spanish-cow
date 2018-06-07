@@ -4,20 +4,15 @@
     <div class="container-fluid">
         <h2>{{ 'label.export_title' | trans({'%domain%': domain}) | desc("Exporter les traductions de '%domain%'") }}</h2>
 
-        <p>
-            <a href="{{ path('domain_export_download', {'locale': 'fr', 'format': 'xliff', 'domain': domain.id, 'project': project.id}) }}">
-                {{ 'label.export_translations' | trans({'%format%': 'xliff'}) | desc("Exporter au format %format%") }}
-            </a>
-        </p>
-        <p>
-            <a href="{{ path('domain_export_download', {'locale': 'fr', 'format': 'yaml', 'domain': domain.id, 'project': project.id}) }}">
-                {{ 'label.export_translations' | trans({'%format%': 'yaml'}) | desc("Exporter au format %format%") }}
-            </a>
-        </p>
-        <p>
-            <a href="{{ path('domain_export_download', {'locale': 'fr', 'format': 'csv', 'domain': domain.id, 'project': project.id}) }}">
-                {{ 'label.export_translations' | trans({'%format%': 'csv'}) | desc("Exporter au format %format%") }}
-            </a>
-        </p>
+        {{ form_start(form) }}
+            {{ form_row(form.targetType) }}
+            {{ form_row(form.localeCode) }}
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                {{ 'label.download' | trans | desc("Télécharger") }}
+            </button>
+        </div>
+        {{ form_end(form) }}
     </div>
 {% endblock %}

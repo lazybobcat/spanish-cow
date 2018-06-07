@@ -18,6 +18,7 @@ use App\Consumer\Topics;
 use App\Entity\Domain;
 use App\Entity\Project;
 use App\Form\DomainType;
+use App\Form\ExportType;
 use App\Form\ImportFileType;
 use App\Importer\FileImporter;
 use App\Manager\DomainManager;
@@ -27,8 +28,10 @@ use App\Voter\DomainVoter;
 use App\Voter\ProjectVoter;
 use Enqueue\Client\ProducerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
 use WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs;
@@ -208,11 +211,24 @@ class DomainController extends Controller
         $breadcrumbs->addItem($project->getName(), $router->generate('domain_list', ['project' => $project->getId()]));
         $breadcrumbs->addItem($domain->getName());
 
-        // @todo choix de la langue
+        $data = new Import();
+        $form = $this->createForm(ExportType::class, $data, [
+            'domain' => $domain,
+        ]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            return $this->redirectToRoute('domain_export_download', [
+                'project' => $project->getId(),
+                'domain' => $domain->getId(),
+                'locale' => $data->getLocaleCode(),
+                'format' => $data->getTargetType(),
+            ]);
+        }
 
         return $this->render('domains/export.html.twig', [
             'project' => $project,
             'domain' => $domain,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -225,7 +241,8 @@ class DomainController extends Controller
             throw $this->createNotFoundException();
         }
 
-        $destination = $this->getParameter('import_translation_folder').DIRECTORY_SEPARATOR.$domain->getId().DIRECTORY_SEPARATOR.'exports';
+        $filename = $domain->getName().'.'.$locale.'.'.$format;
+        $destination = $this->getParameter('import_translation_folder').DIRECTORY_SEPARATOR.$domain->getId().DIRECTORY_SEPARATOR.'exports'.DIRECTORY_SEPARATOR.$filename;
 
         $data = new Import();
         $data
@@ -239,7 +256,14 @@ class DomainController extends Controller
 
         $importer->import($data);
 
-        die();
-        // @todo file download
+        $response = new BinaryFileResponse($data->getTargetFilePath());
+        $response->trustXSendfileTypeHeader();
+        $response->setContentDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            $filename,
+            iconv('UTF-8', 'ASCII//TRANSLIT', $filename)
+        );
+
+        return $response;
     }
 }

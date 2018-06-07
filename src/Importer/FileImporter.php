@@ -20,6 +20,7 @@ use App\Model\FileType;
 use App\Model\Import;
 use Symfony\Component\Translation\Dumper\CsvFileDumper;
 use Symfony\Component\Translation\Dumper\DumperInterface;
+use Symfony\Component\Translation\Dumper\FileDumper;
 use Symfony\Component\Translation\Dumper\XliffFileDumper;
 use Symfony\Component\Translation\Dumper\YamlFileDumper;
 use Symfony\Component\Translation\Loader\CsvFileLoader;
@@ -53,7 +54,12 @@ class FileImporter
 
     public function import(Import $importData)
     {
-        $this->translationWriter->addDumper($importData->getTargetType(), $this->getDumper($importData->getTargetType()));
+        $dumper = $this->getDumper($importData->getTargetType());
+        if ($dumper instanceof FileDumper && !empty($importData->getTargetFilePath())) {
+            $dumper->setRelativePathTemplate(basename($importData->getTargetFilePath()));
+        }
+
+        $this->translationWriter->addDumper($importData->getTargetType(), $dumper);
         $loader = $this->getLoader($importData->getSourceType());
 
         $catalogue = $loader->load($this->getResource($importData, $importData->getSourceType()), $importData->getLocaleCode(), $importData->getDomainName());
@@ -74,7 +80,7 @@ class FileImporter
             case FileType::FILE_TYPE_CSV:
             case FileType::FILE_TYPE_YAML:
             default:
-                $options['path'] = $data->getTargetFilePath();
+                $options['path'] = dirname($data->getTargetFilePath());
                 break;
         }
 
