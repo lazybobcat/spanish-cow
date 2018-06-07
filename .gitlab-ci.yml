@@ -1,0 +1,30 @@
+stages:
+  - test
+  - deploy
+
+test:
+  stage: test
+  script: echo "Running tests"
+
+deploy_staging:
+  stage: deploy
+  script:
+    - echo "Deploying On staging server"
+    - /usr/local/bin/docker-compose run -u `id -u` app yarn run build
+    - dep6 --file=".deploy/deploy.php" deploy staging
+  environment:
+    name: staging
+  only:
+    - release/preview
+
+deploy_prod:
+  stage: deploy
+  script:
+    - echo "Deploying On production server"
+    - /usr/local/bin/docker-compose run -u `id -u` app yarn run build
+    - dep6 --file=".deploy/deploy.php" deploy prod
+  environment:
+    name: prod
+  when: manual
+  only:
+    - master

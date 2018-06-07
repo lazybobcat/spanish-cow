@@ -1,0 +1,12 @@
+preview:
+    hostname: 192.168.40.20
+    user: nvision
+    password: ~
+    stage: staging
+    deploy_path: /var/www/spanish-cow/htdocs
+    http_user: nvision
+    bin/php: APP_ENV=prod /opt/php-7.1.1/bin/php
+    bin/composer: APP_ENV=prod /opt/php-7.1.1/bin/php /usr/local/bin/composer
+    branch: release/preview
+    owner: nvision
+    group: apache
