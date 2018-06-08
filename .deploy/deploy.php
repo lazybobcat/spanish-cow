@@ -7,6 +7,8 @@ set('ssh_type', 'native');
 set('deploy_assets', true);
 set('fpm_command', null);
 set('writable_use_sudo', false);
+set('keep_releases', 2);
+set('supervisor_command', null);
 
 inventory(dirname(__FILE__) . '/servers.yml');
 
@@ -48,3 +50,10 @@ task('reload:php-fpm', function() {
     }
 });
 after('deploy:symlink', 'reload:php-fpm');
+
+task('reload:supervisor', function() {
+    if (null !== ($supervisor = get('supervisor_command', null))) {
+        run($supervisor);
+    }
+});
+after('reload:php-fpm', 'reload:supervisor');

@@ -10,3 +10,4 @@ preview:
     branch: release/preview
     owner: nvision
     group: apache
+    supervisor_command: 'sudo /etc/init.d/supervisord restart'
