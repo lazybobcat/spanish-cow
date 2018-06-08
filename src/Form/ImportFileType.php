@@ -52,18 +52,22 @@ class ImportFileType extends AbstractType
 
                     return null;
                 },
+                'label' => 'form.locale_code',
             ])
             ->add('keep', CheckboxType::class, [
                 'required' => false,
+                'label' => 'form.keep',
             ])
             ->add('file', FileType::class, [
                 'required' => true,
                 'multiple' => false,
+                'label' => 'form.file',
             ])
             ->add('sourceType', ChoiceType::class, [
                 'required' => true,
                 'choices' => Import::getFileTypes(),
                 'choice_translation_domain' => false,
+                'label' => 'form.source_type',
             ])
         ;
     }

@@ -24,13 +24,17 @@ class DomainType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('name', null, [
+                'required' => true,
+                'label' => 'form.domain_name',
+            ])
             ->add('locales', null, [
                 'required' => true,
                 'multiple' => true,
                 'choice_label' => function ($value, $key, $index) {
                     return $value->getName();
                 },
+                'label' => 'form.locales',
             ])
         ;
     }

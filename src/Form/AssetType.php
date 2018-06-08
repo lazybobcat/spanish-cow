@@ -28,15 +28,15 @@ class AssetType extends AbstractType
         $builder
             ->add('resname', TextType::class, [
                 'required' => true,
-                'label' => 'label.resname',
+                'label' => 'form.resname',
             ])
             ->add('source', TextType::class, [
                 'required' => true,
-                'label' => 'label.source',
+                'label' => 'form.source',
             ])
             ->add('notes', TextareaType::class, [
                 'required' => false,
-                'label' => 'label.comment',
+                'label' => 'form.comment',
             ])
         ;
     }

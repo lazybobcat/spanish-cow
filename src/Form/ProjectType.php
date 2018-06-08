@@ -24,13 +24,17 @@ class ProjectType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('name', null, [
+                'required' => true,
+                'label' => 'form.project_name',
+            ])
             ->add('users', null, [
                 'required' => true,
                 'multiple' => true,
                 'choice_label' => function ($value, $key, $index) {
                     return $value->getEmail();
                 },
+                'label' => 'form.users',
             ])
         ;
     }

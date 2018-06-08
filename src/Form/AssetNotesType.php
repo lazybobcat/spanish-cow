@@ -33,7 +33,7 @@ class AssetNotesType extends AbstractType
             ])
             ->add('notes', TextareaType::class, [
                 'required' => false,
-                'label' => 'label.comment',
+                'label' => 'form.comment',
                 'attr' => [
                     'rows' => 10,
                     'class' => 'js-asset-notes',

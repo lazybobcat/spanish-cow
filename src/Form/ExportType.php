@@ -50,11 +50,13 @@ class ExportType extends AbstractType
 
                     return null;
                 },
+                'label' => 'form.locale_code',
             ])
             ->add('targetType', ChoiceType::class, [
                 'required' => true,
                 'choices' => Import::getFileTypes(),
                 'choice_translation_domain' => false,
+                'label' => 'form.target_type',
             ])
         ;
     }
