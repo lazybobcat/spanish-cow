@@ -20,4 +20,5 @@ return [
     Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle::class => ['all' => true],
     WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle::class => ['all' => true],
     Enqueue\Bundle\EnqueueBundle::class => ['all' => true],
+    Nvision\SpanishCowAdapter\NvisionSpanishCowAdapterBundle::class => ['all' => true],
 ];

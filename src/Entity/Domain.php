@@ -14,8 +14,11 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -30,6 +33,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *         "delete"={"access_control"="object.isAssociatedToProject(user) and is_granted('ROLE_ADMIN')", "access_control_message"="Domain not found."}
  *     }
  * )
+ * @ApiFilter(SearchFilter::class, properties={"name": "exact", "project": "exact"})
  */
 class Domain
 {
@@ -100,6 +104,22 @@ class Domain
         }
 
         return $this->getProject()->isAssociatedToProject($user);
+    }
+
+    public function hasLocale($code)
+    {
+        if (!empty($this->getLocale($code))) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function getLocale($code)
+    {
+        $criteria = Criteria::create()->andWhere(Criteria::expr()->eq('code', $code))->setMaxResults(1);
+
+        return $this->locales->matching($criteria)->first();
     }
 
     /**

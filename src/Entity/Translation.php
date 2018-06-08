@@ -14,7 +14,10 @@
 
 namespace App\Entity;
 
+use App\Controller\API\TranslationAPIPost;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 
@@ -26,8 +29,48 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
  *         "get"={"access_control"="object.isAssociatedToProject(user)", "access_control_message"="Domain not found."},
  *         "put"={"access_control"="object.isAssociatedToProject(user)", "access_control_message"="Domain not found."},
  *         "delete"={"access_control"="object.isAssociatedToProject(user) and is_granted('ROLE_ADMIN')", "access_control_message"="Translation not found."}
+ *     },
+ *     collectionOperations={
+ *         "postcustom"={
+ *             "path"="/{project}/{domain}/{resname}/{locale}/translations", "method"="POST", "controller"=TranslationAPIPost::class,
+ *             "swagger_context" = {
+ *                 "parameters" = {
+ *                     {
+ *                         "name" = "project",
+ *                         "in" = "path",
+ *                         "required" = "true",
+ *                         "type" = "integer"
+ *                     },
+ *                     {
+ *                         "name" = "domain",
+ *                         "in" = "path",
+ *                         "required" = "true",
+ *                         "type" = "string"
+ *                     },
+ *                     {
+ *                         "name" = "resname",
+ *                         "in" = "path",
+ *                         "required" = "true",
+ *                         "type" = "string"
+ *                     },
+ *                     {
+ *                         "name" = "locale",
+ *                         "in" = "path",
+ *                         "required" = "true",
+ *                         "type" = "string"
+ *                     },
+ *                     {
+ *                         "name" = "asset",
+ *                         "in" = "body",
+ *                         "required" = "true",
+ *                         "schema" = {"$ref"="#/definitions/Translation"}
+ *                     }
+ *                 }
+ *             }
+ *         }
  *     }
  * )
+ * @ApiFilter(SearchFilter::class, properties={"asset.domain": "exact", "asset.domain.name": "exact", "asset.domain.project": "exact", "asset.resname": "exact", "locale.code": "exact"})
  */
 class Translation
 {

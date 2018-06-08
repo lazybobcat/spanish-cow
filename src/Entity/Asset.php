@@ -17,21 +17,49 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use App\Controller\API\AssetAPIPost;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AssetRepository")
- * @ORM\Table(name="asset__asset", indexes={@ORM\Index(name="resname_idx", columns={"resname"})})
+ * @ORM\Table(name="asset__asset", indexes={@ORM\Index(name="resname_idx", columns={"resname"})}, uniqueConstraints={@ORM\UniqueConstraint(name="unique_resname", columns={"resname", "domain_id"})})
  * @ApiResource(
  *     itemOperations={
  *         "get"={"access_control"="object.isAssociatedToProject(user)", "access_control_message"="Domain not found."},
  *         "put"={"access_control"="object.isAssociatedToProject(user)", "access_control_message"="Domain not found."},
- *         "delete"={"access_control"="object.isAssociatedToProject(user) and is_granted('ROLE_ADMIN')", "access_control_message"="Asset not found."}
+ *         "delete"={"access_control"="object.isAssociatedToProject(user) and is_granted('ROLE_ADMIN')", "access_control_message"="Asset not found."},
+ *     },
+ *     collectionOperations={
+ *         "postcustom"={
+ *             "path"="/{project}/{domain}/assets", "method"="POST", "controller"=AssetAPIPost::class,
+ *             "swagger_context" = {
+ *                 "parameters" = {
+ *                     {
+ *                         "name" = "project",
+ *                         "in" = "path",
+ *                         "required" = "true",
+ *                         "type" = "integer"
+ *                     },
+ *                     {
+ *                         "name" = "domain",
+ *                         "in" = "path",
+ *                         "required" = "true",
+ *                         "type" = "string"
+ *                     },
+ *                     {
+ *                         "name" = "asset",
+ *                         "in" = "body",
+ *                         "required" = "true",
+ *                         "schema" = {"$ref"="#/definitions/Asset"}
+ *                     }
+ *                 }
+ *             }
+ *         }
  *     }
  * )
- * @ApiFilter(SearchFilter::class, properties={"domain": "exact"})
+ * @ApiFilter(SearchFilter::class, properties={"domain": "exact", "domain.name": "exact", "domain.project": "exact", "resname": "exact"})
  */
 class Asset
 {

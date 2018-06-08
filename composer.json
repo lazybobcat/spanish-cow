@@ -15,6 +15,7 @@
         "api-platform/api-pack": "^1.1",
         "enqueue/enqueue-bundle": "^0.8.31",
         "enqueue/fs": "^0.8.24",
+        "guzzlehttp/guzzle": "~6.0",
         "incenteev/composer-parameter-handler": "^2.1",
         "knplabs/doctrine-behaviors": "^1.5",
         "lexik/jwt-authentication-bundle": "^2.4",
@@ -54,7 +55,8 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "src/",
+            "Nvision\\SpanishCowAdapter\\": "nvision/spanishcow-adapter/src/"
         }
     },
     "autoload-dev": {
