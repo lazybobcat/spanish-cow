@@ -3,3 +3,5 @@ nvision_spanish_cow_adapter:
     base_url: http://spanish-cow.loicb.local
     username: loicb@nvision.lu
     password: 123456
+    domains:
+        - messages

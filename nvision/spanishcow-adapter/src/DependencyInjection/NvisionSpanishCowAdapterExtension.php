@@ -42,5 +42,6 @@ class NvisionSpanishCowAdapterExtension extends Extension
 
         $definition = $container->getDefinition('Nvision\SpanishCowAdapter\SpanishCow');
         $definition->replaceArgument('$client', new Reference('Nvision\SpanishCowAdapter\Client'));
+        $definition->replaceArgument('$domains', $config['domains']);
     }
 }

@@ -35,6 +35,8 @@ class Configuration implements ConfigurationInterface
          *     username: XXXXX
          *     password: WWWWW
          *     project: Z
+         *     domains:
+         *         - messages
          */
         $rootNode
             ->children()
@@ -42,6 +44,9 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('username')->end()
                 ->scalarNode('password')->end()
                 ->scalarNode('project')->end()
+                ->arrayNode('domains')
+                    ->scalarPrototype()->end()
+                ->end()
             ->end()
         ;
 

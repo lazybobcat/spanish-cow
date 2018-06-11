@@ -17,6 +17,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use App\Controller\API\DomainAPIExport;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
@@ -31,6 +32,33 @@ use Symfony\Component\Validator\Constraints as Assert;
  *         "get"={"access_control"="object.isAssociatedToProject(user)", "access_control_message"="Domain not found."},
  *         "put"={"access_control"="object.isAssociatedToProject(user)", "access_control_message"="Domain not found."},
  *         "delete"={"access_control"="object.isAssociatedToProject(user) and is_granted('ROLE_ADMIN')", "access_control_message"="Domain not found."}
+ *     },
+ *     collectionOperations={
+ *         "export"={
+ *             "path"="/{project}/{domain}/{locale}/export", "method"="GET", "controller"=DomainAPIExport::class,
+ *             "swagger_context" = {
+ *                 "parameters" = {
+ *                     {
+ *                         "name" = "project",
+ *                         "in" = "path",
+ *                         "required" = "true",
+ *                         "type" = "integer"
+ *                     },
+ *                     {
+ *                         "name" = "domain",
+ *                         "in" = "path",
+ *                         "required" = "true",
+ *                         "type" = "string"
+ *                     },
+ *                     {
+ *                         "name" = "locale",
+ *                         "in" = "path",
+ *                         "required" = "true",
+ *                         "type" = "string"
+ *                     }
+ *                 }
+ *             }
+ *         }
  *     }
  * )
  * @ApiFilter(SearchFilter::class, properties={"name": "exact", "project": "exact"})

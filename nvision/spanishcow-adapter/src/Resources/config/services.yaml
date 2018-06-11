@@ -9,3 +9,4 @@ services:
     Nvision\SpanishCowAdapter\SpanishCow:
         arguments:
             $client: ~
+            $domains: []

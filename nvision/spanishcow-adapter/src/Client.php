@@ -137,6 +137,23 @@ class Client
         return new Translation($data);
     }
 
+    public function deleteTranslation(Translation $translation)
+    {
+        $this->login();
+
+        $options = [
+            'headers' => [
+                'Accept' => 'application/json',
+                'Authorization' => "Bearer {$this->jwt}",
+                'Content-Type' => 'application/json',
+            ],
+        ];
+
+        $response = $this->sendRequest("api/{$this->project}/{$translation->getDomain()}/{$translation->getResname()}/{$translation->getLocale()}/translations", 'DELETE', $options);
+
+        return true;
+    }
+
     public function postAsset(Asset $asset)
     {
         $this->login();
@@ -154,6 +171,42 @@ class Client
         $data = json_decode((string) $response->getBody(), true);
 
         return new Asset($data);
+    }
+
+    public function export($domain, $locale)
+    {
+        $this->login();
+
+        $options = [
+            'headers' => [
+                'Accept' => 'application/json',
+                'Authorization' => "Bearer {$this->jwt}",
+                'Content-Type' => 'application/json',
+            ],
+        ];
+
+        $response = $this->sendRequest("api/{$this->project}/{$domain}/{$locale}/export", 'GET', $options);
+        $data = json_decode((string) $response->getBody(), true);
+
+        return $data['xliff'];
+    }
+
+    public function import($xliff, $domain, $locale)
+    {
+        $this->login();
+
+        $options = [
+            'headers' => [
+                'Accept' => 'application/json',
+                'Authorization' => "Bearer {$this->jwt}",
+                'Content-Type' => 'application/json',
+            ],
+            'body' => json_encode(['xliff' => $xliff]),
+        ];
+
+        $response = $this->sendRequest("api/{$this->project}/{$domain}/{$locale}/import", 'POST', $options);
+
+        return true;
     }
 
     protected function sendRequest($endpoint, $method = 'GET', $options = [])

@@ -21,6 +21,7 @@ use Translation\Common\Model\Message;
 use Translation\Common\Model\MessageInterface;
 use Translation\Common\Storage;
 use Translation\Common\TransferableStorage;
+use Translation\SymfonyStorage\XliffConverter;
 
 class SpanishCow implements Storage, TransferableStorage
 {
@@ -29,9 +30,15 @@ class SpanishCow implements Storage, TransferableStorage
      */
     private $client;
 
-    public function __construct(Client $client)
+    /**
+     * @var array
+     */
+    private $domains;
+
+    public function __construct(Client $client, array $domains = [])
     {
         $this->client = $client;
+        $this->domains = $domains;
     }
 
     /**
@@ -107,7 +114,7 @@ class SpanishCow implements Storage, TransferableStorage
      */
     public function update(MessageInterface $message)
     {
-        // TODO: Implement update() method.
+        $this->create($message);
     }
 
     /**
@@ -121,7 +128,17 @@ class SpanishCow implements Storage, TransferableStorage
      */
     public function delete($locale, $domain, $key)
     {
-        // TODO: Implement delete() method.
+        $translation = new Translation();
+        $translation
+            ->setLocale($locale)
+            ->setDomain($domain)
+            ->setResname($key)
+        ;
+
+        try {
+            $this->client->deleteTranslation($translation);
+        } catch (\Exception $e) {
+        }
     }
 
     /**
@@ -131,7 +148,14 @@ class SpanishCow implements Storage, TransferableStorage
      */
     public function export(MessageCatalogueInterface $catalogue)
     {
-        // TODO: Implement export() method.
+        $locale = $catalogue->getLocale();
+        foreach ($this->domains as $domain) {
+            try {
+                $xliff = $this->client->export($domain, $locale);
+                $catalogue->addCatalogue(XliffConverter::contentToCatalogue($xliff, $locale, $domain));
+            } catch (\Exception $e) {
+            }
+        }
     }
 
     /**
@@ -143,6 +167,13 @@ class SpanishCow implements Storage, TransferableStorage
      */
     public function import(MessageCatalogueInterface $catalogue)
     {
-        // TODO: Implement import() method.
+        $locale = $catalogue->getLocale();
+        foreach ($this->domains as $domain) {
+            try {
+                $xliff = XliffConverter::catalogueToContent($catalogue, $domain);
+                $this->client->import($xliff, $domain, $locale);
+            } catch (\Exception $e) {
+            }
+        }
     }
 }

@@ -15,6 +15,7 @@
 namespace App\Entity;
 
 use App\Controller\API\TranslationAPIPost;
+use App\Controller\API\TranslationAPIDelete;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
@@ -28,7 +29,39 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
  *     itemOperations={
  *         "get"={"access_control"="object.isAssociatedToProject(user)", "access_control_message"="Domain not found."},
  *         "put"={"access_control"="object.isAssociatedToProject(user)", "access_control_message"="Domain not found."},
- *         "delete"={"access_control"="object.isAssociatedToProject(user) and is_granted('ROLE_ADMIN')", "access_control_message"="Translation not found."}
+ *         "delete"={"access_control"="object.isAssociatedToProject(user) and is_granted('ROLE_ADMIN')", "access_control_message"="Translation not found."},
+ *         "deletecustom"={
+ *             "path"="/{project}/{domain}/{resname}/{locale}/translations", "method"="DELETE", "controller"=TranslationAPIDelete::class,
+ *             "defaults"={"_api_receive"=false},
+ *             "swagger_context" = {
+ *                 "parameters" = {
+ *                     {
+ *                         "name" = "project",
+ *                         "in" = "path",
+ *                         "required" = "true",
+ *                         "type" = "integer"
+ *                     },
+ *                     {
+ *                         "name" = "domain",
+ *                         "in" = "path",
+ *                         "required" = "true",
+ *                         "type" = "string"
+ *                     },
+ *                     {
+ *                         "name" = "resname",
+ *                         "in" = "path",
+ *                         "required" = "true",
+ *                         "type" = "string"
+ *                     },
+ *                     {
+ *                         "name" = "locale",
+ *                         "in" = "path",
+ *                         "required" = "true",
+ *                         "type" = "string"
+ *                     }
+ *                 }
+ *             }
+ *         }
  *     },
  *     collectionOperations={
  *         "postcustom"={
