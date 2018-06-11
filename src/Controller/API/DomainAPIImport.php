@@ -66,6 +66,6 @@ class DomainAPIImport extends Controller
 
         $this->importer->import($import);
 
-        return $data;
+        return [];
     }
 }

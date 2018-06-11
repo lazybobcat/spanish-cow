@@ -14,12 +14,9 @@
 
 namespace App\Controller;
 
-use Nvision\SpanishCowAdapter\Client;
-use Nvision\SpanishCowAdapter\SpanishCow;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Translation\Common\Model\Message;
 
 class DefaultController extends Controller
 {
@@ -33,18 +30,5 @@ class DefaultController extends Controller
         }
 
         return $this->redirectToRoute('project_list');
-    }
-
-    /**
-     * @Route("/test", name="test")
-     */
-    public function test(Client $client, SpanishCow $adapter)
-    {
-//        $client->login();
-
-        $message = new Message('homepages', 'messages', 'fr');
-        $adapter->create($message);
-
-        return $this->render('default/homepage.html.twig');
     }
 }

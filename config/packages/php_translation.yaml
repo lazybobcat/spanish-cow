@@ -9,3 +9,4 @@ translation:
             output_dir: "%kernel.project_dir%/translations"
             excluded_names: ["*TestCase.php", "*Test.php"]
             excluded_dirs: [cache, data, logs]
+            remote_storage: ['Nvision\SpanishCowAdapter\SpanishCow']
