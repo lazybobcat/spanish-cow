@@ -1,7 +1,7 @@
 nvision_spanish_cow_adapter:
-    project: 29
-    base_url: http://spanish-cow.loicb.local
-    username: loicb@nvision.lu
-    password: 123456
+    project: X
+    base_url: http://spanish-cow.preview.nvision.lu
+    username: webadmin@nvision.lu
+    password: root
     domains:
         - messages

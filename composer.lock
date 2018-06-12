@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "bde345230b4e17e43496b9781c7516e5",
+    "content-hash": "05d86f57674f32fecee233a41de9d396",
     "packages": [
         {
             "name": "api-platform/api-pack",
@@ -2184,6 +2184,45 @@
                 "php"
             ],
             "time": "2018-03-25T17:35:16+00:00"
+        },
+        {
+            "name": "nvision/spanishcow-adapter",
+            "version": "0.1",
+            "source": {
+                "type": "git",
+                "url": "git@gitlab.nvision.lu:nvision/spanishcow-adapter.git",
+                "reference": "89ad91ef1af715f976a99ac6f598f502bcfb19fd"
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~6.0",
+                "php": "^7.1.3",
+                "php-translation/common": "^0.3",
+                "php-translation/symfony-storage": "^0.5.0",
+                "symfony/translation": "^2.7 || ^3.0 || ^4.0",
+                "symfony/yaml": "^2.7 || ^3.0 || ^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Nvision\\SpanishCowAdapter\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Loïc Boutter",
+                    "email": "loic.boutter@gmail.com"
+                }
+            ],
+            "description": "Translation adapter for Spanish-Cow",
+            "time": "2018-06-12T10:19:28+00:00"
         },
         {
             "name": "nyholm/nsa",
