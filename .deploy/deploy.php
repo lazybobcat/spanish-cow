@@ -23,6 +23,12 @@ set('shared_files', array_merge(get('shared_files'), [
     'config/parameters.yaml',
 ]));
 
+set('shared_dirs', array_merge(get('shared_dirs'), [
+    'var/jwt',
+    'var/translation_files',
+    'var/enqueue',
+]));
+
 // Add web/uploads to writable_dirs
 set('writable_dirs', array_merge(get('writable_dirs'), [
     'web/uploads',

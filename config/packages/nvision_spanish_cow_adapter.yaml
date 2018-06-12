@@ -1,5 +1,5 @@
 nvision_spanish_cow_adapter:
-    project: X
+    project: 1
     base_url: http://spanish-cow.preview.nvision.lu
     username: webadmin@nvision.lu
     password: root
