@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="fr" trgLang="fr">
+  <file id="messages.fr">
+    <unit id="0KT0Bsd" name="breadcrumbs.projects_listing">
+      <segment>
+        <source>breadcrumbs.projects_listing</source>
+        <target>Projets</target>
+      </segment>
+    </unit>
+    <unit id="aiichjx" name="breadcrumbs.domain_add">
+      <segment>
+        <source>breadcrumbs.domain_add</source>
+        <target>Nouveau domaine</target>
+      </segment>
+    </unit>
+    <unit id="sMrBO15" name="breadcrumbs.domain_edit">
+      <segment>
+        <source>breadcrumbs.domain_edit</source>
+        <target>Modifier</target>
+      </segment>
+    </unit>
+    <unit id="oSiFkW0" name="breadcrumbs.project_add">
+      <segment>
+        <source>breadcrumbs.project_add</source>
+        <target>Nouveau projet</target>
+      </segment>
+    </unit>
+    <unit id="HZN3DNm" name="flash.import_success">
+      <segment>
+        <source>flash.import_success</source>
+        <target>L'import des traduction a démarré et peut prendre quelques secondes pour se terminer.</target>
+      </segment>
+    </unit>
+    <unit id="Fx25Xea" name="form.locale_code">
+      <segment>
+        <source>form.locale_code</source>
+        <target>Langue</target>
+      </segment>
+    </unit>
+    <unit id="nIPr.nw" name="form.keep">
+      <segment>
+        <source>form.keep</source>
+        <target>Garder les traductions absentes du fichier</target>
+      </segment>
+    </unit>
+    <unit id="7t891XG" name="form.file">
+      <segment>
+        <source>form.file</source>
+        <target>Fichier</target>
+      </segment>
+    </unit>
+    <unit id="MBwI79Y" name="form.source_type">
+      <segment>
+        <source>form.source_type</source>
+        <target>Type de fichier</target>
+      </segment>
+    </unit>
+    <unit id="EMbdXjS" name="form.target_type">
+      <segment>
+        <source>form.target_type</source>
+        <target>Type de fichier</target>
+      </segment>
+    </unit>
+    <unit id="mqpptzZ" name="form.comment">
+      <segment>
+        <source>form.comment</source>
+        <target>Commentaire</target>
+      </segment>
+    </unit>
+    <unit id="_KAbPRV" name="form.resname">
+      <segment>
+        <source>form.resname</source>
+        <target>Identifiant de le traduction (id / resname)</target>
+      </segment>
+    </unit>
+    <unit id="cWcdcnH" name="form.source">
+      <segment>
+        <source>form.source</source>
+        <target>Source</target>
+      </segment>
+    </unit>
+    <unit id="h0fN2H5" name="form.notes">
+      <segment>
+        <source>form.notes</source>
+        <target>Commentaire</target>
+      </segment>
+    </unit>
+    <unit id="ACC7FFl" name="form.domain_name">
+      <segment>
+        <source>form.domain_name</source>
+        <target>Nom du domaine de traduction</target>
+      </segment>
+    </unit>
+    <unit id="UWHIguw" name="form.project_name">
+      <segment>
+        <source>form.project_name</source>
+        <target>Nom du projet</target>
+      </segment>
+    </unit>
+    <unit id="g6KYbjj" name="form.locales">
+      <segment>
+        <source>form.locales</source>
+        <target>Langues</target>
+      </segment>
+    </unit>
+    <unit id="OLNI7MF" name="form.users">
+      <segment>
+        <source>form.users</source>
+        <target>Utilisateurs</target>
+      </segment>
+    </unit>
+    <unit id="yBYGxQT" name="label.login_title">
+      <segment>
+        <source>label.login_title</source>
+        <target>Se connecter</target>
+      </segment>
+    </unit>
+    <unit id="LDhDPrF" name="label.username">
+      <segment>
+        <source>label.username</source>
+        <target>Adresse e-mail</target>
+      </segment>
+    </unit>
+    <unit id="9pvowqn" name="label.password">
+      <segment>
+        <source>label.password</source>
+        <target>Mot de passe</target>
+      </segment>
+    </unit>
+    <unit id="ZAtrhtu" name="label.login">
+      <segment>
+        <source>label.login</source>
+        <target>Connexion</target>
+      </segment>
+    </unit>
+    <unit id="lcWmxe1" name="label.export_title">
+      <segment>
+        <source>label.export_title</source>
+        <target>Exporter les traductions de '%domain%'</target>
+      </segment>
+    </unit>
+    <unit id="j1bjukk" name="label.download">
+      <segment>
+        <source>label.download</source>
+        <target>Télécharger</target>
+      </segment>
+    </unit>
+    <unit id="Ka61EDY" name="label.edit_domain_title">
+      <segment>
+        <source>label.edit_domain_title</source>
+        <target>Modifier le domaine '%domain%'</target>
+      </segment>
+    </unit>
+    <unit id="0IxCM_a" name="label.new_domain_title">
+      <segment>
+        <source>label.new_domain_title</source>
+        <target>Nouveau domaine pour '%project%'</target>
+      </segment>
+    </unit>
+    <unit id="Ujkxfzw" name="label.create_action">
+      <segment>
+        <source>label.create_action</source>
+        <target>Valider</target>
+      </segment>
+    </unit>
+    <unit id="HQyOnLA" name="label.domains_listing_title">
+      <segment>
+        <source>label.domains_listing_title</source>
+        <target>Domaines de '%projet%'</target>
+      </segment>
+    </unit>
+    <unit id="xWxDXm_" name="label.add_domain">
+      <segment>
+        <source>label.add_domain</source>
+        <target>Ajouter un domaine</target>
+      </segment>
+    </unit>
+    <unit id="Dh97am_" name="label.nb_assets">
+      <segment>
+        <source>label.nb_assets</source>
+        <target>{0} Aucun asset|{1} 1 asset|]1,Inf[ %nb% assets</target>
+      </segment>
+    </unit>
+    <unit id="w7441mn" name="label.edit_domain">
+      <segment>
+        <source>label.edit_domain</source>
+        <target>Modifier le domaine</target>
+      </segment>
+    </unit>
+    <unit id="DjOhc_M" name="label.add_asset">
+      <segment>
+        <source>label.add_asset</source>
+        <target>Ajouter un asset</target>
+      </segment>
+    </unit>
+    <unit id="53s7Rm6" name="label.import">
+      <segment>
+        <source>label.import</source>
+        <target>Importer</target>
+      </segment>
+    </unit>
+    <unit id="BiPY0TX" name="label.delete">
+      <segment>
+        <source>label.delete</source>
+        <target>Supprimer</target>
+      </segment>
+    </unit>
+    <unit id="TJDspI3" name="label.translate">
+      <segment>
+        <source>label.translate</source>
+        <target>Traduire</target>
+      </segment>
+    </unit>
+    <unit id="VkX38Dc" name="label.no_domains">
+      <segment>
+        <source>label.no_domains</source>
+        <target>Ce projet ne contient aucun domaine.</target>
+      </segment>
+    </unit>
+    <unit id="_lNU8HC" name="label.delete_domain_title">
+      <segment>
+        <source>label.delete_domain_title</source>
+        <target>Supprimer le domaine '%domain%'</target>
+      </segment>
+    </unit>
+    <unit id="OxaT8BA" name="label.delete_domain_confirmation">
+      <segment>
+        <source>label.delete_domain_confirmation</source>
+        <target>Êtes-vous sûr de vouloir supprimer le domaine '%domain%' ? Cette action est irréversible.</target>
+      </segment>
+    </unit>
+    <unit id="ffSy64T" name="label.back">
+      <segment>
+        <source>label.back</source>
+        <target>Retour</target>
+      </segment>
+    </unit>
+    <unit id="tyGnBiO" name="label.import_title">
+      <segment>
+        <source>label.import_title</source>
+        <target>Importer un fichier de traductions dans '%domain%'</target>
+      </segment>
+    </unit>
+    <unit id="3rM9BA4" name="label.translate_title">
+      <segment>
+        <source>label.translate_title</source>
+        <target>Traduction</target>
+      </segment>
+    </unit>
+    <unit id="WBsdlxn" name="label.resname">
+      <segment>
+        <source>label.resname</source>
+        <target>Id</target>
+      </segment>
+    </unit>
+    <unit id="d_iJPpz" name="label.source">
+      <segment>
+        <source>label.source</source>
+        <target>Source</target>
+      </segment>
+    </unit>
+    <unit id="ILTzDuZ" name="flash.translation_success">
+      <segment>
+        <source>flash.translation_success</source>
+        <target>La traduction a été sauvegardée avec succès !</target>
+      </segment>
+    </unit>
+    <unit id="Aa2G7EH" name="flash.translation_error">
+      <segment>
+        <source>flash.translation_error</source>
+        <target>Une erreur est survenue lors de la sauvegarde de la traduction.</target>
+      </segment>
+    </unit>
+    <unit id="1fozYu9" name="label.comment_action">
+      <segment>
+        <source>label.comment_action</source>
+        <target>Commenter</target>
+      </segment>
+    </unit>
+    <unit id="s54iWXV" name="label.no_assets">
+      <segment>
+        <source>label.no_assets</source>
+        <target>Aucun asset n'a encore été ajouté à ce domaine.</target>
+      </segment>
+    </unit>
+    <unit id="fglGrs3" name="label.new_project_title">
+      <segment>
+        <source>label.new_project_title</source>
+        <target>Nouveau projet</target>
+      </segment>
+    </unit>
+    <unit id="WynHKhj" name="label.projects_listing_title">
+      <segment>
+        <source>label.projects_listing_title</source>
+        <target>Mes projets</target>
+      </segment>
+    </unit>
+    <unit id="20U7EVe" name="label.add_project">
+      <segment>
+        <source>label.add_project</source>
+        <target>Créer un domaine</target>
+      </segment>
+    </unit>
+    <unit id="M8Tm9l_" name="label.nb_domains">
+      <segment>
+        <source>label.nb_domains</source>
+        <target>{0} Aucun domaine|{1} 1 domaine|]1,Inf[ %nb% domaines</target>
+      </segment>
+    </unit>
+    <unit id=".AKNsK5" name="label.domain_list">
+      <segment>
+        <source>label.domain_list</source>
+        <target>Voir le projet</target>
+      </segment>
+    </unit>
+    <unit id="ih5LOcs" name="label.no_projects">
+      <segment>
+        <source>label.no_projects</source>
+        <target>Vous n'êtes associé à aucun projet.</target>
+      </segment>
+    </unit>
+    <unit id="vl07VZb" name="label.delete_project_title">
+      <segment>
+        <source>label.delete_project_title</source>
+        <target>Supprimer le projet '%project%'</target>
+      </segment>
+    </unit>
+    <unit id="w5IcUxy" name="label.delete_project_confirmation">
+      <segment>
+        <source>label.delete_project_confirmation</source>
+        <target>Êtes-vous sûr de vouloir supprimer le projet '%project%' ? Cette action est irréversible.</target>
+      </segment>
+    </unit>
+    <unit id="anYT8Tf" name="skip_link.to_content">
+      <segment>
+        <source>skip_link.to_content</source>
+        <target>Skip to content</target>
+      </segment>
+    </unit>
+    <unit id="w4nyqI3" name="skip_link.to_nav">
+      <segment>
+        <source>skip_link.to_nav</source>
+        <target>Skip to navigation</target>
+      </segment>
+    </unit>
+    <unit id="II4DGnv" name="label.logout">
+      <segment>
+        <source>label.logout</source>
+        <target>Déconnection</target>
+      </segment>
+    </unit>
+    <unit id="q3lcWvl" name="label.new_asset_title">
+      <segment>
+        <source>label.new_asset_title</source>
+        <target>Nouvel asset pour '%domain%'</target>
+      </segment>
+    </unit>
+    <unit id="bjXiBwx" name="label.delete_asset_title">
+      <segment>
+        <source>label.delete_asset_title</source>
+        <target>Supprimer l'asset '%asset%'</target>
+      </segment>
+    </unit>
+    <unit id="eHXf00m" name="label.delete_asset_confirmation">
+      <segment>
+        <source>label.delete_asset_confirmation</source>
+        <target>Êtes-vous sûr de vouloir supprimer l'asset '%asset%' ? Cette action est irréversible.</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>
