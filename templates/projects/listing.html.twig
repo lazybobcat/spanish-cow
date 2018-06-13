@@ -28,6 +28,9 @@
                         </div>
                         <div class="domain-card__actions">
                             {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('project_edit', {'project': project.id}) }}" title="{{ 'label.edit_project' | trans | desc("Modifier le projet") }}" class="btn btn-icon">
+                                <svg class="icon-cog-gear"><use xlink:href="#icon-cog-gear"></use></svg>
+                            </a>
                             <a href="{{ path('project_delete', {'project': project.id}) }}" title="{{ 'label.delete' | trans | desc("Supprimer") }}" class="btn btn-icon btn-error">
                                 <svg class="icon-trash-bin"><use xlink:href="#icon-trash-bin"></use></svg>
                             </a>

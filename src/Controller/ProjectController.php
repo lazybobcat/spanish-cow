@@ -74,6 +74,33 @@ class ProjectController extends Controller
     }
 
     /**
+     * @Route("/project/{project}/edit", name="project_edit")
+     */
+    public function edit(Request $request, Project $project, ProjectManager $projectManager, Breadcrumbs $breadcrumbs, RouterInterface $router)
+    {
+        if (!$this->isGranted(ProjectVoter::UPDATE, $project)) {
+            throw $this->createNotFoundException();
+        }
+
+        $breadcrumbs->addItem('breadcrumbs.projects_listing', $router->generate('project_list'));
+        $breadcrumbs->addItem($project->getName());
+
+        $form = $this->createForm(ProjectType::class, $project);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $project->addUser($this->getUser());
+            $projectManager->save($project);
+
+            return $this->redirectToRoute('project_list');
+        }
+
+        return $this->render('projects/edit.html.twig', [
+            'project' => $project,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
      * @Route("/project/{project}/delete", name="project_delete")
      */
     public function delete(Request $request, ProjectManager $projectManager, Breadcrumbs $breadcrumbs, RouterInterface $router, Project $project)
