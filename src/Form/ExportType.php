@@ -58,6 +58,12 @@ class ExportType extends AbstractType
                 'choice_translation_domain' => false,
                 'label' => 'form.target_type',
             ])
+            ->add('xliffVersion', ChoiceType::class, [
+                'required' => true,
+                'choices' => Import::getXliffVersions(),
+                'choice_translation_domain' => false,
+                'label' => 'form.xliff_version',
+            ])
         ;
     }
 

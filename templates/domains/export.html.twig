@@ -5,7 +5,12 @@
         <h2>{{ 'label.export_title' | trans({'%domain%': domain}) | desc("Exporter les traductions de '%domain%'") }}</h2>
 
         {{ form_start(form) }}
-            {{ form_row(form.targetType) }}
+            {{ form_row(form.targetType, {'attr': {'class': 'js-export-type'}}) }}
+
+            <div class="js-xliff-options">
+                {{ form_row(form.xliffVersion) }}
+            </div>
+
             {{ form_row(form.localeCode) }}
 
         <div class="form-actions">

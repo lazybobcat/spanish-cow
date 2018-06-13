@@ -32,6 +32,7 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
 use WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs;
@@ -201,7 +202,7 @@ class DomainController extends Controller
     /**
      * @Route("/project/{project}/domain/{domain}/export", name="domain_export")
      */
-    public function export(Request $request, Breadcrumbs $breadcrumbs, RouterInterface $router, Project $project, Domain $domain)
+    public function export(Request $request, Breadcrumbs $breadcrumbs, RouterInterface $router, FileImporter $importer, SessionInterface $session, Project $project, Domain $domain)
     {
         if (!$this->isGranted(DomainVoter::READ, $domain)) {
             throw $this->createNotFoundException();
@@ -212,16 +213,28 @@ class DomainController extends Controller
         $breadcrumbs->addItem($domain->getName());
 
         $data = new Import();
+        $data
+            ->setSourceType(FileType::FILE_TYPE_DATABASE)
+            ->setDomainName($domain->getName())
+            ->setDomainId($domain->getId())
+        ;
+
         $form = $this->createForm(ExportType::class, $data, [
             'domain' => $domain,
         ]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $filename = $domain->getName().'.'.$data->getLocaleCode().'.'.$data->getTargetType();
+            $destination = $this->getParameter('import_translation_folder').DIRECTORY_SEPARATOR.$domain->getId().DIRECTORY_SEPARATOR.'exports'.DIRECTORY_SEPARATOR.$filename;
+
+            $data->setTargetFilePath($destination);
+            $importer->import($data);
+
+            $session->set('export.data', json_encode($data));
+
             return $this->redirectToRoute('domain_export_download', [
                 'project' => $project->getId(),
                 'domain' => $domain->getId(),
-                'locale' => $data->getLocaleCode(),
-                'format' => $data->getTargetType(),
             ]);
         }
 
@@ -233,35 +246,27 @@ class DomainController extends Controller
     }
 
     /**
-     * @Route("/project/{project}/domain/{domain}/export/{locale}/{format}", name="domain_export_download")
+     * @Route("/project/{project}/domain/{domain}/download", name="domain_export_download")
      */
-    public function exportDownload(Request $request, FileImporter $importer, Project $project, Domain $domain, $locale, $format)
+    public function exportDownload(Request $request, SessionInterface $session, Project $project, Domain $domain)
     {
         if (!$this->isGranted(DomainVoter::READ, $domain)) {
             throw $this->createNotFoundException();
         }
 
-        $filename = $domain->getName().'.'.$locale.'.'.$format;
-        $destination = $this->getParameter('import_translation_folder').DIRECTORY_SEPARATOR.$domain->getId().DIRECTORY_SEPARATOR.'exports'.DIRECTORY_SEPARATOR.$filename;
+        $json = $session->get('export.data');
+        if (null === $json) {
+            throw $this->createNotFoundException();
+        }
 
-        $data = new Import();
-        $data
-            ->setSourceType(FileType::FILE_TYPE_DATABASE)
-            ->setLocaleCode($locale)
-            ->setDomainName($domain->getName())
-            ->setDomainId($domain->getId())
-            ->setTargetType($format)
-            ->setTargetFilePath($destination)
-        ;
-
-        $importer->import($data);
+        $data = new Import(json_decode($json, true));
 
         $response = new BinaryFileResponse($data->getTargetFilePath());
         $response->trustXSendfileTypeHeader();
         $response->setContentDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            $filename,
-            iconv('UTF-8', 'ASCII//TRANSLIT', $filename)
+            basename($data->getTargetFilePath()),
+            iconv('UTF-8', 'ASCII//TRANSLIT', basename($data->getTargetFilePath()))
         );
 
         return $response;

@@ -77,6 +77,8 @@ class FileImporter
                 break;
 
             case FileType::FILE_TYPE_XLIFF:
+                $options['xliff_version'] = $data->getXliffVersion();
+                // no break
             case FileType::FILE_TYPE_CSV:
             case FileType::FILE_TYPE_YAML:
             default:

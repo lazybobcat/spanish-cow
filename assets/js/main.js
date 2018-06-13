@@ -120,12 +120,31 @@
         });
     };
 
+    var exportOptions = function() {
+        var $select = $('.js-export-type');
+
+        if (!$select.length) {
+            return;
+        }
+
+        var toggleXliffOptions = function() {
+            $('.js-xliff-options').toggle($select.val() === 'xliff');
+        };
+
+        $select.on('change', function() {
+            toggleXliffOptions();
+        });
+
+        toggleXliffOptions();
+    };
+
     $(document).ready(function () {
         ariaControls();
         checkVisibility('main-nav', mqBreakpoints.desktop);
         watchVisibility();
         translateTable();
         translateField();
+        exportOptions();
     });
 })
 (jQuery);

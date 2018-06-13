@@ -59,6 +59,11 @@ class Import implements \JsonSerializable
     protected $targetType = FileType::FILE_TYPE_DATABASE;
 
     /**
+     * @var string
+     */
+    protected $xliffVersion = '2.0';
+
+    /**
      * Keep existing translations that are not in the newly imported file
      *
      * @var bool
@@ -74,6 +79,14 @@ class Import implements \JsonSerializable
         ];
     }
 
+    public static function getXliffVersions()
+    {
+        return [
+            '2.0' => '2.0',
+            '1.2' => '1.2',
+        ];
+    }
+
     public function jsonSerialize()
     {
         return [
@@ -84,6 +97,7 @@ class Import implements \JsonSerializable
             'source_type' => $this->getSourceType(),
             'target_path' => $this->getTargetFilePath(),
             'target_type' => $this->getTargetType(),
+            'xliff_version' => $this->getXliffVersion(),
             'keep' => $this->isKeep(),
         ];
     }
@@ -98,6 +112,7 @@ class Import implements \JsonSerializable
             $this->setSourceType($from['source_type']);
             $this->setTargetFilePath($from['target_path']);
             $this->setTargetType($from['target_type']);
+            $this->setXliffVersion($from['xliff_version']);
             $this->setKeep($from['keep']);
         }
     }
@@ -251,6 +266,25 @@ class Import implements \JsonSerializable
     public function setTargetType($targetType)
     {
         $this->targetType = $targetType;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getXliffVersion(): string
+    {
+        return $this->xliffVersion;
+    }
+
+    /**
+     * @param string $xliffVersion
+     * @return Import
+     */
+    public function setXliffVersion($xliffVersion)
+    {
+        $this->xliffVersion = $xliffVersion;
 
         return $this;
     }
