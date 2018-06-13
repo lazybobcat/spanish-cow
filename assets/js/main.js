@@ -76,7 +76,7 @@
             return;
         }
 
-        $rows.on('click', function() {
+        $('body').on('click', '.js-translation-row', function() {
             var $this = $(this),
                 locales = $locales.data('locales').split(',');
 
@@ -85,7 +85,7 @@
             $this.addClass('-active');
 
             locales.forEach(function(locale) {
-                $('textarea#' + locale).val($this.data(locale));
+                $('textarea#' + locale).val($this.attr("data-" + locale));
             });
 
             $('.js-asset-notes').val($this.data('notes'));
@@ -108,9 +108,10 @@
         }
 
         $fields.on('focusout', function() {
-            console.log('focusout');
             var $this = $(this),
-                $form = $this.parents('form');
+                $form = $this.parents('form'),
+                id = $form.find('[name="id"]').val();
+            $('.js-translation-row[data-id="'+id+'"]').attr("data-" + $this.attr('id'), $this.val());
             $.post($form.attr('action'), $form.serialize()).done(function() {
                 $this.siblings('.js-translation-success').show().fadeOut(3000);
             }).fail(function() {
