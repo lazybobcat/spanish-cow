@@ -50,7 +50,7 @@ class AssetController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $assetManager->save($asset);
 
-            return $this->redirectToRoute('translate', ['project' => $project->getId(), 'domain' => $domain->getId()]);
+            return $this->redirectToRoute('translate', ['project' => $project->getId(), 'domain' => $domain->getId(), 'active' => $asset->getId()]);
         }
 
         return $this->render('assets/edit.html.twig', [
