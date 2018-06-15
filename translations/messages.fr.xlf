@@ -1,370 +1,689 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="fr" trgLang="fr">
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="fr-LU" trgLang="fr">
   <file id="messages.fr">
     <unit id="0KT0Bsd" name="breadcrumbs.projects_listing">
+      <notes>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:3</note>
+        <note category="desc" priority="1">Projets</note>
+      </notes>
       <segment>
         <source>breadcrumbs.projects_listing</source>
         <target>Projets</target>
       </segment>
     </unit>
     <unit id="aiichjx" name="breadcrumbs.domain_add">
+      <notes>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:4</note>
+        <note category="desc" priority="1">Nouveau domaine</note>
+      </notes>
       <segment>
         <source>breadcrumbs.domain_add</source>
         <target>Nouveau domaine</target>
       </segment>
     </unit>
     <unit id="sMrBO15" name="breadcrumbs.domain_edit">
+      <notes>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:5</note>
+        <note category="desc" priority="1">Modifier</note>
+      </notes>
       <segment>
         <source>breadcrumbs.domain_edit</source>
         <target>Modifier</target>
       </segment>
     </unit>
     <unit id="oSiFkW0" name="breadcrumbs.project_add">
+      <notes>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:6</note>
+        <note category="desc" priority="1">Nouveau projet</note>
+      </notes>
       <segment>
         <source>breadcrumbs.project_add</source>
         <target>Nouveau projet</target>
       </segment>
     </unit>
     <unit id="HZN3DNm" name="flash.import_success">
+      <notes>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:12</note>
+        <note category="desc" priority="1">L'import des traduction a démarré et peut prendre quelques secondes pour se terminer.</note>
+        <note category="file-source" priority="1">src/Controller/DomainController.php:190</note>
+      </notes>
       <segment>
         <source>flash.import_success</source>
         <target>L'import des traduction a démarré et peut prendre quelques secondes pour se terminer.</target>
       </segment>
     </unit>
     <unit id="Fx25Xea" name="form.locale_code">
+      <notes>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:15</note>
+        <note category="desc" priority="1">Langue</note>
+        <note category="file-source" priority="1">src/Form/ExportType.php:33</note>
+        <note category="file-source" priority="1">src/Form/ImportFileType.php:35</note>
+      </notes>
       <segment>
         <source>form.locale_code</source>
         <target>Langue</target>
       </segment>
     </unit>
     <unit id="nIPr.nw" name="form.keep">
+      <notes>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:16</note>
+        <note category="desc" priority="1">Garder les traductions absentes du fichier</note>
+        <note category="file-source" priority="1">src/Form/ImportFileType.php:57</note>
+      </notes>
       <segment>
         <source>form.keep</source>
         <target>Garder les traductions absentes du fichier</target>
       </segment>
     </unit>
     <unit id="7t891XG" name="form.file">
+      <notes>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:17</note>
+        <note category="desc" priority="1">Fichier</note>
+        <note category="file-source" priority="1">src/Form/ImportFileType.php:61</note>
+      </notes>
       <segment>
         <source>form.file</source>
         <target>Fichier</target>
       </segment>
     </unit>
     <unit id="MBwI79Y" name="form.source_type">
+      <notes>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:18</note>
+        <note category="desc" priority="1">Type de fichier</note>
+        <note category="file-source" priority="1">src/Form/ImportFileType.php:66</note>
+      </notes>
       <segment>
         <source>form.source_type</source>
         <target>Type de fichier</target>
       </segment>
     </unit>
     <unit id="EMbdXjS" name="form.target_type">
+      <notes>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:19</note>
+        <note category="desc" priority="1">Type de fichier</note>
+        <note category="file-source" priority="1">src/Form/ExportType.php:55</note>
+      </notes>
       <segment>
         <source>form.target_type</source>
         <target>Type de fichier</target>
       </segment>
     </unit>
     <unit id="mqpptzZ" name="form.comment">
+      <notes>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:20</note>
+        <note category="desc" priority="1">Commentaire</note>
+        <note category="file-source" priority="1">src/Form/AssetType.php:37</note>
+        <note category="file-source" priority="1">src/Form/AssetNotesType.php:34</note>
+      </notes>
       <segment>
         <source>form.comment</source>
         <target>Commentaire</target>
       </segment>
     </unit>
     <unit id="_KAbPRV" name="form.resname">
+      <notes>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:21</note>
+        <note category="desc" priority="1">Identifiant de le traduction (id / resname)</note>
+        <note category="file-source" priority="1">src/Form/AssetType.php:29</note>
+      </notes>
       <segment>
         <source>form.resname</source>
         <target>Identifiant de le traduction (id / resname)</target>
       </segment>
     </unit>
     <unit id="cWcdcnH" name="form.source">
+      <notes>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:22</note>
+        <note category="desc" priority="1">Source</note>
+        <note category="file-source" priority="1">src/Form/AssetType.php:33</note>
+      </notes>
       <segment>
         <source>form.source</source>
         <target>Source</target>
       </segment>
     </unit>
     <unit id="h0fN2H5" name="form.notes">
+      <notes>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:23</note>
+        <note category="desc" priority="1">Commentaire</note>
+      </notes>
       <segment>
         <source>form.notes</source>
         <target>Commentaire</target>
       </segment>
     </unit>
     <unit id="ACC7FFl" name="form.domain_name">
+      <notes>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:24</note>
+        <note category="desc" priority="1">Nom du domaine de traduction</note>
+        <note category="file-source" priority="1">src/Form/DomainType.php:27</note>
+      </notes>
       <segment>
         <source>form.domain_name</source>
         <target>Nom du domaine de traduction</target>
       </segment>
     </unit>
     <unit id="UWHIguw" name="form.project_name">
+      <notes>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:25</note>
+        <note category="desc" priority="1">Nom du projet</note>
+        <note category="file-source" priority="1">src/Form/ProjectType.php:27</note>
+      </notes>
       <segment>
         <source>form.project_name</source>
         <target>Nom du projet</target>
       </segment>
     </unit>
     <unit id="g6KYbjj" name="form.locales">
+      <notes>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:26</note>
+        <note category="desc" priority="1">Langues</note>
+        <note category="file-source" priority="1">src/Form/DomainType.php:31</note>
+      </notes>
       <segment>
         <source>form.locales</source>
         <target>Langues</target>
       </segment>
     </unit>
     <unit id="OLNI7MF" name="form.users">
+      <notes>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:27</note>
+        <note category="desc" priority="1">Utilisateurs</note>
+        <note category="file-source" priority="1">src/Form/ProjectType.php:31</note>
+      </notes>
       <segment>
         <source>form.users</source>
         <target>Utilisateurs</target>
       </segment>
     </unit>
     <unit id="yBYGxQT" name="label.login_title">
+      <notes>
+        <note category="file-source" priority="1">templates/security/login.html.twig:5</note>
+        <note category="desc" priority="1">Se connecter</note>
+      </notes>
       <segment>
         <source>label.login_title</source>
         <target>Se connecter</target>
       </segment>
     </unit>
     <unit id="LDhDPrF" name="label.username">
+      <notes>
+        <note category="file-source" priority="1">templates/security/login.html.twig:10</note>
+        <note category="desc" priority="1">Adresse e-mail</note>
+      </notes>
       <segment>
         <source>label.username</source>
         <target>Adresse e-mail</target>
       </segment>
     </unit>
     <unit id="9pvowqn" name="label.password">
+      <notes>
+        <note category="file-source" priority="1">templates/security/login.html.twig:14</note>
+        <note category="desc" priority="1">Mot de passe</note>
+      </notes>
       <segment>
         <source>label.password</source>
         <target>Mot de passe</target>
       </segment>
     </unit>
     <unit id="ZAtrhtu" name="label.login">
+      <notes>
+        <note category="file-source" priority="1">templates/security/login.html.twig:18</note>
+        <note category="desc" priority="1">Connexion</note>
+      </notes>
       <segment>
         <source>label.login</source>
         <target>Connexion</target>
       </segment>
     </unit>
     <unit id="lcWmxe1" name="label.export_title">
+      <notes>
+        <note category="file-source" priority="1">templates/domains/export.html.twig:5</note>
+        <note category="desc" priority="1">Exporter les traductions de '%domain%'</note>
+      </notes>
       <segment>
         <source>label.export_title</source>
         <target>Exporter les traductions de '%domain%'</target>
       </segment>
     </unit>
     <unit id="j1bjukk" name="label.download">
+      <notes>
+        <note category="file-source" priority="1">templates/domains/export.html.twig:18</note>
+        <note category="desc" priority="1">Télécharger</note>
+        <note category="file-source" priority="1">templates/domains/listing.html.twig:46</note>
+        <note category="desc" priority="1">Télécharger</note>
+      </notes>
       <segment>
         <source>label.download</source>
         <target>Télécharger</target>
       </segment>
     </unit>
     <unit id="Ka61EDY" name="label.edit_domain_title">
+      <notes>
+        <note category="file-source" priority="1">templates/domains/edit.html.twig:6</note>
+        <note category="desc" priority="1">Modifier le domaine '%domain%'</note>
+      </notes>
       <segment>
         <source>label.edit_domain_title</source>
         <target>Modifier le domaine '%domain%'</target>
       </segment>
     </unit>
     <unit id="0IxCM_a" name="label.new_domain_title">
+      <notes>
+        <note category="file-source" priority="1">templates/domains/edit.html.twig:8</note>
+        <note category="desc" priority="1">Nouveau domaine pour '%project%'</note>
+      </notes>
       <segment>
         <source>label.new_domain_title</source>
         <target>Nouveau domaine pour '%project%'</target>
       </segment>
     </unit>
     <unit id="Ujkxfzw" name="label.create_action">
+      <notes>
+        <note category="file-source" priority="1">templates/domains/edit.html.twig:17</note>
+        <note category="desc" priority="1">Valider</note>
+        <note category="file-source" priority="1">templates/domains/import.html.twig:15</note>
+        <note category="desc" priority="1">Valider</note>
+        <note category="file-source" priority="1">templates/projects/edit.html.twig:13</note>
+        <note category="desc" priority="1">Valider</note>
+        <note category="file-source" priority="1">templates/assets/edit.html.twig:14</note>
+        <note category="desc" priority="1">Valider</note>
+      </notes>
       <segment>
         <source>label.create_action</source>
         <target>Valider</target>
       </segment>
     </unit>
     <unit id="HQyOnLA" name="label.domains_listing_title">
+      <notes>
+        <note category="file-source" priority="1">templates/domains/listing.html.twig:5</note>
+        <note category="desc" priority="1">Domaines de '%projet%'</note>
+      </notes>
       <segment>
         <source>label.domains_listing_title</source>
         <target>Domaines de '%projet%'</target>
       </segment>
     </unit>
     <unit id="xWxDXm_" name="label.add_domain">
+      <notes>
+        <note category="file-source" priority="1">templates/domains/listing.html.twig:8</note>
+        <note category="desc" priority="1">Ajouter un domaine</note>
+      </notes>
       <segment>
         <source>label.add_domain</source>
         <target>Ajouter un domaine</target>
       </segment>
     </unit>
     <unit id="Dh97am_" name="label.nb_assets">
+      <notes>
+        <note category="file-source" priority="1">templates/domains/listing.html.twig:30</note>
+        <note category="desc" priority="1">{0} Aucun asset|{1} 1 asset|]1,Inf[ %nb% assets</note>
+        <note category="file-source" priority="1">templates/projects/listing.html.twig:26</note>
+        <note category="desc" priority="1">{0} Aucun asset|{1} 1 asset|]1,Inf[ %nb% assets</note>
+      </notes>
       <segment>
         <source>label.nb_assets</source>
         <target>{0} Aucun asset|{1} 1 asset|]1,Inf[ %nb% assets</target>
       </segment>
     </unit>
     <unit id="w7441mn" name="label.edit_domain">
+      <notes>
+        <note category="file-source" priority="1">templates/domains/listing.html.twig:37</note>
+        <note category="desc" priority="1">Modifier le domaine</note>
+      </notes>
       <segment>
         <source>label.edit_domain</source>
         <target>Modifier le domaine</target>
       </segment>
     </unit>
     <unit id="DjOhc_M" name="label.add_asset">
+      <notes>
+        <note category="file-source" priority="1">templates/domains/listing.html.twig:40</note>
+        <note category="desc" priority="1">Ajouter un asset</note>
+        <note category="file-source" priority="1">templates/translation/translate.html.twig:8</note>
+        <note category="desc" priority="1">Ajouter un asset</note>
+      </notes>
       <segment>
         <source>label.add_asset</source>
         <target>Ajouter un asset</target>
       </segment>
     </unit>
     <unit id="53s7Rm6" name="label.import">
+      <notes>
+        <note category="file-source" priority="1">templates/domains/listing.html.twig:43</note>
+        <note category="desc" priority="1">Importer</note>
+      </notes>
       <segment>
         <source>label.import</source>
         <target>Importer</target>
       </segment>
     </unit>
     <unit id="BiPY0TX" name="label.delete">
+      <notes>
+        <note category="file-source" priority="1">templates/domains/listing.html.twig:49</note>
+        <note category="desc" priority="1">Supprimer</note>
+        <note category="file-source" priority="1">templates/domains/delete.html.twig:18</note>
+        <note category="desc" priority="1">Supprimer</note>
+        <note category="file-source" priority="1">templates/translation/translate.html.twig:66</note>
+        <note category="desc" priority="1">Supprimer</note>
+        <note category="file-source" priority="1">templates/projects/listing.html.twig:34</note>
+        <note category="desc" priority="1">Supprimer</note>
+        <note category="file-source" priority="1">templates/projects/delete.html.twig:18</note>
+        <note category="desc" priority="1">Supprimer</note>
+        <note category="file-source" priority="1">templates/assets/delete.html.twig:18</note>
+        <note category="desc" priority="1">Supprimer</note>
+      </notes>
       <segment>
         <source>label.delete</source>
         <target>Supprimer</target>
       </segment>
     </unit>
     <unit id="TJDspI3" name="label.translate">
+      <notes>
+        <note category="file-source" priority="1">templates/domains/listing.html.twig:52</note>
+        <note category="desc" priority="1">Traduire</note>
+      </notes>
       <segment>
         <source>label.translate</source>
         <target>Traduire</target>
       </segment>
     </unit>
     <unit id="VkX38Dc" name="label.no_domains">
+      <notes>
+        <note category="file-source" priority="1">templates/domains/listing.html.twig:60</note>
+        <note category="desc" priority="1">Ce projet ne contient aucun domaine.</note>
+      </notes>
       <segment>
         <source>label.no_domains</source>
         <target>Ce projet ne contient aucun domaine.</target>
       </segment>
     </unit>
     <unit id="_lNU8HC" name="label.delete_domain_title">
+      <notes>
+        <note category="file-source" priority="1">templates/domains/delete.html.twig:5</note>
+        <note category="desc" priority="1">Supprimer le domaine '%domain%'</note>
+      </notes>
       <segment>
         <source>label.delete_domain_title</source>
         <target>Supprimer le domaine '%domain%'</target>
       </segment>
     </unit>
     <unit id="OxaT8BA" name="label.delete_domain_confirmation">
+      <notes>
+        <note category="file-source" priority="1">templates/domains/delete.html.twig:10</note>
+        <note category="desc" priority="1">Êtes-vous sûr de vouloir supprimer le domaine '%domain%' ? Cette action est irréversible.</note>
+      </notes>
       <segment>
         <source>label.delete_domain_confirmation</source>
         <target>Êtes-vous sûr de vouloir supprimer le domaine '%domain%' ? Cette action est irréversible.</target>
       </segment>
     </unit>
     <unit id="ffSy64T" name="label.back">
+      <notes>
+        <note category="file-source" priority="1">templates/domains/delete.html.twig:15</note>
+        <note category="desc" priority="1">Retour</note>
+        <note category="file-source" priority="1">templates/projects/delete.html.twig:15</note>
+        <note category="desc" priority="1">Retour</note>
+        <note category="file-source" priority="1">templates/assets/delete.html.twig:15</note>
+        <note category="desc" priority="1">Retour</note>
+      </notes>
       <segment>
         <source>label.back</source>
         <target>Retour</target>
       </segment>
     </unit>
     <unit id="tyGnBiO" name="label.import_title">
+      <notes>
+        <note category="file-source" priority="1">templates/domains/import.html.twig:5</note>
+        <note category="desc" priority="1">Importer un fichier de traductions dans '%domain%'</note>
+      </notes>
       <segment>
         <source>label.import_title</source>
         <target>Importer un fichier de traductions dans '%domain%'</target>
       </segment>
     </unit>
     <unit id="3rM9BA4" name="label.translate_title">
+      <notes>
+        <note category="file-source" priority="1">templates/translation/translate.html.twig:5</note>
+        <note category="desc" priority="1">Traduction</note>
+      </notes>
       <segment>
         <source>label.translate_title</source>
         <target>Traduction</target>
       </segment>
     </unit>
     <unit id="WBsdlxn" name="label.resname">
+      <notes>
+        <note category="file-source" priority="1">templates/translation/translate.html.twig:18</note>
+        <note category="desc" priority="1">Id</note>
+      </notes>
       <segment>
         <source>label.resname</source>
         <target>Id</target>
       </segment>
     </unit>
     <unit id="d_iJPpz" name="label.source">
+      <notes>
+        <note category="file-source" priority="1">templates/translation/translate.html.twig:19</note>
+        <note category="desc" priority="1">Source</note>
+      </notes>
       <segment>
         <source>label.source</source>
         <target>Source</target>
       </segment>
     </unit>
     <unit id="ILTzDuZ" name="flash.translation_success">
+      <notes>
+        <note category="file-source" priority="1">templates/translation/translate.html.twig:51</note>
+        <note category="desc" priority="1">La traduction a été sauvegardée avec succès !</note>
+      </notes>
       <segment>
         <source>flash.translation_success</source>
         <target>La traduction a été sauvegardée avec succès !</target>
       </segment>
     </unit>
     <unit id="Aa2G7EH" name="flash.translation_error">
+      <notes>
+        <note category="file-source" priority="1">templates/translation/translate.html.twig:54</note>
+        <note category="desc" priority="1">Une erreur est survenue lors de la sauvegarde de la traduction.</note>
+      </notes>
       <segment>
         <source>flash.translation_error</source>
         <target>Une erreur est survenue lors de la sauvegarde de la traduction.</target>
       </segment>
     </unit>
     <unit id="1fozYu9" name="label.comment_action">
+      <notes>
+        <note category="file-source" priority="1">templates/translation/translate.html.twig:70</note>
+        <note category="desc" priority="1">Commenter</note>
+      </notes>
       <segment>
         <source>label.comment_action</source>
         <target>Commenter</target>
       </segment>
     </unit>
     <unit id="s54iWXV" name="label.no_assets">
+      <notes>
+        <note category="file-source" priority="1">templates/translation/translate.html.twig:79</note>
+        <note category="desc" priority="1">Aucun asset n'a encore été ajouté à ce domaine.</note>
+      </notes>
       <segment>
         <source>label.no_assets</source>
         <target>Aucun asset n'a encore été ajouté à ce domaine.</target>
       </segment>
     </unit>
     <unit id="fglGrs3" name="label.new_project_title">
+      <notes>
+        <note category="file-source" priority="1">templates/projects/edit.html.twig:5</note>
+        <note category="desc" priority="1">Nouveau projet</note>
+      </notes>
       <segment>
         <source>label.new_project_title</source>
         <target>Nouveau projet</target>
       </segment>
     </unit>
     <unit id="WynHKhj" name="label.projects_listing_title">
+      <notes>
+        <note category="file-source" priority="1">templates/projects/listing.html.twig:5</note>
+        <note category="desc" priority="1">Mes projets</note>
+      </notes>
       <segment>
         <source>label.projects_listing_title</source>
         <target>Mes projets</target>
       </segment>
     </unit>
     <unit id="20U7EVe" name="label.add_project">
+      <notes>
+        <note category="file-source" priority="1">templates/projects/listing.html.twig:9</note>
+        <note category="desc" priority="1">Créer un domaine</note>
+      </notes>
       <segment>
         <source>label.add_project</source>
         <target>Créer un domaine</target>
       </segment>
     </unit>
     <unit id="M8Tm9l_" name="label.nb_domains">
+      <notes>
+        <note category="file-source" priority="1">templates/projects/listing.html.twig:23</note>
+        <note category="desc" priority="1">{0} Aucun domaine|{1} 1 domaine|]1,Inf[ %nb% domaines</note>
+      </notes>
       <segment>
         <source>label.nb_domains</source>
         <target>{0} Aucun domaine|{1} 1 domaine|]1,Inf[ %nb% domaines</target>
       </segment>
     </unit>
     <unit id=".AKNsK5" name="label.domain_list">
+      <notes>
+        <note category="file-source" priority="1">templates/projects/listing.html.twig:38</note>
+        <note category="desc" priority="1">Voir le projet</note>
+      </notes>
       <segment>
         <source>label.domain_list</source>
         <target>Voir le projet</target>
       </segment>
     </unit>
     <unit id="ih5LOcs" name="label.no_projects">
+      <notes>
+        <note category="file-source" priority="1">templates/projects/listing.html.twig:46</note>
+        <note category="desc" priority="1">Vous n'êtes associé à aucun projet.</note>
+      </notes>
       <segment>
         <source>label.no_projects</source>
         <target>Vous n'êtes associé à aucun projet.</target>
       </segment>
     </unit>
     <unit id="vl07VZb" name="label.delete_project_title">
+      <notes>
+        <note category="file-source" priority="1">templates/projects/delete.html.twig:5</note>
+        <note category="desc" priority="1">Supprimer le projet '%project%'</note>
+      </notes>
       <segment>
         <source>label.delete_project_title</source>
         <target>Supprimer le projet '%project%'</target>
       </segment>
     </unit>
     <unit id="w5IcUxy" name="label.delete_project_confirmation">
+      <notes>
+        <note category="file-source" priority="1">templates/projects/delete.html.twig:10</note>
+        <note category="desc" priority="1">Êtes-vous sûr de vouloir supprimer le projet '%project%' ? Cette action est irréversible.</note>
+      </notes>
       <segment>
         <source>label.delete_project_confirmation</source>
         <target>Êtes-vous sûr de vouloir supprimer le projet '%project%' ? Cette action est irréversible.</target>
       </segment>
     </unit>
     <unit id="anYT8Tf" name="skip_link.to_content">
+      <notes>
+        <note category="file-source" priority="1">templates/base.html.twig:59</note>
+        <note category="desc" priority="1">Skip to content</note>
+      </notes>
       <segment>
         <source>skip_link.to_content</source>
         <target>Skip to content</target>
       </segment>
     </unit>
     <unit id="w4nyqI3" name="skip_link.to_nav">
+      <notes>
+        <note category="file-source" priority="1">templates/base.html.twig:60</note>
+        <note category="desc" priority="1">Skip to navigation</note>
+      </notes>
       <segment>
         <source>skip_link.to_nav</source>
         <target>Skip to navigation</target>
       </segment>
     </unit>
     <unit id="II4DGnv" name="label.logout">
+      <notes>
+        <note category="file-source" priority="1">templates/base.html.twig:94</note>
+        <note category="desc" priority="1">Déconnection</note>
+      </notes>
       <segment>
         <source>label.logout</source>
         <target>Déconnection</target>
       </segment>
     </unit>
     <unit id="q3lcWvl" name="label.new_asset_title">
+      <notes>
+        <note category="file-source" priority="1">templates/assets/edit.html.twig:5</note>
+        <note category="desc" priority="1">Nouvel asset pour '%domain%'</note>
+      </notes>
       <segment>
         <source>label.new_asset_title</source>
         <target>Nouvel asset pour '%domain%'</target>
       </segment>
     </unit>
     <unit id="bjXiBwx" name="label.delete_asset_title">
+      <notes>
+        <note category="file-source" priority="1">templates/assets/delete.html.twig:5</note>
+        <note category="desc" priority="1">Supprimer l'asset '%asset%'</note>
+      </notes>
       <segment>
         <source>label.delete_asset_title</source>
         <target>Supprimer l'asset '%asset%'</target>
       </segment>
     </unit>
     <unit id="eHXf00m" name="label.delete_asset_confirmation">
+      <notes>
+        <note category="file-source" priority="1">templates/assets/delete.html.twig:10</note>
+        <note category="desc" priority="1">Êtes-vous sûr de vouloir supprimer l'asset '%asset%' ? Cette action est irréversible.</note>
+      </notes>
       <segment>
         <source>label.delete_asset_confirmation</source>
         <target>Êtes-vous sûr de vouloir supprimer l'asset '%asset%' ? Cette action est irréversible.</target>
+      </segment>
+    </unit>
+    <unit id="i78bd5U" name="form.xliff_version">
+      <notes>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:28</note>
+        <note category="desc" priority="1">Version xliff</note>
+        <note category="file-source" priority="1">src/Form/ExportType.php:61</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>form.xliff_version</source>
+        <target>Version xliff</target>
+      </segment>
+    </unit>
+    <unit id="0IsogQa" name="label.toggle_translated_assets">
+      <notes>
+        <note category="file-source" priority="1">templates/translation/translate.html.twig:34</note>
+        <note category="desc" priority="1">Afficher/masquer les assets déjà traduits</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>label.toggle_translated_assets</source>
+        <target>Afficher/masquer les assets déjà traduits</target>
+      </segment>
+    </unit>
+    <unit id="MUEc0Pr" name="label.edit_project">
+      <notes>
+        <note category="file-source" priority="1">templates/projects/listing.html.twig:31</note>
+        <note category="desc" priority="1">Modifier le projet</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>label.edit_project</source>
+        <target>Modifier le projet</target>
       </segment>
     </unit>
   </file>

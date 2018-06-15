@@ -98,6 +98,11 @@
         } else {
             $('.js-translation-section').hide();
         }
+
+        $('.js-toggle-translated-assets').on('click', function(e) {
+            e.preventDefault();
+            $('.js-translation-row:not(.-pending)').toggle();
+        });
     };
 
     var translateField = function() {

@@ -12,6 +12,7 @@
 
         {% if assets|length %}
             <div class="assets-table-container">
+                <div><a href="#" class="js-toggle-translated-assets">{{ 'label.toggle_translated_assets' | trans | desc("Afficher/masquer les assets déjà traduits") }}</a></div>
                 <div class="assets-table">
                     <div class="assets-table__head">
                         <div class="row">
@@ -20,16 +21,17 @@
                         </div>
                     </div>
                     <div class="assets-table__body" data-locales="{{ domain.locales|join(',') }}">
-                    {% for asset in assets %}
-                        <div class="row translation-row js-translation-row{% if not asset.isFullyTranslated(domain.locales) %} -pending{% endif %}{% if asset.id == select %} -active{% endif %}"
-                            {% for locale in domain.locales %}data-{{ locale.code }}="{{ asset.translate(locale.code) }}" {% endfor %}
-                            data-notes="{{ asset.notes }}"
-                            data-id="{{ asset.id }}"
-                        >
-                            <div class="col-sm-5 -id">{{ asset.resname }}</div>
-                            <div class="col-sm-7 -source">{{ asset.source }}</div>
-                        </div>
-                    {% endfor %}
+                        {% for asset in assets %}
+                            {% set fully_translated = asset.isFullyTranslated(domain.locales) %}
+                            <div class="row translation-row js-translation-row{% if not fully_translated %} -pending{% endif %}{% if asset.id == select %} -active{% endif %}"
+                                {% for locale in domain.locales %}data-{{ locale.code }}="{{ asset.translate(locale.code) }}" {% endfor %}
+                                data-notes="{{ asset.notes }}"
+                                data-id="{{ asset.id }}"
+                            >
+                                <div class="col-sm-5 -id">{{ asset.resname }}</div>
+                                <div class="col-sm-7 -source">{{ asset.source }}</div>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
