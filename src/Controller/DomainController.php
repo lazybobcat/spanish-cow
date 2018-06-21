@@ -27,7 +27,9 @@ use App\Model\Import;
 use App\Voter\DomainVoter;
 use App\Voter\ProjectVoter;
 use Enqueue\Client\ProducerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -159,7 +161,7 @@ class DomainController extends Controller
     /**
      * @Route("/project/{project}/domain/{domain}/import", name="domain_import")
      */
-    public function import(Request $request, ProducerInterface $producer, Breadcrumbs $breadcrumbs, RouterInterface $router, Project $project, Domain $domain)
+    public function import(Request $request, ProducerInterface $producer, FileImporter $importer, Breadcrumbs $breadcrumbs, RouterInterface $router, Project $project, Domain $domain, LoggerInterface $logger)
     {
         if (!$this->isGranted(DomainVoter::UPDATE, $domain)) {
             throw $this->createNotFoundException();
@@ -185,9 +187,25 @@ class DomainController extends Controller
             $destination = $this->getParameter('import_translation_folder').DIRECTORY_SEPARATOR.$domain->getId();
             $file = $uploadedFile->move($destination, $uploadedFile->getClientOriginalName());
             $data->setFile($file);
-            $producer->sendEvent(Topics::TOPIC_FILE_IMPORT, json_encode($data));
 
-            $this->addFlash('success', 'flash.import_success');
+//            // Async treatment of the importation
+//            $producer->sendEvent(Topics::TOPIC_FILE_IMPORT, json_encode($data));
+
+            $fs = new Filesystem();
+
+            try {
+                $importer->import($data);
+                $fs->remove($data->getSourceFilePath());
+                $this->addFlash('success', 'flash.import_success');
+            } catch (\Exception $e) {
+                $this->addFlash('error', 'flash.import_failure');
+                $logger->error('Error during import of translation file', [
+                    'data' => $data,
+                    'exception' => $e,
+                ]);
+
+                return self::REJECT;
+            }
 
             return $this->redirectToRoute('domain_list', ['project' => $project->getId()]);
         }

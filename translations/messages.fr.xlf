@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="fr-LU" trgLang="fr">
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="fr-FR" trgLang="fr">
   <file id="messages.fr">
     <unit id="0KT0Bsd" name="breadcrumbs.projects_listing">
       <notes>
@@ -45,16 +45,16 @@
       <notes>
         <note category="file-source" priority="1">templates/fakei18n.html.twig:12</note>
         <note category="desc" priority="1">L'import des traduction a démarré et peut prendre quelques secondes pour se terminer.</note>
-        <note category="file-source" priority="1">src/Controller/DomainController.php:190</note>
+        <note category="file-source" priority="1">src/Controller/DomainController.php:199</note>
       </notes>
       <segment>
         <source>flash.import_success</source>
-        <target>L'import des traduction a démarré et peut prendre quelques secondes pour se terminer.</target>
+        <target>L'import des traduction a été effectué avec succès !</target>
       </segment>
     </unit>
     <unit id="Fx25Xea" name="form.locale_code">
       <notes>
-        <note category="file-source" priority="1">templates/fakei18n.html.twig:15</note>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:16</note>
         <note category="desc" priority="1">Langue</note>
         <note category="file-source" priority="1">src/Form/ExportType.php:33</note>
         <note category="file-source" priority="1">src/Form/ImportFileType.php:35</note>
@@ -66,7 +66,7 @@
     </unit>
     <unit id="nIPr.nw" name="form.keep">
       <notes>
-        <note category="file-source" priority="1">templates/fakei18n.html.twig:16</note>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:17</note>
         <note category="desc" priority="1">Garder les traductions absentes du fichier</note>
         <note category="file-source" priority="1">src/Form/ImportFileType.php:57</note>
       </notes>
@@ -77,7 +77,7 @@
     </unit>
     <unit id="7t891XG" name="form.file">
       <notes>
-        <note category="file-source" priority="1">templates/fakei18n.html.twig:17</note>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:18</note>
         <note category="desc" priority="1">Fichier</note>
         <note category="file-source" priority="1">src/Form/ImportFileType.php:61</note>
       </notes>
@@ -88,7 +88,7 @@
     </unit>
     <unit id="MBwI79Y" name="form.source_type">
       <notes>
-        <note category="file-source" priority="1">templates/fakei18n.html.twig:18</note>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:19</note>
         <note category="desc" priority="1">Type de fichier</note>
         <note category="file-source" priority="1">src/Form/ImportFileType.php:66</note>
       </notes>
@@ -99,7 +99,7 @@
     </unit>
     <unit id="EMbdXjS" name="form.target_type">
       <notes>
-        <note category="file-source" priority="1">templates/fakei18n.html.twig:19</note>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:20</note>
         <note category="desc" priority="1">Type de fichier</note>
         <note category="file-source" priority="1">src/Form/ExportType.php:55</note>
       </notes>
@@ -110,7 +110,7 @@
     </unit>
     <unit id="mqpptzZ" name="form.comment">
       <notes>
-        <note category="file-source" priority="1">templates/fakei18n.html.twig:20</note>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:21</note>
         <note category="desc" priority="1">Commentaire</note>
         <note category="file-source" priority="1">src/Form/AssetType.php:37</note>
         <note category="file-source" priority="1">src/Form/AssetNotesType.php:34</note>
@@ -122,7 +122,7 @@
     </unit>
     <unit id="_KAbPRV" name="form.resname">
       <notes>
-        <note category="file-source" priority="1">templates/fakei18n.html.twig:21</note>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:22</note>
         <note category="desc" priority="1">Identifiant de le traduction (id / resname)</note>
         <note category="file-source" priority="1">src/Form/AssetType.php:29</note>
       </notes>
@@ -133,7 +133,7 @@
     </unit>
     <unit id="cWcdcnH" name="form.source">
       <notes>
-        <note category="file-source" priority="1">templates/fakei18n.html.twig:22</note>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:23</note>
         <note category="desc" priority="1">Source</note>
         <note category="file-source" priority="1">src/Form/AssetType.php:33</note>
       </notes>
@@ -144,7 +144,7 @@
     </unit>
     <unit id="h0fN2H5" name="form.notes">
       <notes>
-        <note category="file-source" priority="1">templates/fakei18n.html.twig:23</note>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:24</note>
         <note category="desc" priority="1">Commentaire</note>
       </notes>
       <segment>
@@ -154,7 +154,7 @@
     </unit>
     <unit id="ACC7FFl" name="form.domain_name">
       <notes>
-        <note category="file-source" priority="1">templates/fakei18n.html.twig:24</note>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:25</note>
         <note category="desc" priority="1">Nom du domaine de traduction</note>
         <note category="file-source" priority="1">src/Form/DomainType.php:27</note>
       </notes>
@@ -165,7 +165,7 @@
     </unit>
     <unit id="UWHIguw" name="form.project_name">
       <notes>
-        <note category="file-source" priority="1">templates/fakei18n.html.twig:25</note>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:26</note>
         <note category="desc" priority="1">Nom du projet</note>
         <note category="file-source" priority="1">src/Form/ProjectType.php:27</note>
       </notes>
@@ -176,7 +176,7 @@
     </unit>
     <unit id="g6KYbjj" name="form.locales">
       <notes>
-        <note category="file-source" priority="1">templates/fakei18n.html.twig:26</note>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:27</note>
         <note category="desc" priority="1">Langues</note>
         <note category="file-source" priority="1">src/Form/DomainType.php:31</note>
       </notes>
@@ -187,7 +187,7 @@
     </unit>
     <unit id="OLNI7MF" name="form.users">
       <notes>
-        <note category="file-source" priority="1">templates/fakei18n.html.twig:27</note>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:28</note>
         <note category="desc" priority="1">Utilisateurs</note>
         <note category="file-source" priority="1">src/Form/ProjectType.php:31</note>
       </notes>
@@ -248,9 +248,9 @@
     </unit>
     <unit id="j1bjukk" name="label.download">
       <notes>
-        <note category="file-source" priority="1">templates/domains/export.html.twig:18</note>
-        <note category="desc" priority="1">Télécharger</note>
         <note category="file-source" priority="1">templates/domains/listing.html.twig:46</note>
+        <note category="desc" priority="1">Télécharger</note>
+        <note category="file-source" priority="1">templates/domains/export.html.twig:18</note>
         <note category="desc" priority="1">Télécharger</note>
       </notes>
       <segment>
@@ -280,13 +280,13 @@
     </unit>
     <unit id="Ujkxfzw" name="label.create_action">
       <notes>
-        <note category="file-source" priority="1">templates/domains/edit.html.twig:17</note>
-        <note category="desc" priority="1">Valider</note>
-        <note category="file-source" priority="1">templates/domains/import.html.twig:15</note>
-        <note category="desc" priority="1">Valider</note>
         <note category="file-source" priority="1">templates/projects/edit.html.twig:13</note>
         <note category="desc" priority="1">Valider</note>
         <note category="file-source" priority="1">templates/assets/edit.html.twig:14</note>
+        <note category="desc" priority="1">Valider</note>
+        <note category="file-source" priority="1">templates/domains/edit.html.twig:17</note>
+        <note category="desc" priority="1">Valider</note>
+        <note category="file-source" priority="1">templates/domains/import.html.twig:15</note>
         <note category="desc" priority="1">Valider</note>
       </notes>
       <segment>
@@ -316,9 +316,9 @@
     </unit>
     <unit id="Dh97am_" name="label.nb_assets">
       <notes>
-        <note category="file-source" priority="1">templates/domains/listing.html.twig:30</note>
-        <note category="desc" priority="1">{0} Aucun asset|{1} 1 asset|]1,Inf[ %nb% assets</note>
         <note category="file-source" priority="1">templates/projects/listing.html.twig:26</note>
+        <note category="desc" priority="1">{0} Aucun asset|{1} 1 asset|]1,Inf[ %nb% assets</note>
+        <note category="file-source" priority="1">templates/domains/listing.html.twig:30</note>
         <note category="desc" priority="1">{0} Aucun asset|{1} 1 asset|]1,Inf[ %nb% assets</note>
       </notes>
       <segment>
@@ -360,17 +360,17 @@
     </unit>
     <unit id="BiPY0TX" name="label.delete">
       <notes>
-        <note category="file-source" priority="1">templates/domains/listing.html.twig:49</note>
-        <note category="desc" priority="1">Supprimer</note>
-        <note category="file-source" priority="1">templates/domains/delete.html.twig:18</note>
-        <note category="desc" priority="1">Supprimer</note>
-        <note category="file-source" priority="1">templates/translation/translate.html.twig:66</note>
+        <note category="file-source" priority="1">templates/projects/delete.html.twig:18</note>
         <note category="desc" priority="1">Supprimer</note>
         <note category="file-source" priority="1">templates/projects/listing.html.twig:34</note>
         <note category="desc" priority="1">Supprimer</note>
-        <note category="file-source" priority="1">templates/projects/delete.html.twig:18</note>
-        <note category="desc" priority="1">Supprimer</note>
         <note category="file-source" priority="1">templates/assets/delete.html.twig:18</note>
+        <note category="desc" priority="1">Supprimer</note>
+        <note category="file-source" priority="1">templates/domains/delete.html.twig:18</note>
+        <note category="desc" priority="1">Supprimer</note>
+        <note category="file-source" priority="1">templates/domains/listing.html.twig:49</note>
+        <note category="desc" priority="1">Supprimer</note>
+        <note category="file-source" priority="1">templates/translation/translate.html.twig:66</note>
         <note category="desc" priority="1">Supprimer</note>
       </notes>
       <segment>
@@ -420,11 +420,11 @@
     </unit>
     <unit id="ffSy64T" name="label.back">
       <notes>
-        <note category="file-source" priority="1">templates/domains/delete.html.twig:15</note>
-        <note category="desc" priority="1">Retour</note>
         <note category="file-source" priority="1">templates/projects/delete.html.twig:15</note>
         <note category="desc" priority="1">Retour</note>
         <note category="file-source" priority="1">templates/assets/delete.html.twig:15</note>
+        <note category="desc" priority="1">Retour</note>
+        <note category="file-source" priority="1">templates/domains/delete.html.twig:15</note>
         <note category="desc" priority="1">Retour</note>
       </notes>
       <segment>
@@ -454,7 +454,7 @@
     </unit>
     <unit id="WBsdlxn" name="label.resname">
       <notes>
-        <note category="file-source" priority="1">templates/translation/translate.html.twig:18</note>
+        <note category="file-source" priority="1">templates/translation/translate.html.twig:19</note>
         <note category="desc" priority="1">Id</note>
       </notes>
       <segment>
@@ -464,7 +464,7 @@
     </unit>
     <unit id="d_iJPpz" name="label.source">
       <notes>
-        <note category="file-source" priority="1">templates/translation/translate.html.twig:19</note>
+        <note category="file-source" priority="1">templates/translation/translate.html.twig:20</note>
         <note category="desc" priority="1">Source</note>
       </notes>
       <segment>
@@ -654,10 +654,9 @@
     </unit>
     <unit id="i78bd5U" name="form.xliff_version">
       <notes>
-        <note category="file-source" priority="1">templates/fakei18n.html.twig:28</note>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:29</note>
         <note category="desc" priority="1">Version xliff</note>
         <note category="file-source" priority="1">src/Form/ExportType.php:61</note>
-        <note category="state" priority="1">new</note>
       </notes>
       <segment>
         <source>form.xliff_version</source>
@@ -666,9 +665,8 @@
     </unit>
     <unit id="0IsogQa" name="label.toggle_translated_assets">
       <notes>
-        <note category="file-source" priority="1">templates/translation/translate.html.twig:34</note>
+        <note category="file-source" priority="1">templates/translation/translate.html.twig:15</note>
         <note category="desc" priority="1">Afficher/masquer les assets déjà traduits</note>
-        <note category="state" priority="1">new</note>
       </notes>
       <segment>
         <source>label.toggle_translated_assets</source>
@@ -679,11 +677,22 @@
       <notes>
         <note category="file-source" priority="1">templates/projects/listing.html.twig:31</note>
         <note category="desc" priority="1">Modifier le projet</note>
-        <note category="state" priority="1">new</note>
       </notes>
       <segment>
         <source>label.edit_project</source>
         <target>Modifier le projet</target>
+      </segment>
+    </unit>
+    <unit id="tIDzdPr" name="flash.import_failure">
+      <notes>
+        <note category="file-source" priority="1">templates/fakei18n.html.twig:13</note>
+        <note category="desc" priority="1">Une erreur est survenue lors de l'import.</note>
+        <note category="file-source" priority="1">src/Controller/DomainController.php:201</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>flash.import_failure</source>
+        <target>Une erreur est survenue lors de l'import.</target>
       </segment>
     </unit>
   </file>
