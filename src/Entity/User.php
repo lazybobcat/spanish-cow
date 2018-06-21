@@ -18,7 +18,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity()
@@ -54,8 +53,6 @@ class User implements UserInterface, \Serializable
      */
     protected $password;
 
-    /**
-     */
     protected $plainPassword;
 
     /**
@@ -102,6 +99,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @param string $email
+     *
      * @return User
      */
     public function setEmail($email)
@@ -121,6 +119,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @param bool $active
+     *
      * @return User
      */
     public function setActive($active)
@@ -132,6 +131,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @param array $roles
+     *
      * @return $this
      */
     public function setRoles(array $roles)
@@ -160,6 +160,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @param $password
+     *
      * @return $this
      */
     public function setPassword($password)
@@ -187,6 +188,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @param mixed $plainPassword
+     *
      * @return User
      */
     public function setPlainPassword($plainPassword)
@@ -206,6 +208,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @param $username
+     *
      * @return $this
      */
     public function setUsername($username)
@@ -238,11 +241,11 @@ class User implements UserInterface, \Serializable
      */
     public function serialize()
     {
-        return serialize(array(
+        return serialize([
             $this->id,
             $this->email,
             $this->password,
-        ));
+        ]);
     }
 
     /**
@@ -250,10 +253,9 @@ class User implements UserInterface, \Serializable
      */
     public function unserialize($serialized)
     {
-        list (
+        list(
             $this->id,
             $this->email,
-            $this->password,
-            ) = unserialize($serialized, ['allowed_classes' => false]);
+            $this->password) = unserialize($serialized, ['allowed_classes' => false]);
     }
 }

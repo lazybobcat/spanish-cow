@@ -64,7 +64,7 @@ class Import implements \JsonSerializable
     protected $xliffVersion = '2.0';
 
     /**
-     * Keep existing translations that are not in the newly imported file
+     * Keep existing translations that are not in the newly imported file.
      *
      * @var bool
      */
@@ -127,6 +127,7 @@ class Import implements \JsonSerializable
 
     /**
      * @param int $domainId
+     *
      * @return Import
      */
     public function setDomainId($domainId)
@@ -146,6 +147,7 @@ class Import implements \JsonSerializable
 
     /**
      * @param string $domainName
+     *
      * @return Import
      */
     public function setDomainName($domainName)
@@ -165,6 +167,7 @@ class Import implements \JsonSerializable
 
     /**
      * @param string $localeCode
+     *
      * @return Import
      */
     public function setLocaleCode($localeCode)
@@ -184,6 +187,7 @@ class Import implements \JsonSerializable
 
     /**
      * @param File $file
+     *
      * @return Import
      */
     public function setFile($file)
@@ -204,6 +208,7 @@ class Import implements \JsonSerializable
 
     /**
      * @param string $sourceFilePath
+     *
      * @return Import
      */
     public function setSourceFilePath($sourceFilePath)
@@ -223,6 +228,7 @@ class Import implements \JsonSerializable
 
     /**
      * @param string $targetFilePath
+     *
      * @return Import
      */
     public function setTargetFilePath($targetFilePath)
@@ -242,6 +248,7 @@ class Import implements \JsonSerializable
 
     /**
      * @param string $sourceType
+     *
      * @return Import
      */
     public function setSourceType($sourceType)
@@ -261,6 +268,7 @@ class Import implements \JsonSerializable
 
     /**
      * @param string $targetType
+     *
      * @return Import
      */
     public function setTargetType($targetType)
@@ -280,6 +288,7 @@ class Import implements \JsonSerializable
 
     /**
      * @param string $xliffVersion
+     *
      * @return Import
      */
     public function setXliffVersion($xliffVersion)
@@ -299,6 +308,7 @@ class Import implements \JsonSerializable
 
     /**
      * @param bool $keep
+     *
      * @return Import
      */
     public function setKeep($keep)

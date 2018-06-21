@@ -72,6 +72,7 @@ class Import
 
     /**
      * @param string $xliff
+     *
      * @return Import
      */
     public function setXliff($xliff)

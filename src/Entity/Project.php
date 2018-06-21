@@ -83,7 +83,7 @@ class Project
     public function __toString()
     {
         if (null === $this->name) {
-            return "n/a";
+            return 'n/a';
         }
 
         return $this->getName();
@@ -160,6 +160,7 @@ class Project
 
     /**
      * @param ArrayCollection $domains
+     *
      * @return Project
      */
     public function setDomains($domains)
@@ -209,6 +210,7 @@ class Project
 
     /**
      * @param ArrayCollection $users
+     *
      * @return Project
      */
     public function setUsers($users)

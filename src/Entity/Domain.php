@@ -119,7 +119,7 @@ class Domain
     public function __toString()
     {
         if (null === $this->name) {
-            return "n/a";
+            return 'n/a';
         }
 
         return $this->getName();
@@ -188,6 +188,7 @@ class Domain
 
     /**
      * @param Asset[] $assets
+     *
      * @return Domain
      */
     public function setAssets($assets)
@@ -301,6 +302,7 @@ class Domain
 
     /**
      * @param Project $project
+     *
      * @return Domain
      */
     public function setProject($project)
