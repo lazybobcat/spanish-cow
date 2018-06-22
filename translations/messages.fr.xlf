@@ -539,7 +539,7 @@
       </notes>
       <segment>
         <source>label.add_project</source>
-        <target>Créer un domaine</target>
+        <target>Créer un projet</target>
       </segment>
     </unit>
     <unit id="M8Tm9l_" name="label.nb_domains">

@@ -1,72 +1,51 @@
-// Add margin and padding with classes
-// mt1 = margin-top: 1rem;
-// pl4 = padding-left: 4rem;
-// mxauto = margin-left: auto; margin-right: auto;
+// stylelint-disable declaration-no-important
 
-// TODO : Change breakpoints name in $mq-breakpoints
-// TODO : Add - around names in classes name (if this is not the 0 width breakpoint)
-// TODO : Test if we are on margin case and not load padding auto
-// So we can use classes like .mt-xs-4 rather than .mtdesktop4
+// Margin and Padding
 
-// for each breakpoint
-@each $bp in map-keys($mq-breakpoints) {
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
-    // Include from current breakpoints
-    @include mq($from: $bp) {
+    @each $prop, $abbrev in (margin: m, padding: p) {
+      @each $size, $length in $spacers {
 
-        // For both margins and paddings
-        @each $prop, $abbrev in (margin: m, padding: p) {
-
-            // For predefined numbers (so we don't create 1534 classes, just the ones we need)
-            // Add a value here if you want to create a new size
-            @each $size in (1, 2, 3, 4, 5) {
-                .#{$abbrev}#{$bp}#{$size} {
-                    #{$prop}: #{$size}rem !important;
-                }
-
-                .#{$abbrev}#{$bp}t#{$size} {
-                    #{$prop}-top: #{$size}rem !important;
-                }
-
-                .#{$abbrev}#{$bp}r#{$size} {
-                    #{$prop}-right: #{$size}rem !important;
-                }
-
-                .#{$abbrev}#{$bp}b#{$size} {
-                    #{$prop}-bottom: #{$size}rem !important;
-                }
-
-                .#{$abbrev}#{$bp}l#{$size} {
-                    #{$prop}-left: #{$size}rem !important;
-                }
-
-                .#{$abbrev}#{$bp}x#{$size} {
-                    #{$prop}-left: #{$size}rem !important;
-                    #{$prop}-right: #{$size}rem !important;
-                }
-
-                .#{$abbrev}#{$bp}y#{$size} {
-                    #{$prop}-top: #{$size}rem !important;
-                    #{$prop}-bottom: #{$size}rem !important;
-                }
-
-
-                //@if $prop = 'margin'
-                // margin only
-                .m#{$bp}auto {
-                    margin: auto
-                }
-
-                .m#{$bp}xauto {
-                    margin-left: auto;
-                    margin-right: auto;
-                }
-
-                .m#{$bp}yauto {
-                    margin-top: auto;
-                    margin-bottom: auto;
-                }
-            }
+        .#{$abbrev}#{$infix}-#{$size} { #{$prop}: $length !important; }
+        .#{$abbrev}t#{$infix}-#{$size},
+        .#{$abbrev}y#{$infix}-#{$size} {
+          #{$prop}-top: $length !important;
         }
+        .#{$abbrev}r#{$infix}-#{$size},
+        .#{$abbrev}x#{$infix}-#{$size} {
+          #{$prop}-right: $length !important;
+        }
+        .#{$abbrev}b#{$infix}-#{$size},
+        .#{$abbrev}y#{$infix}-#{$size} {
+          #{$prop}-bottom: $length !important;
+        }
+        .#{$abbrev}l#{$infix}-#{$size},
+        .#{$abbrev}x#{$infix}-#{$size} {
+          #{$prop}-left: $length !important;
+        }
+      }
     }
+
+    // Some special margin utils
+    .m#{$infix}-auto { margin: auto !important; }
+    .mt#{$infix}-auto,
+    .my#{$infix}-auto {
+      margin-top: auto !important;
+    }
+    .mr#{$infix}-auto,
+    .mx#{$infix}-auto {
+      margin-right: auto !important;
+    }
+    .mb#{$infix}-auto,
+    .my#{$infix}-auto {
+      margin-bottom: auto !important;
+    }
+    .ml#{$infix}-auto,
+    .mx#{$infix}-auto {
+      margin-left: auto !important;
+    }
+  }
 }

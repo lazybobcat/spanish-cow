@@ -1,19 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block main_content %}
+    <div class="main-content__title">
+        <h1 class="h2">
+            {% if domain %}
+                {{ 'label.edit_domain_title' | trans({'%domain%': domain}) | desc("Modifier le domaine '%domain%'") }}
+            {% else %}
+                {{ 'label.new_domain_title' | trans({'%project%': project}) | desc("Nouveau domaine pour '%project%'") }}
+            {% endif %}
+        </h1>
+    </div>
     <div class="container-fluid">
-        {% if domain %}
-            <h2>{{ 'label.edit_domain_title' | trans({'%domain%': domain}) | desc("Modifier le domaine '%domain%'") }}</h2>
-        {% else %}
-            <h2>{{ 'label.new_domain_title' | trans({'%project%': project}) | desc("Nouveau domaine pour '%project%'") }}</h2>
-        {% endif %}
-
         {{ form_start(form) }}
             {{ form_row(form.name) }}
             {{ form_row(form.locales) }}
 
             <div class="form-actions">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-dark">
                     {{ 'label.create_action' | trans | desc("Valider") }}
                 </button>
             </div>

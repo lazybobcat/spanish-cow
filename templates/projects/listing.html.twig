@@ -1,43 +1,46 @@
 {% extends 'base.html.twig' %}
 
 {% block main_content %}
-    <div class="container-fluid">
-        <h2>{{ 'label.projects_listing_title' | trans | desc("Mes projets") }}</h2>
+    <div class="main-content__title">
+        <h1 class="h2">{{ 'label.projects_listing_title' | trans | desc("Mes projets") }}</h1>
 
         {% if is_granted('ROLE_ADMIN') %}
-        <div class="top-page-actions">
-            <a href="{{ path('project_add') }}" title="{{ 'label.add_project' | trans | desc("Créer un domaine") }}" class="btn btn-primary btn-icon">
-                <svg class="icon-plus"><use xlink:href="#icon-plus"></use></svg>
-            </a>
-        </div>
+            <div class="btn-toolbar">
+                <a href="{{ path('project_add') }}" title="{{ 'label.add_project' | trans | desc("Créer un projet") }}" class="btn btn-sm btn-outline-dark btn-icon">
+                    <svg class="icon-plus"><use xlink:href="#icon-plus"></use></svg>
+                </a>
+            </div>
         {% endif %}
-
+    </div>
+    <div class="container-fluid">
         {% if projects.count %}
-            <div class="domain-card-list">
+            <div class="card-columns">
                 {% for project in projects %}
-                    <div class="domain-card">
-                        <h3 class="domain-card__title">{{ project }}</h3>
-                        <div class="domain-card__meta">
-                            <span class="domain-card__assets">
-                                {% set count = (project.domains|length) %}
-                                {{ 'label.nb_domains' | transchoice(count, {'%nb%': count}) | desc("{0} Aucun domaine|{1} 1 domaine|]1,Inf[ %nb% domaines") }}
-                                -
-                                {% set count = project.countAssets %}
-                                {{ 'label.nb_assets' | transchoice(count, {'%nb%': count}) | desc("{0} Aucun asset|{1} 1 asset|]1,Inf[ %nb% assets") }}
-                            </span>
-                        </div>
-                        <div class="domain-card__actions">
-                            {% if is_granted('ROLE_ADMIN') %}
-                            <a href="{{ path('project_edit', {'project': project.id}) }}" title="{{ 'label.edit_project' | trans | desc("Modifier le projet") }}" class="btn btn-icon">
-                                <svg class="icon-cog-gear"><use xlink:href="#icon-cog-gear"></use></svg>
-                            </a>
-                            <a href="{{ path('project_delete', {'project': project.id}) }}" title="{{ 'label.delete' | trans | desc("Supprimer") }}" class="btn btn-icon btn-error">
-                                <svg class="icon-trash-bin"><use xlink:href="#icon-trash-bin"></use></svg>
-                            </a>
-                            {% endif %}
-                            <a href="{{ path('domain_list', {'project': project.id}) }}" title="{{ 'label.domain_list' | trans | desc("Voir le projet") }}" class="btn btn-icon btn-primary">
-                                <svg class="icon-angle-right"><use xlink:href="#icon-angle-right"></use></svg>
-                            </a>
+                    <div class="card">
+                        <h3 class="card-header">{{ project }}</h3>
+                        <div class="card-body">
+                            <div class="card-title">
+                                <span class="domain-card__assets">
+                                    {% set count = (project.domains|length) %}
+                                    {{ 'label.nb_domains' | transchoice(count, {'%nb%': count}) | desc("{0} Aucun domaine|{1} 1 domaine|]1,Inf[ %nb% domaines") }}
+                                    -
+                                    {% set count = project.countAssets %}
+                                    {{ 'label.nb_assets' | transchoice(count, {'%nb%': count}) | desc("{0} Aucun asset|{1} 1 asset|]1,Inf[ %nb% assets") }}
+                                </span>
+                            </div>
+                            <div class="card-text">
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="{{ path('project_edit', {'project': project.id}) }}" title="{{ 'label.edit_project' | trans | desc("Modifier le projet") }}" class="btn btn-icon btn-outline-dark">
+                                        <svg class="icon-cog-gear"><use xlink:href="#icon-cog-gear"></use></svg>
+                                    </a>
+                                    <a href="{{ path('project_delete', {'project': project.id}) }}" title="{{ 'label.delete' | trans | desc("Supprimer") }}" class="btn btn-icon btn-outline-danger">
+                                        <svg class="icon-trash-bin"><use xlink:href="#icon-trash-bin"></use></svg>
+                                    </a>
+                                {% endif %}
+                                <a href="{{ path('domain_list', {'project': project.id}) }}" title="{{ 'label.domain_list' | trans | desc("Voir le projet") }}" class="btn btn-icon btn-dark">
+                                    <svg class="icon-angle-right"><use xlink:href="#icon-angle-right"></use></svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}

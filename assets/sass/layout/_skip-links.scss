@@ -1,0 +1,14 @@
+/**
+* Skip links
+*/
+
+.skip-link {
+    position: absolute;
+    left: -99999em;
+    overflow: hidden;
+}
+
+.skip-link:hover,
+.skip-link:focus {
+    position: static;
+}

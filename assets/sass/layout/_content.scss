@@ -1,0 +1,12 @@
+.main-content {
+    padding: 0 1rem;
+
+    &__title {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: center;
+        border-bottom: 1px solid $gray-300;
+        margin-bottom: 1rem;
+    }
+}

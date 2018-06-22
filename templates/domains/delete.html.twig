@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block main_content %}
+    <div class="main-content__title">
+        <h1 class="h2">{{ 'label.delete_domain_title' | trans({'%domain%': domain}) | desc("Supprimer le domaine '%domain%'") }}</h1>
+    </div>
     <div class="container-fluid">
-        <h2>{{ 'label.delete_domain_title' | trans({'%domain%': domain}) | desc("Supprimer le domaine '%domain%'") }}</h2>
-
         {{ form_start(form) }}
 
         <div>
@@ -11,10 +12,10 @@
         </div>
 
         <div class="form-actions">
-            <a href="{{ path('domain_list', {'project': project.id}) }}" class="btn btn-primary">
+            <a href="{{ path('domain_list', {'project': project.id}) }}" class="btn btn-dark">
                 {{ 'label.back' | trans | desc("Retour") }}
             </a>
-            <button type="submit" class="btn btn-error">
+            <button type="submit" class="btn btn-danger">
                 {{ 'label.delete' | trans | desc("Supprimer") }}
             </button>
         </div>

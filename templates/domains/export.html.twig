@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block main_content %}
+    <div class="main-content__title">
+        <h1 class="h2">{{ 'label.export_title' | trans({'%domain%': domain}) | desc("Exporter les traductions de '%domain%'") }}</h1>
+    </div>
     <div class="container-fluid">
-        <h2>{{ 'label.export_title' | trans({'%domain%': domain}) | desc("Exporter les traductions de '%domain%'") }}</h2>
-
         {{ form_start(form) }}
             {{ form_row(form.targetType, {'attr': {'class': 'js-export-type'}}) }}
 
@@ -14,7 +15,7 @@
             {{ form_row(form.localeCode) }}
 
         <div class="form-actions">
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-dark">
                 {{ 'label.download' | trans | desc("Télécharger") }}
             </button>
         </div>

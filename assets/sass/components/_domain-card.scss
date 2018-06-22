@@ -1,34 +1,15 @@
 
-.domain-card {
-    background: $c-gray-light;
-    border: 1px solid $c-gray-lighter;
-    padding: 1rem;
-    flex-basis: 50%;
-
-    &-list {
-        display: flex;
-        margin: 2rem 0 1rem;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-
-    &__title {
-        margin-bottom: 0;
-    }
-
-    &__meta {
-        margin: 1rem 0;
-    }
-
-    &__locales {
-        @extend %unstyled-list;
+.card {
+    &-locales {
+        list-style-type: none;
+        padding: 0;
         display: inline-block;
 
         li {
             display: inline-block;
 
             img {
-                width: 2.5rem;
+                width: 2rem;
             }
         }
 
@@ -38,20 +19,20 @@
         }
     }
 
-    &__progressbar {
+    &-progressbar {
         width: 100%;
-        height: 2.5rem;
+        height: 2rem;
         margin: 1rem 0;
-        background-color: $c-gray-lighter;
+        background-color: $gray-300;
 
         .-progress {
             display: block;
-            height: 2.5rem;
-            background: map_get(map_get($message-types, success), color);
+            height: 2rem;
+            background: map_get($theme-colors, success);
         }
     }
 
-    &__actions {
+    &-actions {
         text-align: right;
     }
 }

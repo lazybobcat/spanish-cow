@@ -1,15 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block main_content %}
-    <div class="container-fluid">
-        <h2>{{ 'label.translate_title' | trans() | desc("Traduction") }}</h2>
+    <div class="main-content__title">
+        <h1 class="h2">{{ 'label.translate_title' | trans() | desc("Traduction") }}</h1>
 
-        <div class="top-page-actions">
-            <a href="{{ path('asset_add', {'domain': domain.id, 'project': domain.project.id}) }}" title="{{ 'label.add_asset' | trans | desc("Ajouter un asset") }}" class="btn btn-icon btn-primary">
+        <div class="btn-toolbar">
+            <a href="{{ path('asset_add', {'domain': domain.id, 'project': domain.project.id}) }}" title="{{ 'label.add_asset' | trans | desc("Ajouter un asset") }}" class="btn btn-sm btn-outline-dark btn-icon">
                 <svg class="icon-plus"><use xlink:href="#icon-plus"></use></svg>
             </a>
         </div>
-
+    </div>
+    <div class="container-fluid">
         {% if assets|length %}
             <div class="assets-table-container">
                 <div><a href="#" class="js-toggle-translated-assets">{{ 'label.toggle_translated_assets' | trans | desc("Afficher/masquer les assets déjà traduits") }}</a></div>
@@ -63,10 +64,10 @@
                             {{ form_row(form.notes) }}
                             {{ form_row(form.id) }}
                             <div class="form-actions">
-                                <button type="submit" name="delete" value="delete" class="btn btn-error btn-icon" title="{{ 'label.delete' | trans | desc("Supprimer") }}">
+                                <button type="submit" name="delete" value="delete" class="btn btn-icon btn-outline-danger" title="{{ 'label.delete' | trans | desc("Supprimer") }}">
                                     <svg class="icon-trash-bin"><use xlink:href="#icon-trash-bin"></use></svg>
                                 </button>
-                                <button type="submit" name="comment" class="btn btn-primary">
+                                <button type="submit" name="comment" class="btn btn-dark">
                                     {{ 'label.comment_action' | trans | desc("Commenter") }}
                                 </button>
                             </div>

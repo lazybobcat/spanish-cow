@@ -1,15 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block main_content %}
+    <div class="main-content__title">
+        <h1 class="h2">{{ 'label.new_project_title' | trans() | desc("Nouveau projet") }}</h1>
+    </div>
     <div class="container-fluid">
-        <h2>{{ 'label.new_project_title' | trans() | desc("Nouveau projet") }}</h2>
-
         {{ form_start(form) }}
             {{ form_row(form.name) }}
             {{ form_row(form.users) }}
 
             <div class="form-actions">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-dark">
                     {{ 'label.create_action' | trans | desc("Valider") }}
                 </button>
             </div>

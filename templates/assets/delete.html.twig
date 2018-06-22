@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block main_content %}
+    <div class="main-content__title">
+        <h1 class="h2">{{ 'label.delete_asset_title' | trans({'%asset%': asset.resname}) | desc("Supprimer l'asset '%asset%'") }}</h1>
+    </div>
     <div class="container-fluid">
-        <h2>{{ 'label.delete_asset_title' | trans({'%asset%': asset.resname}) | desc("Supprimer l'asset '%asset%'") }}</h2>
-
         {{ form_start(form) }}
 
         <div>
@@ -11,10 +12,10 @@
         </div>
 
         <div class="form-actions">
-            <a href="{{ path('translate', {'project': project.id, 'domain': asset.domain.id, 'active': asset.id}) }}" class="btn btn-primary">
+            <a href="{{ path('translate', {'project': project.id, 'domain': asset.domain.id, 'active': asset.id}) }}" class="btn btn-dark">
                 {{ 'label.back' | trans | desc("Retour") }}
             </a>
-            <button type="submit" class="btn btn-error">
+            <button type="submit" class="btn btn-danger">
                 {{ 'label.delete' | trans | desc("Supprimer") }}
             </button>
         </div>

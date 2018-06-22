@@ -20,18 +20,124 @@
     {%- endif -%}
 {%- endblock form_errors -%}
 
-{% block form_row_attributes %}
+{%- block form_row_attributes -%}
     {% spaceless %}
-        class="form-item form-item--{{ form.vars.name }}
+        class="form-group form-item--{{ form.vars.name }}
         {% if required %}form-item--required{% endif %}
         {% if errors|length > 0 %}form-item--error{% elseif value is not empty %}form-item--valid{% endif %}"
     {% endspaceless %}
-{% endblock form_row_attributes %}
+{%- endblock form_row_attributes -%}
 
 {% block checkbox_row %}
     <div {{ block('form_row_attributes') }}>
-        {{- form_widget(form) }}
-        {{ form_label(form) -}}
+        <div class="form-check">
+            {{- form_widget(form) }}
+            {{ form_label(form) -}}
+        </div>
     </div>
     {{- form_errors(form) -}}
 {% endblock checkbox_row %}
+
+{%- block checkbox_widget -%}
+    <input type="checkbox" {{ block('checkbox_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+{%- endblock checkbox_widget -%}
+
+{%- block checkbox_attributes -%}
+    id="{{ id }}" name="{{ full_name }}" class="form-check-input"
+    {%- if disabled %} disabled="disabled"{% endif -%}
+    {%- if required %} required="required"{% endif -%}
+    {%- for attrname, attrvalue in attr -%}
+        {{- " " -}}
+        {%- if attrname in ['placeholder', 'title'] -%}
+            {{- attrname }}="{{ translation_domain is same as(false) ? attrvalue : attrvalue|trans({}, translation_domain) }}"
+        {%- elseif attrname == 'class' -%}
+            {{- attrname }}="form-control {{ attrvalue }}"
+        {%- elseif attrvalue is same as(true) -%}
+            {{- attrname }}="{{ attrname }}"
+        {%- elseif attrvalue is not same as(false) -%}
+            {{- attrname }}="{{ attrvalue }}"
+        {%- endif -%}
+    {%- endfor -%}
+{%- endblock checkbox_attributes -%}
+
+{%- block widget_attributes -%}
+    {% set has_class_attrs = false %}
+    id="{{ id }}" name="{{ full_name }}"
+    {%- if disabled %} disabled="disabled"{% endif -%}
+    {%- if required %} required="required"{% endif -%}
+    {%- for attrname, attrvalue in attr -%}
+        {{- " " -}}
+        {%- if attrname in ['placeholder', 'title'] -%}
+            {{- attrname }}="{{ translation_domain is same as(false) ? attrvalue : attrvalue|trans({}, translation_domain) }}"
+        {%- elseif attrname == 'class' -%}
+            {% set has_class_attrs = true %}
+            {{- attrname }}="form-control {{ attrvalue }}"
+        {%- elseif attrvalue is same as(true) -%}
+            {{- attrname }}="{{ attrname }}"
+        {%- elseif attrvalue is not same as(false) -%}
+            {{- attrname }}="{{ attrvalue }}"
+        {%- endif -%}
+    {%- endfor -%}
+    {% if has_class_attrs == false %} class="form-control"{% endif %}
+{%- endblock widget_attributes -%}
+
+{% block file_row %}
+    {% spaceless %}
+        <div {{ block('form_row_attributes') }}>
+            <div class="custom-file">
+                {{ form_widget(form, attr) }}
+                {{ form_label(form) }}
+            </div>
+            {{ form_errors(form) }}
+        </div>
+    {% endspaceless %}
+{% endblock %}
+
+{%- block file_widget -%}
+    <input type="file" {{ block('file_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %} />
+{%- endblock file_widget -%}
+
+{%- block file_label -%}
+    {% if label is not same as(false) -%}
+        {% if not compound -%}
+            {% set label_attr = label_attr|merge({'for': id}) %}
+        {%- endif -%}
+        {% if required -%}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' custom-file-label required')|trim}) %}
+        {% else %}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' custom-file-label')|trim}) %}
+        {%- endif -%}
+        {% if label is empty -%}
+            {%- if label_format is not empty -%}
+                {% set label = label_format|replace({
+                    '%name%': name,
+                    '%id%': id,
+                }) %}
+            {%- else -%}
+                {% set label = name|humanize %}
+            {%- endif -%}
+        {%- endif -%}
+        <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ translation_domain is same as(false) ? label|raw : label|trans({}, translation_domain)|raw }}</label>
+    {%- endif -%}
+{%- endblock file_label -%}
+
+{%- block file_attributes -%}
+    {% set has_class_attrs = false %}
+    id="{{ id }}" name="{{ full_name }}"
+    {%- if disabled %} disabled="disabled"{% endif -%}
+    {%- if required %} required="required"{% endif -%}
+    {%- for attrname, attrvalue in attr -%}
+        {{- " " -}}
+        {%- if attrname in ['placeholder', 'title'] -%}
+            {{- attrname }}="{{ translation_domain is same as(false) ? attrvalue : attrvalue|trans({}, translation_domain) }}"
+        {%- elseif attrname == 'class' -%}
+            {% set has_class_attrs = true %}
+            {{- attrname }}="form-file-input {{ attrvalue }}"
+        {%- elseif attrvalue is same as(true) -%}
+            {{- attrname }}="{{ attrname }}"
+        {%- elseif attrvalue is not same as(false) -%}
+            {{- attrname }}="{{ attrvalue }}"
+        {%- endif -%}
+    {%- endfor -%}
+    {% if has_class_attrs == false %} class="form-file-input"{% endif %}
+{%- endblock file_attributes -%}

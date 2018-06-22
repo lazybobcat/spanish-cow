@@ -1,32 +1,55 @@
-@charset "utf-8";
+/*!
+ * Bootstrap v4.1.1 (https://getbootstrap.com/)
+ * Copyright 2011-2018 The Bootstrap Authors
+ * Copyright 2011-2018 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
 
-@import "utilities/_variables";
-@import "utilities/_mixins";
-@import "utilities/_helpers";
-@import "utilities/_sass-mq";
-@import "utilities/_spacing";
-// Import debug if debug mode is active
-@import "utilities/_debug";
-//@import "utilities/responsive-utilities"; Only active if necessary
+@import "functions";
+@import "variables";
+@import "mixins";
+@import "root";
+@import "reboot";
+@import "type";
+@import "images";
+@import "code";
+@import "grid";
+@import "tables";
+@import "forms";
+@import "buttons";
+@import "transitions";
+@import "dropdown";
+@import "button-group";
+@import "input-group";
+@import "custom-forms";
+@import "nav";
+@import "navbar";
+@import "card";
+@import "breadcrumb";
+@import "pagination";
+@import "badge";
+@import "jumbotron";
+@import "alert";
+@import "progress";
+@import "media";
+@import "list-group";
+@import "close";
+@import "modal";
+@import "tooltip";
+@import "popover";
+@import "carousel";
+@import "utilities";
+@import "print";
 
-@import "base/_normalize";
-@import "base/_base";
-@import "base/_fonts";
-@import "base/_typography";
 
-@import "layout/_grids";
-@import "layout/_listing";
-@import "layout/_header";
-@import "layout/_navigation";
-@import "layout/_footer";
-@import "layout/_form";
-@import "layout/_login";
-
-@import "components/_browsehappy";
-@import "components/_buttons";
-@import "components/_icons";
-@import "components/_breadcrumb";
-@import "components/_domain-card";
-@import "components/_assets-table";
-@import "components/_translation";
-@import "components/_top-page-actions";
+@import "layout/skip-links";
+@import "layout/header";
+@import "layout/content";
+@import "layout/buttons";
+@import "layout/icons";
+@import "layout/forms";
+@import "components/alerts";
+@import "components/domain-card";
+@import "components/assets-table";
+@import "components/translation";
+@import "components/login-form";

@@ -2,7 +2,7 @@
 .translate-form, .asset-form {
     label {
         display: block;
-        background: $c-gray-light;
+        background: $gray-300;
         font-weight: bold;
         padding: 0 1rem;
 
@@ -39,12 +39,12 @@
         padding: 0 1rem;
 
         &.-success {
-            background: map-get(map-get($message-types, 'success'), 'color');
+            background: map-get($theme-colors, 'success');
             color: #fff;
         }
 
         &.-error {
-            background: map-get(map-get($message-types, 'error'), 'color');
+            background: map-get($theme-colors, 'danger');
             color: #fff;
         }
     }

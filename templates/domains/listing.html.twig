@@ -1,57 +1,58 @@
 {% extends 'base.html.twig' %}
 
 {% block main_content %}
-    <div class="container-fluid">
-        <h2>{{ 'label.domains_listing_title' | trans({'%projet%': project}) | desc("Domaines de '%projet%'") }}</h2>
+    <div class="main-content__title">
+        <h1 class="h2">{{ 'label.domains_listing_title' | trans({'%projet%': project}) | desc("Domaines de '%projet%'") }}</h1>
 
-        <div class="top-page-actions">
-            <a href="{{ path('domain_add', {'project': project.id}) }}" title="{{ 'label.add_domain' | trans | desc("Ajouter un domaine") }}" class="btn btn-primary btn-icon">
+        <div class="btn-toolbar">
+            <a href="{{ path('domain_add', {'project': project.id}) }}" title="{{ 'label.add_domain' | trans | desc("Ajouter un domaine") }}" class="btn btn-sm btn-outline-dark btn-icon">
                 <svg class="icon-plus"><use xlink:href="#icon-plus"></use></svg>
             </a>
         </div>
-
+    </div>
+    <div class="container-fluid">
         {% if domains.count %}
-            <section class="domain-card-list">
+            <section class="card-columns">
                 {% for domain in domains %}
-                    <div class="domain-card">
-                        <h3 class="domain-card__title">{{ domain }}</h3>
-                        <div class="domain-card__meta">
+                    <div class="card">
+                        <h3 class="card-header">{{ domain }}</h3>
+                        <div class="card-body">
                             {% if domain.locales|length %}
-                            <ul class="domain-card__locales">
-                                {% for locale in domain.locales %}
-                                <li>
-                                    <img src="{{ asset('/img/flags/' ~ locale.code ~ '.png') }}" alt="{{ locale.code }}"/>
-                                </li>
-                                {% endfor %}
-                            </ul>
+                                <ul class="card-locales">
+                                    {% for locale in domain.locales %}
+                                        <li>
+                                            <img src="{{ asset('/img/flags/' ~ locale.code ~ '.png') }}" alt="{{ locale.code }}"/>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
                             {% endif %}
-                            <span class="domain-card__assets">
+                            <span class="card-assets">
                                 {% set count = (domain.assets|length) %}
                                 {{ 'label.nb_assets' | transchoice(count, {'%nb%': count}) | desc("{0} Aucun asset|{1} 1 asset|]1,Inf[ %nb% assets") }}
                             </span>
-                        </div>
-                        <div class="domain-card__progressbar" title="{{ (progress[domain.id] * 100) }}%">
-                            <span class="-progress" style="width: {{ (progress[domain.id] * 100) }}%"></span>
-                        </div>
-                        <div class="domain-card__actions">
-                            <a href="{{ path('domain_edit', {'domain': domain.id, 'project': project.id}) }}" title="{{ 'label.edit_domain' | trans | desc("Modifier le domaine") }}" class="btn btn-icon">
-                                <svg class="icon-cog-gear"><use xlink:href="#icon-cog-gear"></use></svg>
-                            </a>
-                            <a href="{{ path('asset_add', {'domain': domain.id, 'project': domain.project.id}) }}" title="{{ 'label.add_asset' | trans | desc("Ajouter un asset") }}" class="btn btn-icon">
-                                <svg class="icon-tag-2"><use xlink:href="#icon-tag-2"></use></svg>
-                            </a>
-                            <a href="{{ path('domain_import', {'domain': domain.id, 'project': domain.project.id}) }}" title="{{ 'label.import' | trans | desc("Importer") }}" class="btn btn-icon">
-                                <svg class="icon-download"><use xlink:href="#icon-download"></use></svg>
-                            </a>
-                            <a href="{{ path('domain_export', {'domain': domain.id, 'project': domain.project.id}) }}" title="{{ 'label.download' | trans | desc("Télécharger") }}" class="btn btn-icon">
-                                <svg class="icon-file-text"><use xlink:href="#icon-file-text"></use></svg>
-                            </a>
-                            <a href="{{ path('domain_delete', {'domain': domain.id, 'project': domain.project.id}) }}" title="{{ 'label.delete' | trans | desc("Supprimer") }}" class="btn btn-icon btn-error">
-                                <svg class="icon-trash-bin"><use xlink:href="#icon-trash-bin"></use></svg>
-                            </a>
-                            <a href="{{ path('translate', {'domain': domain.id, 'project': domain.project.id}) }}" title="{{ 'label.translate' | trans | desc("Traduire") }}" class="btn btn-icon btn-primary">
-                                <svg class="icon-chat-bubble-two"><use xlink:href="#icon-chat-bubble-two"></use></svg>
-                            </a>
+                            <div class="card-progressbar" title="{{ (progress[domain.id] * 100) }}%">
+                                <span class="-progress" style="width: {{ (progress[domain.id] * 100) }}%"></span>
+                            </div>
+                            <div class="card-actions">
+                                <a href="{{ path('domain_edit', {'domain': domain.id, 'project': project.id}) }}" title="{{ 'label.edit_domain' | trans | desc("Modifier le domaine") }}" class="btn btn-icon btn-outline-dark">
+                                    <svg class="icon-cog-gear"><use xlink:href="#icon-cog-gear"></use></svg>
+                                </a>
+                                <a href="{{ path('asset_add', {'domain': domain.id, 'project': domain.project.id}) }}" title="{{ 'label.add_asset' | trans | desc("Ajouter un asset") }}" class="btn btn-icon btn-outline-dark">
+                                    <svg class="icon-tag-2"><use xlink:href="#icon-tag-2"></use></svg>
+                                </a>
+                                <a href="{{ path('domain_import', {'domain': domain.id, 'project': domain.project.id}) }}" title="{{ 'label.import' | trans | desc("Importer") }}" class="btn btn-icon btn-outline-dark">
+                                    <svg class="icon-download"><use xlink:href="#icon-download"></use></svg>
+                                </a>
+                                <a href="{{ path('domain_export', {'domain': domain.id, 'project': domain.project.id}) }}" title="{{ 'label.download' | trans | desc("Télécharger") }}" class="btn btn-icon btn-outline-dark">
+                                    <svg class="icon-file-text"><use xlink:href="#icon-file-text"></use></svg>
+                                </a>
+                                <a href="{{ path('domain_delete', {'domain': domain.id, 'project': domain.project.id}) }}" title="{{ 'label.delete' | trans | desc("Supprimer") }}" class="btn btn-icon btn-outline-danger">
+                                    <svg class="icon-trash-bin"><use xlink:href="#icon-trash-bin"></use></svg>
+                                </a>
+                                <a href="{{ path('translate', {'domain': domain.id, 'project': domain.project.id}) }}" title="{{ 'label.translate' | trans | desc("Traduire") }}" class="btn btn-icon btn-dark">
+                                    <svg class="icon-chat-bubble-two"><use xlink:href="#icon-chat-bubble-two"></use></svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}

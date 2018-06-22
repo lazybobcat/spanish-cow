@@ -143,8 +143,16 @@
         toggleXliffOptions();
     };
 
+    var fileInput = function() {
+        $('.form-file-input').on('change', function(e) {
+            var $this = $(this);
+            $('[for="' + $this.attr('id') +'"]').html($this[0].files[0]['name']);
+        })
+    };
+
     $(document).ready(function () {
         ariaControls();
+        fileInput();
         checkVisibility('main-nav', mqBreakpoints.desktop);
         watchVisibility();
         translateTable();

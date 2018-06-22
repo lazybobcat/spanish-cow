@@ -1,11 +1,11 @@
 
 .assets-table {
     width: 100%;
-    border: 1px solid $c-gray-light;
+    border: 1px solid $gray-300;
     margin-bottom: 2rem;
 
     &__head {
-        background: $c-gray-light;
+        background: $gray-300;
         padding: 0 1rem;
     }
 
@@ -23,16 +23,16 @@
             }
 
             &:hover {
-                background: $c-gray-lighter;
+                background: $gray-200;
             }
 
             &.-active {
-                background: $c-primary;
+                background: $primary;
                 color: #fff;
             }
 
             div {
-                font-size: 1.4rem;
+                font-size: 1rem;
             }
         }
     }

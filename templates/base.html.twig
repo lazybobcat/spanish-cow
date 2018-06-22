@@ -71,54 +71,51 @@
     <![endif]-->
 {% endblock browsehappy %}
 
-<div>
-    {% block header %}
-        <header class="header" role="banner">
-            {% block header_content %}
-            <div class="container-fluid">
-                {% block logo %}
-                    <h1>
-                        <a href="{{ path('homepage') }}" class="logo">
-                            <img src="{{ asset('img/logo.svg') }}" alt="Spanish Cow" />
-                            <span class="sr-only">Spanish Cow</span>
-                        </a>
-                    </h1>
-                {% endblock %}
+{% block header %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="banner">
+        {% block header_content %}
+            {% block logo %}
+                <a href="{{ path('homepage') }}" class="navbar-brand h1">
+                    <img src="{{ asset('img/logo.svg') }}" alt="Spanish Cow" width="30" height="30" />
+                    Spanish Cow
+                </a>
+            {% endblock %}
 
-                <!-- Header -->
-                {% block main_nav %}
-                    <nav class="main-nav" id="main-nav" role="navigation" tabindex="-1">
-                        <ul>
-                            <li>
-                                <a href="{{ path('logout') }}">
-                                    {{ 'label.logout' | trans | desc("Déconnection") }}
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                {% endblock main_nav %}
-            {% endblock header_content %}
-            </div>
-        </header>
-    {% endblock header %}
+            <!-- Header -->
+            {% block main_nav %}
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('logout') }}">
+                                {{ 'label.logout' | trans | desc("Déconnection") }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            {% endblock main_nav %}
+        {% endblock header_content %}
+    </nav>
+{% endblock header %}
 
 
-    {% block main %}
-        <main role="main" class="main" id="content" tabindex="-1">
-            {% block breadcrumb %}
-                {{ wo_render_breadcrumbs() }}
-            {% endblock breadcrumb %}
+{% block main %}
+    <main role="main" class="main" id="content" tabindex="-1">
+        {% block breadcrumb %}
+            {{ wo_render_breadcrumbs() }}
+        {% endblock breadcrumb %}
 
-            {% include '_components/flashbag.html.twig' %}
+        {% include '_components/flashbag.html.twig' %}
 
-            <div class="main-content">
-                {% block main_content %}
-                    <!-- Content goes here -->
-                {% endblock main_content %}
-            </div>
-        </main>
-    {% endblock main %}
-</div>
+        <div class="main-content">
+            {% block main_content %}
+                <!-- Content goes here -->
+            {% endblock main_content %}
+        </div>
+    </main>
+{% endblock main %}
 
 {% block footer %}
     {#<footer class="footer container-fluid" role="contentinfo">#}

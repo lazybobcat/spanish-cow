@@ -1,0 +1,9 @@
+.alerts {
+    padding: 0 1rem;
+}
+
+.alert {
+    &-error {
+        @extend .alert-danger;
+    }
+}

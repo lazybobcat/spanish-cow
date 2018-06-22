@@ -1,22 +1,20 @@
 {% if wo_breadcrumbs()|length %}
     {%- spaceless -%}
-        <nav class="breadcrumb">
-            <div class="container-fluid">
-                <ol class="{{ listClass }}" itemscope itemtype="http://schema.org/BreadcrumbList">
-                    {% for b in breadcrumbs %}
-                        <li{% if itemClass is defined and itemClass|length %} class="{{ itemClass }}"{% endif %} itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                            {% if b.url and not loop.last %}
-                            <a href="{{ b.url }}" itemprop="item"{% if linkRel is defined and linkRel|length %} rel="{{ linkRel }}"{% endif %}>
-                                {% endif %}
-                                <span itemprop="name">{{- b.text | trans(b.translationParameters, translation_domain, locale) -}}</span>
-                                {% if b.url and not loop.last %}
-                            </a>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb {{ listClass }}" itemscope itemtype="http://schema.org/BreadcrumbList">
+                {% for b in breadcrumbs %}
+                    <li class="breadcrumb-item{% if itemClass is defined and itemClass|length %} {{ itemClass }}{% endif %}" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                        {% if b.url and not loop.last %}
+                        <a href="{{ b.url }}" itemprop="item"{% if linkRel is defined and linkRel|length %} rel="{{ linkRel }}"{% endif %}>
                             {% endif %}
-                            <meta itemprop="position" content="{{ loop.index }}" />
-                        </li>
-                    {% endfor %}
-                </ol>
-            </div>
+                            <span itemprop="name">{{- b.text | trans(b.translationParameters, translation_domain, locale) -}}</span>
+                            {% if b.url and not loop.last %}
+                        </a>
+                        {% endif %}
+                        <meta itemprop="position" content="{{ loop.index }}" />
+                    </li>
+                {% endfor %}
+            </ol>
         </nav>
     {%- endspaceless -%}
 {% endif %}
