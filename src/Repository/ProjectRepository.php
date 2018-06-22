@@ -33,6 +33,7 @@ class ProjectRepository extends EntityRepository
         $qb
             ->andWhere(':user MEMBER OF p.users')
             ->setParameter('user', $user)
+            ->addOrderBy('p.name', 'ASC')
         ;
 
         return $qb;

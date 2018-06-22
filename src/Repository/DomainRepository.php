@@ -32,6 +32,7 @@ class DomainRepository extends EntityRepository
         $qb
             ->andWhere('d.project = :project')
             ->setParameter('project', $project)
+            ->addOrderBy('d.name', 'ASC')
         ;
 
         return $qb;
